@@ -37,6 +37,8 @@ public class MainFrame extends JFrame {
 		setLocationRelativeTo(null);
 		
 		setIconImage(new ImageIcon("images/ftn_logo.jpg").getImage());
+		MenuBar mb = new MenuBar();
+		this.setJMenuBar(mb);
 
 		
 	}

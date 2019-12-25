@@ -8,7 +8,7 @@ public class MyApp {
 		// TODO Auto-generated method stub
 				MainFrame mf=new MainFrame();
 				mf.setVisible(true);
-				
+				 
 	}
 
 }
