@@ -26,7 +26,7 @@ public class StatusBar extends JPanel {
 		//podesavanje trenutnog datuma i vremena vremena
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
-		JLabel vreme = new JLabel(dtf.format(now));
+		JLabel vreme = new JLabel(dtf.format(now)); 
 		
 		this.add(statusBar,BorderLayout.WEST);
 	
