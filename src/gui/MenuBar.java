@@ -18,7 +18,7 @@ public class MenuBar extends JMenuBar {
 
 	public MenuBar() {
 		super(); 
-		
+		 
 		
 		//File
 		JMenu file = new JMenu("File");
