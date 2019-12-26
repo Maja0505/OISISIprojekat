@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -10,6 +11,8 @@ import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+
+
 
 
 
@@ -39,6 +42,10 @@ public class MainFrame extends JFrame {
 		setIconImage(new ImageIcon("images/ftn_logo.jpg").getImage());
 		MenuBar mb = new MenuBar();
 		this.setJMenuBar(mb);
+		
+		
+		ToolBar toolbar = new ToolBar();
+		add(toolbar, BorderLayout.NORTH);
 
 		
 	}
