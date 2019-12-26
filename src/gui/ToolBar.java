@@ -5,6 +5,8 @@ package gui;
 
 
 
+import java.awt.Font;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -55,9 +57,10 @@ public class ToolBar extends JToolBar {
 		}
 
 		JTextField textField=new JTextField();
-		textField.setDocument(new JTextFieldLimit(30));
-		
-		add(textField);
+		textField.setDocument(new JTextFieldLimit(80));
+		 Font font = new Font("Serif", Font.BOLD, 15); 			//font za unos
+		 textField.setFont(font);
+		 add(textField);
 		
 		setFloatable(false);
 		
