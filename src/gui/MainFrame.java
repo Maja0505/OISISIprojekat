@@ -16,6 +16,8 @@ import javax.swing.JFrame;
 
 
 
+
+
 public class MainFrame extends JFrame {
 
 	/**
@@ -40,11 +42,19 @@ public class MainFrame extends JFrame {
 		setIconImage(new ImageIcon("images/ftn_logo.jpg").getImage());
 		MenuBar mb = new MenuBar();
 		this.setJMenuBar(mb);
+
 		mb.setPreferredSize((new Dimension(screenWidth, 30)));
 
+		
+		
+		ToolBar toolbar = new ToolBar();
+		add(toolbar, BorderLayout.NORTH);
+
+		
 		StatusBar sb = new StatusBar();
 		this.add(sb,BorderLayout.SOUTH);
 		sb.setPreferredSize((new Dimension(screenWidth, 25)));
+		
 		
 		
 	}
