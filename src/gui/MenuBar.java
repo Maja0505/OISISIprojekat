@@ -28,10 +28,15 @@ public class MenuBar extends JMenuBar {
 		JMenuItem New = new JMenuItem("New", new ImageIcon("images/plusIcon.jpg"));
 		JMenuItem close = new JMenuItem("Close",new ImageIcon("images/xIcon.jpg"));
 		
+		
+		file.setMnemonic(KeyEvent.VK_F);
+		close.setMnemonic(KeyEvent.VK_C);
+		New.setMnemonic(KeyEvent.VK_N);
+		
 		KeyStroke ctrlN = KeyStroke.getKeyStroke(KeyEvent.VK_N,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
 		New.setAccelerator(ctrlN);	
 		file.add(New);	 
-		
+	
 		file.addSeparator();
 		
 		close.setAccelerator(KeyStroke.getKeyStroke(
@@ -46,9 +51,15 @@ public class MenuBar extends JMenuBar {
 		
 		
 		JMenu edit = new JMenu("Edit");
+		edit.setMnemonic(KeyEvent.VK_E);
 		
-		JMenuItem editItem = new JMenuItem("Edit");
-		JMenuItem delete = new JMenuItem("Delete");
+		JMenuItem editItem = new JMenuItem("Edit",new ImageIcon("images/editIcon.jpg"));
+		JMenuItem delete = new JMenuItem("Delete",new ImageIcon("images/deleteIcon.jpg"));
+		editItem.setMnemonic(KeyEvent.VK_E);
+		delete.setMnemonic(KeyEvent.VK_D);
+		
+		editItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.CTRL_MASK));
+		delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK));
 		
 		edit.add(editItem);
 		edit.addSeparator();
@@ -56,12 +67,22 @@ public class MenuBar extends JMenuBar {
 		
 		add(edit);
 		
-		JMenu help = new JMenu("Help");
 		
-		JMenuItem helpItem = new JMenuItem("Help");
-		JMenuItem aboutItem = new JMenuItem("About");
+		
+		JMenu help = new JMenu("Help");
+		help.setMnemonic(KeyEvent.VK_H);
+		
+		JMenuItem helpItem = new JMenuItem("Help",new ImageIcon("images/helpIcon.jpg"));
+		JMenuItem aboutItem = new JMenuItem("About",new ImageIcon("images/aboutIcon.jpg"));
+		helpItem.setMnemonic(KeyEvent.VK_H);
+		aboutItem.setMnemonic(KeyEvent.VK_A);
+		
+		helpItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,ActionEvent.CTRL_MASK));
+		aboutItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,ActionEvent.CTRL_MASK));
+		
 		
 		help.add(helpItem);
+		help.addSeparator();
 		help.add(aboutItem);
 		
 		add(help);
