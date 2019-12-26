@@ -21,43 +21,39 @@ public class MenuBar extends JMenuBar {
 		super();
 		
 		
-		
+		//File
 		JMenu file = new JMenu("File");
+		file.setMnemonic(KeyEvent.VK_F);
 		
-				
+		//dodavanje novog entiteta i zatvaranje aplikacije sa njihovim mnemonicima		
 		JMenuItem New = new JMenuItem("New", new ImageIcon("images/plusIcon.jpg"));
 		JMenuItem close = new JMenuItem("Close",new ImageIcon("images/xIcon.jpg"));
-		
-		
-		file.setMnemonic(KeyEvent.VK_F);
 		close.setMnemonic(KeyEvent.VK_C);
 		New.setMnemonic(KeyEvent.VK_N);
 		
-		KeyStroke ctrlN = KeyStroke.getKeyStroke(KeyEvent.VK_N,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-		New.setAccelerator(ctrlN);	
-		file.add(New);	 
-	
-		file.addSeparator();
-		
-		close.setAccelerator(KeyStroke.getKeyStroke(
-		        KeyEvent.VK_C, ActionEvent.CTRL_MASK));
-		
 			
+		//Acceleratori za new i close
+		New.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));
+		close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
 		
+		file.add(New);	 	
+		file.addSeparator();	
 		file.add(close);
 		
 		add(file);
 		
 		
-		
+		//Edit
 		JMenu edit = new JMenu("Edit");
 		edit.setMnemonic(KeyEvent.VK_E);
 		
+		//Izmena postojeceg i brisanje entiteta sa njihovim mnemonicima
 		JMenuItem editItem = new JMenuItem("Edit",new ImageIcon("images/editIcon.jpg"));
 		JMenuItem delete = new JMenuItem("Delete",new ImageIcon("images/deleteIcon.jpg"));
 		editItem.setMnemonic(KeyEvent.VK_E);
 		delete.setMnemonic(KeyEvent.VK_D);
 		
+		//Acceleratori za edit i delete
 		editItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.CTRL_MASK));
 		delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK));
 		
@@ -68,15 +64,17 @@ public class MenuBar extends JMenuBar {
 		add(edit);
 		
 		
-		
+		//Help 
 		JMenu help = new JMenu("Help");
 		help.setMnemonic(KeyEvent.VK_H);
 		
+		//Help i delete sa njihovim mnemonicima
 		JMenuItem helpItem = new JMenuItem("Help",new ImageIcon("images/helpIcon.jpg"));
 		JMenuItem aboutItem = new JMenuItem("About",new ImageIcon("images/aboutIcon.jpg"));
 		helpItem.setMnemonic(KeyEvent.VK_H);
 		aboutItem.setMnemonic(KeyEvent.VK_A);
 		
+		//Acceleratori za help i about
 		helpItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,ActionEvent.CTRL_MASK));
 		aboutItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,ActionEvent.CTRL_MASK));
 		
