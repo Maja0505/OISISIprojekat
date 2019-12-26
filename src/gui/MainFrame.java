@@ -51,9 +51,9 @@ public class MainFrame extends JFrame {
 		add(toolbar, BorderLayout.NORTH);
 
 		
-		StatusBar sb = new StatusBar();
-		this.add(sb,BorderLayout.SOUTH);
-		sb.setPreferredSize((new Dimension(screenWidth, 25)));
+		StatusBar statusBar = new StatusBar();
+		this.add(statusBar,BorderLayout.SOUTH);
+		statusBar.setPreferredSize((new Dimension(screenWidth, 25)));
 		
 		
 		
