@@ -20,8 +20,10 @@ public class StatusBar extends JPanel {
 		super();
 		this.setLayout(new BorderLayout());
 		
+		
 		JLabel statusBar = new JLabel("Studentska sluzba");
 		
+		//podesavanje trenutnog datuma i vremena vremena
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
 		JLabel vreme = new JLabel(dtf.format(now));
