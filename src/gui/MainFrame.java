@@ -3,14 +3,20 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-
+import java.awt.Font;
 import java.awt.HeadlessException;
-
 import java.awt.Toolkit;
 
-
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.border.Border;
 
 
 
@@ -56,7 +62,40 @@ public class MainFrame extends JFrame {
 		statusBar.setPreferredSize((new Dimension(screenWidth, 25)));
 		
 		
+		inicijalizacijaTabbedPane();
+		
+		
 		
 	}
+
+	private void inicijalizacijaTabbedPane() {
+		 JTabbedPane tabbedPane = new JTabbedPane();
+		 JPanel panel1, panel2, panel3;
+	      panel1 = new JPanel();
+	      panel2 = new JPanel();
+	      panel3 = new JPanel();
+	     
+	      tabbedPane.addTab("STUDENTI", panel1);
+	      tabbedPane.addTab("PROFESORI ", panel2);
+	      tabbedPane.addTab("PREDMETI", panel3);
+	      
+	      Font font = new Font("Serif", Font.BOLD, 20); 
+	      tabbedPane.setFont(font);
+	      tabbedPane.setForeground(Color.WHITE);
+	      tabbedPane.setBackground(Color.GRAY);
+	    	this.add(tabbedPane);
+		
+	}
+
+	
+
+	
+	
+		
+		
+		
+	
+	
+	
 
 }
