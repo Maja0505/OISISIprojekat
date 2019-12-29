@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.border.Border;
 
 
@@ -89,7 +90,16 @@ public class MainFrame extends JFrame {
 
 	
 
-	
+	private static MainFrame instance = null;
+
+	public static MainFrame getInstance() {
+		if (instance == null) {
+			instance = new MainFrame();
+		}
+		return instance;
+	}
+
+	private JTable tabelaStudenata;
 	
 		
 		
