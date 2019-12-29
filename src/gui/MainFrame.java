@@ -7,17 +7,20 @@ import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
+
+
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.border.Border;
+
+import javax.swing.border.EmptyBorder;
+
+import tabele.StudentiJTable;
 
 
 
@@ -79,6 +82,13 @@ public class MainFrame extends JFrame {
 	      tabbedPane.addTab("STUDENTI", panel1);
 	      tabbedPane.addTab("PROFESORI ", panel2);
 	      tabbedPane.addTab("PREDMETI", panel3);
+	      
+	      tabelaStudenata = new StudentiJTable();
+			JScrollPane scrollPane = new JScrollPane(tabelaStudenata);
+			scrollPane.setPreferredSize(new Dimension(1300, 1500));
+			scrollPane.setBorder(new EmptyBorder(60, 50, 30, 40));
+
+			panel1.add(scrollPane, BorderLayout.SOUTH);
 	      
 	      Font font = new Font("Serif", Font.BOLD, 20); 
 	      tabbedPane.setFont(font);
