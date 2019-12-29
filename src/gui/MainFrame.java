@@ -20,6 +20,7 @@ import javax.swing.JTable;
 
 import javax.swing.border.EmptyBorder;
 
+import tabele.PredmetiJTable;
 import tabele.StudentiJTable;
 
 
@@ -78,7 +79,7 @@ public class MainFrame extends JFrame {
 	      panel1 = new JPanel();
 	      panel2 = new JPanel();
 	      panel3 = new JPanel();
-	     
+	   
 	      tabbedPane.addTab("STUDENTI", panel1);
 	      tabbedPane.addTab("PROFESORI ", panel2);
 	      tabbedPane.addTab("PREDMETI", panel3);
@@ -87,9 +88,16 @@ public class MainFrame extends JFrame {
 			JScrollPane scrollPane = new JScrollPane(tabelaStudenata);
 			scrollPane.setPreferredSize(new Dimension(1300, 1500));
 			scrollPane.setBorder(new EmptyBorder(60, 50, 30, 40));
+			
+		 tabelaPredmeta = new PredmetiJTable();
+				JScrollPane scrollPane1 = new JScrollPane(tabelaPredmeta);
+				scrollPane1.setPreferredSize(new Dimension(1300, 1500));
+				scrollPane1.setBorder(new EmptyBorder(60, 50, 30, 40));
+			
 
 			panel1.add(scrollPane, BorderLayout.SOUTH);
-	      
+			panel3.add(scrollPane1, BorderLayout.SOUTH);
+			
 	      Font font = new Font("Serif", Font.BOLD, 20); 
 	      tabbedPane.setFont(font);
 	      tabbedPane.setForeground(Color.WHITE);
@@ -110,6 +118,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private JTable tabelaStudenata;
+	private JTable tabelaPredmeta;
 	
 		
 		
