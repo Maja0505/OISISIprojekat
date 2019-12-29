@@ -1,0 +1,112 @@
+package modeli;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+public class BazaPredmeta {
+	private static BazaPredmeta instance = null;
+
+	public static BazaPredmeta getInstance() {
+		if(instance == null) {
+			instance = new BazaPredmeta();
+		}
+		return instance;
+	}
+	
+	private List<Predmet> predmeti;
+	private List<String> kolone;
+	
+	private BazaPredmeta() {
+		
+	
+		initPredmeti();
+
+		this.kolone = new ArrayList<String>();
+		this.kolone.add("Sifra");
+		this.kolone.add("Naziv");
+		this.kolone.add("Semestar");
+		this.kolone.add("Godina izvodjenja");
+		this.kolone.add("Predmetni profesor");	
+		
+		
+		
+	}
+	
+	@SuppressWarnings("null")
+	private void initPredmeti() {
+		
+		this.predmeti = new ArrayList<Predmet>();
+		List<String> listaStudenata = new ArrayList<String>();
+		
+		predmeti.add(new Predmet("WP-E2","Web programiranje",6,3,"Milan Vidakovic",listaStudenata));
+		predmeti.add(new Predmet("MA2-E2","Matematicka Analiza 2",3,2,"Mila Stojakovic",listaStudenata));
+		predmeti.add(new Predmet("BP2-E2","Baze podataka 2",7,4,"Ivan Lukovic",listaStudenata));
+		
+	for(int j = 0;j<predmeti.size();j++) {	
+		List<String> listaStudenata1 = new ArrayList<String>();
+		for(int i = 0;i<BazaStudenata.getInstance().getStudenti().size();i++) {
+			if(Integer.parseInt(BazaStudenata.getInstance().getValueAt(i, 4))==predmeti.get(j).getGodinaIzvodjenjaPredmeta()){
+					listaStudenata1.add(BazaStudenata.getInstance().getValueAt(i, 0).toString());
+					
+					
+				}
+		}
+		predmeti.get(j).setSpisakStudenata(listaStudenata1);
+	}		
+}
+
+	public List<Predmet> getPredmeti() {
+		return predmeti;
+	}
+
+	public void setPredmeti(List<Predmet> predmeti) {
+		this.predmeti = predmeti;
+	}
+
+	public List<String> getKolone() {
+		return kolone;
+	}
+
+	public void setKolone(List<String> kolone) {
+		this.kolone = kolone;
+	}
+	
+	//broj koliko kolona ima
+	public int getColumnCount() {
+		return 5;
+	}
+	
+	public String getColumnName(int index) {
+		return this.kolone.get(index);
+	}
+	
+	
+	public Predmet getRow(int rowIndex) {
+		return this.predmeti.get(rowIndex);
+	}
+	
+	public String getValueAt(int row, int column) {
+		Predmet Predmet = this.predmeti.get(row);
+		switch (column) {
+		case 0:
+			return Predmet.getSifraPredmeta();
+		case 1:
+			return Predmet.getNazivPredmet();
+		case 2:
+			return Integer.toString(Predmet.getSemestar());
+		case 3:
+			return Integer.toString(Predmet.getGodinaIzvodjenjaPredmeta());
+		case 4:
+			return Predmet.getPredmetniProfesor();
+		default:
+			return null;
+		}
+	}
+	
+	
+	
+
+	
+}
