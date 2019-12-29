@@ -60,6 +60,7 @@ public class AbstractTableModelPredmeti extends AbstractTableModel {
 		}
 		
 	}
+	
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
