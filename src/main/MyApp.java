@@ -2,6 +2,7 @@ package main;
 
 import gui.MainFrame;
 import modeli.BazaPredmeta;
+import modeli.BazaProfesora;
 import modeli.BazaStudenata;
 
 public class MyApp {
@@ -12,8 +13,11 @@ public class MyApp {
 				mf.setVisible(true);
 				BazaStudenata.getInstance();
 				BazaPredmeta.getInstance();
+				BazaProfesora.getInstance();
 				MainFrame.getInstance(); 
 				BazaStudenata.getInstance().popunjavanjeListePredmeta();
+				BazaPredmeta.getInstance().popunjavanjeListeStudenata();
+				BazaProfesora.getInstance().popunjavanjeListePredmeta();
 	}
 
 }
