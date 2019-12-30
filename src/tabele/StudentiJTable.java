@@ -9,6 +9,8 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
+import listeners.MouseListenerStudenti;
+
 
 
 
@@ -31,6 +33,9 @@ public class StudentiJTable extends JTable {
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelStudenti());
 		this.setShowHorizontalLines(false);
+		this.setAutoCreateRowSorter(true);
+		
+        this.addMouseListener(new MouseListenerStudenti(this));
 		
 	}
 	

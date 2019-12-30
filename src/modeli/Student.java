@@ -11,7 +11,7 @@ public class Student {
 	private String prezime;
 	private Date datumRodjenja;
 	private String adresa;
-	private long brojTelefona;
+	private String brojTelefona;
 	private String email;
 	private String brIndeksa;
 	private int godinaUpisa;
@@ -22,7 +22,7 @@ public class Student {
 	
 
 
-	public Student(String ime, String prezime, Date datumRodjenja, String adresa, long brojTelefona, String email,
+	public Student(String ime, String prezime, Date datumRodjenja, String adresa, String brojTelefona, String email,
 			String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, double prosecnaOcena,
 			List<String> spisakPredmeta, Status status) {
 		super();
@@ -102,11 +102,11 @@ public class Student {
 		this.adresa = adresa;
 	}
 
-	public long getBrojTelefona() {
+	public String getBrojTelefona() {
 		return brojTelefona;
 	}
 
-	public void setBrojTelefona(long brojTelefona) {
+	public void setBrojTelefona(String brojTelefona) {
 		this.brojTelefona = brojTelefona;
 	}
 
