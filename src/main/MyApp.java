@@ -13,8 +13,7 @@ public class MyApp {
 				BazaStudenata.getInstance();
 				BazaPredmeta.getInstance();
 				MainFrame.getInstance(); 
-				
-				 
+				BazaStudenata.getInstance().popunjavanjeListePredmeta();
 	}
 
 }
