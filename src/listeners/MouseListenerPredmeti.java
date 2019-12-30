@@ -21,11 +21,11 @@ import javax.swing.JTable;
 import modeli.BazaPredmeta;
 import modeli.BazaStudenata;
 
-public class MouseListener extends MouseAdapter {
+public class MouseListenerPredmeti extends MouseAdapter {
 	 private JTable table;
 	
      
-	    public MouseListener(JTable table) {
+	    public MouseListenerPredmeti(JTable table) {
 	        this.table = table;
 	    }
 	     

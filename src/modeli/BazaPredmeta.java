@@ -34,7 +34,6 @@ public class BazaPredmeta {
 		
 	}
 	
-	@SuppressWarnings("null")
 	private void initPredmeti() {
 		
 		this.predmeti = new ArrayList<Predmet>();
@@ -44,17 +43,7 @@ public class BazaPredmeta {
 		predmeti.add(new Predmet("MA2-E2","Matematicka Analiza 2",3,2,"Mila Stojakovic",listaStudenata));
 		predmeti.add(new Predmet("BP2-E2","Baze podataka 2",7,4,"Ivan Lukovic",listaStudenata));
 		
-	for(int j = 0;j<predmeti.size();j++) {	
-		List<String> listaStudenata1 = new ArrayList<String>();
-		for(int i = 0;i<BazaStudenata.getInstance().getStudenti().size();i++) {
-			if(Integer.parseInt(BazaStudenata.getInstance().getValueAt(i, 4))==predmeti.get(j).getGodinaIzvodjenjaPredmeta()){
-					listaStudenata1.add(BazaStudenata.getInstance().getValueAt(i, 0).toString());
-					
-					
-				}
-		}
-		predmeti.get(j).setSpisakStudenata(listaStudenata1);
-	}		
+	
 }
 
 	public List<Predmet> getPredmeti() {
@@ -105,8 +94,18 @@ public class BazaPredmeta {
 		}
 	}
 	
-	
-	
+	public void popunjavanjeListeStudenata() {
+		for(int j = 0;j<BazaPredmeta.getInstance().getPredmeti().size();j++) {	
+			List<String> listaStudenata = new ArrayList<String>();
+			for(int i = 0;i<BazaStudenata.getInstance().getStudenti().size();i++) {
+				if(Integer.parseInt(BazaStudenata.getInstance().getValueAt(i, 4))==BazaPredmeta.getInstance().getPredmeti().get(j).getGodinaIzvodjenjaPredmeta()){
+						listaStudenata.add(BazaStudenata.getInstance().getValueAt(i, 0).toString());
+						
+					}
+			}
+			BazaPredmeta.getInstance().getPredmeti().get(j).setSpisakStudenata(listaStudenata);
+		}		
+	}
 
 	
 }
