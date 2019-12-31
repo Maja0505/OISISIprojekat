@@ -21,6 +21,8 @@ public class StudentiJTable extends JTable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public static boolean selektovanStudent = false; //da bi znali da li je vrsta studenta selektovana (ako nije brisanje i izmena nisu moguci)
+	
 	public StudentiJTable() {
 		super();
 		this.setRowHeight(30);
@@ -44,6 +46,7 @@ public class StudentiJTable extends JTable {
 		Component c = super.prepareRenderer(renderer, row, column);
 		if (isRowSelected(row)) {
 			c.setBackground(Color.CYAN);
+			selektovanStudent = true;
 		} else {
 			c.setBackground(Color.WHITE);
 		}
