@@ -6,6 +6,8 @@ package gui;
 
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +19,14 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+import dialozi.DijalogBrisanjeStudenta;
+import dialozi.DijalogDodajProfesora;
+import dialozi.DijalogDodajStudenta;
+import dialozi.DijalogIzmenaProfesora;
+import dialozi.DijalogIzmenaStudenta;
+import tabele.ProfesoriJTable;
+import tabele.StudentiJTable;
+
 public class ToolBar extends JToolBar {
 
 	/**
@@ -24,6 +34,7 @@ public class ToolBar extends JToolBar {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
 	public ToolBar() {
 		super(SwingConstants.HORIZONTAL);
 		
@@ -33,6 +44,19 @@ public class ToolBar extends JToolBar {
 		buttonNew.setIcon(new ImageIcon("images/add.jpg"));
 		add(buttonNew);
 		
+		buttonNew.addActionListener(new ActionListener() {
+
+//iskace odgovarajuvi dijalog za izmenu			
+			//@Override  
+			public void actionPerformed(ActionEvent e) {
+				if(MainFrame.tab == 0) {
+					new DijalogDodajStudenta(true);
+				}else if(MainFrame.tab == 1) {
+					new DijalogDodajProfesora(true);
+				}else if(MainFrame.tab == 2) {
+				}
+			}
+		});
 		
 		addSeparator();
 		
@@ -41,6 +65,20 @@ public class ToolBar extends JToolBar {
 		buttonEdit.setToolTipText("Izmeni");
 		buttonEdit.setIcon(new ImageIcon("images/edit.jpg"));
 		add(buttonEdit);
+		
+		
+		buttonEdit.addActionListener(new ActionListener() {
+//iskace odgovarajuvi dijalog za dodavanje			
+						//@Override  
+						public void actionPerformed(ActionEvent e) {
+							if(MainFrame.tab == 0 && StudentiJTable.selektovanStudent) {
+								new DijalogIzmenaStudenta(true);
+							}else if(MainFrame.tab == 1) {
+								new DijalogIzmenaProfesora(true && ProfesoriJTable.selektovanProfesor);
+							}else if(MainFrame.tab == 2) {
+							}
+						}
+					});
 		
 		addSeparator();
 		
@@ -51,6 +89,22 @@ public class ToolBar extends JToolBar {
 		buttonDelete.setIcon(new ImageIcon("images/delete.jpg"));
 
 		add(buttonDelete);
+		
+		
+		buttonDelete.addActionListener(new ActionListener() {
+
+//iskace odgovarajuvi dijalog za brisanje			
+						//@Override  
+						public void actionPerformed(ActionEvent e) {
+							if(MainFrame.tab == 0 && StudentiJTable.selektovanStudent) {
+								new DijalogBrisanjeStudenta(true);
+							}else if(MainFrame.tab == 1) {
+								
+							}else if(MainFrame.tab == 2) {
+							}
+						}
+					});
+		
 		
 		for(int i =0;i<90;i++) {
 		addSeparator();
