@@ -20,4 +20,14 @@ public class ModalniDijalog extends JDialog {
 		
 	
 	}
+	
+	//novi konstruktor koji ce da omoguci proizvolju sirinu i visinu dijaloga
+	public ModalniDijalog(Frame parent, String title, boolean modal,int sirina,int visina) {
+		super(parent, title, modal);
+
+		setSize(sirina, visina);
+		setLocationRelativeTo(parent);
+		
+	
+	}
 }
