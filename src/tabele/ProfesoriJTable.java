@@ -16,6 +16,7 @@ public class ProfesoriJTable extends JTable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public static boolean selektovanProfesor = false; //za izmenu i brisanje
 
 	public ProfesoriJTable() {
 		super();
@@ -40,6 +41,7 @@ public class ProfesoriJTable extends JTable {
 		Component c = super.prepareRenderer(renderer, row, column);
 		if (isRowSelected(row)) {
 			c.setBackground(Color.CYAN);
+			selektovanProfesor = true;
 		} else {
 			c.setBackground(Color.WHITE);
 		}
