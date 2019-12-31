@@ -19,6 +19,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import tabele.PredmetiJTable;
 import tabele.ProfesoriJTable;
@@ -73,6 +75,8 @@ public class MainFrame extends JFrame {
 		
 		
 	}
+	
+	public static int tab;  // da bi znali koji tab je aktivan
 
 	private void inicijalizacijaTabbedPane() {
 		 JTabbedPane tabbedPane = new JTabbedPane();
@@ -94,6 +98,7 @@ public class MainFrame extends JFrame {
 				JScrollPane scrollPane1 = new JScrollPane(tabelaPredmeta);
 				scrollPane1.setPreferredSize(new Dimension(1300, 1500));
 				scrollPane1.setBorder(new EmptyBorder(60, 50, 30, 40));
+				
 		tabelaProfesora=new ProfesoriJTable();		
 				JScrollPane scrollPane2 = new JScrollPane(tabelaProfesora);
 				scrollPane2.setPreferredSize(new Dimension(1300, 1500));
@@ -108,6 +113,15 @@ public class MainFrame extends JFrame {
 	      tabbedPane.setFont(font);
 	      tabbedPane.setForeground(Color.WHITE);
 	      tabbedPane.setBackground(Color.GRAY);
+	      
+//reaguje na promenu taba	
+	      tabbedPane.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				JTabbedPane sourceJTabbedPane = (JTabbedPane) e.getSource();
+				tab = sourceJTabbedPane.getSelectedIndex();
+			}
+		});
 	    	this.add(tabbedPane);
 		
 	}
