@@ -9,8 +9,14 @@ import javax.swing.table.TableCellRenderer;
 import listeners.MouseListenerPredmeti;
 
 public class PredmetiJTable extends JTable {
+	
+
+
 	private static final long serialVersionUID = 1L;
 
+	public static boolean selektovanPredmet = false; //da li je vrsta predmeta oznacena
+	
+	
 	public PredmetiJTable() {
 		super();
 		this.setRowHeight(30);
@@ -34,6 +40,7 @@ public class PredmetiJTable extends JTable {
 		Component c = super.prepareRenderer(renderer, row, column);
 		if (isRowSelected(row)) {
 			c.setBackground(Color.CYAN);
+			selektovanPredmet = true;
 		} else {
 			c.setBackground(Color.WHITE);
 		}
