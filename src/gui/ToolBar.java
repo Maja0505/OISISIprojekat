@@ -19,11 +19,16 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+import dialozi.DijalogBrisanjePredmeta;
+import dialozi.DijalogBrisanjeProfesora;
 import dialozi.DijalogBrisanjeStudenta;
+import dialozi.DijalogDodajPredmet;
 import dialozi.DijalogDodajProfesora;
 import dialozi.DijalogDodajStudenta;
+import dialozi.DijalogIzmenaPredmeta;
 import dialozi.DijalogIzmenaProfesora;
 import dialozi.DijalogIzmenaStudenta;
+import tabele.PredmetiJTable;
 import tabele.ProfesoriJTable;
 import tabele.StudentiJTable;
 
@@ -46,7 +51,7 @@ public class ToolBar extends JToolBar {
 		
 		buttonNew.addActionListener(new ActionListener() {
 
-//iskace odgovarajuvi dijalog za izmenu			
+//iskace odgovarajuvi dijalog za dodavanje			
 			//@Override  
 			public void actionPerformed(ActionEvent e) {
 				if(MainFrame.tab == 0) {
@@ -54,6 +59,7 @@ public class ToolBar extends JToolBar {
 				}else if(MainFrame.tab == 1) {
 					new DijalogDodajProfesora(true);
 				}else if(MainFrame.tab == 2) {
+					new DijalogDodajPredmet(true);
 				}
 			}
 		});
@@ -68,14 +74,15 @@ public class ToolBar extends JToolBar {
 		
 		
 		buttonEdit.addActionListener(new ActionListener() {
-//iskace odgovarajuvi dijalog za dodavanje			
+//iskace odgovarajuvi dijalog za izmenu			
 						//@Override  
 						public void actionPerformed(ActionEvent e) {
 							if(MainFrame.tab == 0 && StudentiJTable.selektovanStudent) {
 								new DijalogIzmenaStudenta(true);
-							}else if(MainFrame.tab == 1) {
-								new DijalogIzmenaProfesora(true && ProfesoriJTable.selektovanProfesor);
-							}else if(MainFrame.tab == 2) {
+							}else if(MainFrame.tab == 1 && ProfesoriJTable.selektovanProfesor) {
+								new DijalogIzmenaProfesora(true);
+							}else if(MainFrame.tab == 2 && PredmetiJTable.selektovanPredmet) {
+								new DijalogIzmenaPredmeta(true);
 							}
 						}
 					});
@@ -98,9 +105,11 @@ public class ToolBar extends JToolBar {
 						public void actionPerformed(ActionEvent e) {
 							if(MainFrame.tab == 0 && StudentiJTable.selektovanStudent) {
 								new DijalogBrisanjeStudenta(true);
-							}else if(MainFrame.tab == 1) {
-								
-							}else if(MainFrame.tab == 2) {
+							}else if(MainFrame.tab == 1 && ProfesoriJTable.selektovanProfesor) {
+								new DijalogBrisanjeProfesora(true);
+							}else if(MainFrame.tab == 2 && PredmetiJTable.selektovanPredmet) {
+								new DijalogBrisanjePredmeta(true);
+							
 							}
 						}
 					});
