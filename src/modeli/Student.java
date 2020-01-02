@@ -3,10 +3,12 @@ package modeli;
 import java.sql.Date;
 import java.util.List;
 
-enum Status {B,S};
+
 
 public class Student {
 
+	public	enum Status {B,S};
+	
 	private String ime;
 	private String prezime;
 	private Date datumRodjenja;
@@ -21,7 +23,10 @@ public class Student {
 	private Status status;
 	
 
-
+	public Student() {
+		super();
+	}
+	
 	public Student(String ime, String prezime, Date datumRodjenja, String adresa, String brojTelefona, String email,
 			String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, double prosecnaOcena,
 			List<String> spisakPredmeta, Status status) {

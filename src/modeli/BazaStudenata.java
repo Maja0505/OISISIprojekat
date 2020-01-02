@@ -3,6 +3,8 @@ package modeli;
 import java.util.ArrayList;
 import java.util.List;
 
+import modeli.Student.Status;
+
 
 
 
@@ -111,6 +113,11 @@ public class BazaStudenata {
 			BazaStudenata.getInstance().getStudenti().get(j).setSpisakPredmeta(listaPredmeta);
 		}
 	}
-	
+
+//metoda da dodavanje studenta u Bazu	
+	public void dodajStudenta(Student s) {
+		this.studenti.add(s);
+	}
+
 	
 }
