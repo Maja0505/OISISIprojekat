@@ -72,17 +72,16 @@ public class MouseListenerStudenti extends MouseAdapter {
 				list.setFont(f);
 				
 			    JScrollPane scrollPane = new JScrollPane(list); 
-				 
-				   
+ 				   
 				    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 					GridBagConstraints gbc = new GridBagConstraints();
 				    
-						gbc.gridx = 1;
-						gbc.gridy = 1;
-						gbc.weightx = 200;
-						gbc.weighty = 200;
-						gbc.fill = GridBagConstraints.HORIZONTAL;
-						gbc.insets = new Insets(10, 100, 10, 100);					
+						gbc.gridx = 0;
+						gbc.gridy = 0;
+						gbc.weightx = 100;
+						gbc.weighty = 100;
+						gbc.fill = GridBagConstraints.BOTH;   
+						gbc.insets = new Insets(20, 100, 20, 100);					
 					
 					panel.add(scrollPane,gbc);
 			
