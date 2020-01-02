@@ -1,5 +1,6 @@
 package main;
 
+import controlleri.StudentiController;
 import gui.MainFrame;
 import modeli.BazaPredmeta;
 import modeli.BazaProfesora;
@@ -9,9 +10,8 @@ public class MyApp {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-				MainFrame mf=new MainFrame();
-				mf.setVisible(true);
 				BazaStudenata.getInstance();
+				StudentiController.getInstance();
 				BazaPredmeta.getInstance();
 				BazaProfesora.getInstance();
 				MainFrame.getInstance(); 

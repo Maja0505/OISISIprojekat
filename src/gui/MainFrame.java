@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import tabele.AbstractTableModelStudenti;
 import tabele.PredmetiJTable;
 import tabele.ProfesoriJTable;
 import tabele.StudentiJTable;
@@ -71,14 +72,15 @@ public class MainFrame extends JFrame {
 		
 		
 		inicijalizacijaTabbedPane();
+		prikaziTabele();
 		
-		
-		
+
+		setVisible(true);
 	}
 	
 	public static int tab;  // da bi znali koji tab je aktivan
 
-	private void inicijalizacijaTabbedPane() {
+	public void inicijalizacijaTabbedPane() {
 		 JTabbedPane tabbedPane = new JTabbedPane();
 		 JPanel panel1, panel2, panel3;
 	      panel1 = new JPanel();
@@ -104,7 +106,7 @@ public class MainFrame extends JFrame {
 				scrollPane2.setPreferredSize(new Dimension(1300, 1500));
 				scrollPane2.setBorder(new EmptyBorder(60, 50, 30, 40));
 			
-
+				
 			panel1.add(scrollPane, BorderLayout.SOUTH);
 			panel2.add(scrollPane2,BorderLayout.SOUTH);
 			panel3.add(scrollPane1, BorderLayout.SOUTH);
@@ -122,8 +124,10 @@ public class MainFrame extends JFrame {
 				tab = sourceJTabbedPane.getSelectedIndex();
 			}
 		});
+	      	
+	      
 	    	this.add(tabbedPane);
-		
+	 
 	}
 
 	
@@ -142,9 +146,16 @@ public class MainFrame extends JFrame {
 	private JTable tabelaProfesora;
 	
 		
-		
-		
+//metoda da azuriranje modela Student 
+	public void azurirajTabeluStudent() {
+			AbstractTableModelStudenti model = (AbstractTableModelStudenti) tabelaStudenata.getModel();
+			model.fireTableDataChanged();
+			validate();
+	}	
 	
+	private void prikaziTabele() {
+		this.azurirajTabeluStudent();
+	}
 	
 	
 
