@@ -6,7 +6,13 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,6 +22,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
+import controlleri.StudentiController;
+import modeli.Student;
+import modeli.Student.Status;
 
 public class DijalogDodajStudenta {
 
@@ -64,11 +74,26 @@ public class DijalogDodajStudenta {
 		JTextField GodUpis = new JTextField();
 		GodUpis.setPreferredSize(new Dimension(100,30));
 		
+		List<String> predmeti = new ArrayList<String>();
+		Student student = new Student();
+		
+		student.setSpisakPredmeta(predmeti);
+		
+		
 	    String[] izbor = { "I (prva)","II (druga) ", "III (treca)","IV (cetvrta)"};
 
 	    final JComboBox<String> cb = new JComboBox<String>(izbor);
 	    cb.setPreferredSize(new Dimension(100,30));
 		
+	    cb.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int godStud = cb.getSelectedIndex() + 1; //indeksiranje ide od 0
+				student.setTrenutnaGodinaStudija(godStud);
+			}
+		});
+	    
 	    
 	    JRadioButton button1 = new JRadioButton("Budzet");
 	    JRadioButton button2 = new JRadioButton("Samofinansiranje");
@@ -77,9 +102,81 @@ public class DijalogDodajStudenta {
 	    buttonGroup.add(button1);
 	    buttonGroup.add(button2);
 	    
+	    
+	   button1.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(button1.isSelected())
+				student.setStatus(Status.B);
+		}
+	});
+	   
+	   button2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(button2.isSelected())
+					student.setStatus(Status.S);
+			}
+		});
+	   
+	   
+	   
+	   
+	    
 	    JButton odustanak = new JButton("Odustanak");
 	    JButton potvrda = new JButton("Potvrda");
 	    
+	    
+	    potvrda.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String ime = Ime.getText();
+				student.setIme(ime);
+				String prz = Prz.getText();
+				student.setPrezime(prz);
+				String dat = Dat.getText();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+				try {
+					Date god = new Date(sdf.parse(dat).getTime());
+					student.setDatumRodjenja(god);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				String adresa = Adresa.getText();
+				student.setAdresa(adresa);
+				String broj = Broj.getText();
+				student.setBrojTelefona(broj);
+				String email = Email.getText();
+				student.setEmail(email);
+				String indeks = Indeks.getText();
+				student.setBrIndeksa(indeks);
+				String prosecnaOcena = ProsecnaOcena.getText();
+				float prosecna = Float.parseFloat(prosecnaOcena);
+				student.setProsecnaOcena(prosecna);
+				String godString = GodUpis.getText();
+				int godUpis = Integer.parseInt(godString);
+				student.setGodinaUpisa(godUpis);
+				
+				
+				StudentiController.getInstance().dodajStudenta(student);
+
+				dodajStudenta.dispose();
+			}
+		});
+	    
+	    
+	    odustanak.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dodajStudenta.dispose();
+				
+			}
+		});
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
