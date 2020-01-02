@@ -97,6 +97,7 @@ public class BazaProfesora {
 						
 					}
 			}
+			
 			BazaProfesora.getInstance().getProfesori().get(j).setSpisakPredmeta(listaPredmeta);
 		}
 	}

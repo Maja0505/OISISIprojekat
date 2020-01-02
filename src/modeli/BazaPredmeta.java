@@ -39,7 +39,7 @@ public class BazaPredmeta {
 		this.predmeti = new ArrayList<Predmet>();
 		List<String> listaStudenata = new ArrayList<String>();
 		
-		predmeti.add(new Predmet("WP-E2","Web programiranje",6,3,"Milan Vidakovic",listaStudenata));
+		
 		predmeti.add(new Predmet("MA2-E2","Matematicka Analiza 2",3,2,"Mila Stojakovic",listaStudenata));
 		predmeti.add(new Predmet("BP2-E2","Baze podataka 2",7,4,"Ivan Lukovic",listaStudenata));
 		
@@ -107,6 +107,21 @@ public class BazaPredmeta {
 		}		
 	}
 
+	public void izbrisiPredmet(String id) {				//brise iz baze
+		for (Predmet p : predmeti) {
+			if (p.getSifraPredmeta().equals(id)) {
+				predmeti.remove(p);
+				
+				break;
+			}
+		}
+	}
 	
+	public void dodajPredmet(Predmet p) {				//dodaje u bazu
+		this.predmeti.add(p);
+		BazaProfesora.getInstance().popunjavanjeListePredmeta();
+		
+		
+	}
 	
 }
