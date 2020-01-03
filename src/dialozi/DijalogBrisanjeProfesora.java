@@ -6,13 +6,15 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import tabele.ProfesoriJTable;
 
 public class DijalogBrisanjeProfesora {
 	public DijalogBrisanjeProfesora(boolean vidljiv) {
@@ -38,6 +40,25 @@ public class DijalogBrisanjeProfesora {
 	    JButton odustanak = new JButton("Odustanak");
 	    JButton potvrda = new JButton("Potvrda");
 	    
+	    	odustanak.addActionListener(new ActionListener() {
+			
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						obrisiProfesora.dispose();
+						
+					}
+	    	}); 
+
+	    	
+	    	potvrda.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						
+						controlleri.ProfesoriController.getInstance().izbrisiProfesora(ProfesoriJTable.selektovanaVrsta);
+						obrisiProfesora.dispose();
+					}
+		});
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
