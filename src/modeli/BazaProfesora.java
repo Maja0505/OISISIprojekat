@@ -98,9 +98,18 @@ public class BazaProfesora {
 					}
 			}
 			
-			BazaProfesora.getInstance().getProfesori().get(j).setSpisakPredmeta(listaPredmeta);
+				BazaProfesora.getInstance().getProfesori().get(j).setSpisakPredmeta(listaPredmeta);
 		}
 	}
 	
-
+	public void izbrisiProfesora(String id) {				//brise iz baze
+		for (Profesor p : Profesori) {
+			if (p.getBrojLicneKarte().equals(id)) {
+				Profesori.remove(p);
+				
+				break;
+			}
+		}
+	}
+	
 }

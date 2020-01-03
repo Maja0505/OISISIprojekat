@@ -3,6 +3,9 @@ package modeli;
 import java.util.ArrayList;
 import java.util.List;
 
+import tabele.PredmetiJTable;
+
+
 
 
 public class BazaPredmeta {
@@ -121,6 +124,20 @@ public class BazaPredmeta {
 		this.predmeti.add(p);
 		BazaProfesora.getInstance().popunjavanjeListePredmeta();
 		
+		
+	}
+	
+	public void izmeniPredmet(String sifra, String nazivPredmet, int semestar, int godinaIzvodjenjaPredmeta, String predmetniProfesor) {		//menja u bazi
+				Predmet p=BazaPredmeta.getInstance().getRow(PredmetiJTable.selektovanaVrsta);
+	
+				p.setSifraPredmeta(sifra);
+				p.setNazivPredmet(nazivPredmet);
+				p.setSemestar(semestar);
+				p.setGodinaIzvodjenjaPredmeta(godinaIzvodjenjaPredmeta);
+				p.setPredmetniProfesor(predmetniProfesor);
+				p.setSpisakStudenata(null);
+			
+			
 		
 	}
 	
