@@ -22,6 +22,7 @@ public class StudentiJTable extends JTable {
 	private static final long serialVersionUID = 1L;
 
 	public static boolean selektovanStudent = false; //da bi znali da li je vrsta studenta selektovana (ako nije brisanje i izmena nisu moguci)
+	public static int selektovanaVrsta=-1;   //da bi znali koja vrsta tacno je selektovana
 	
 	public StudentiJTable() {
 		super();
@@ -47,8 +48,10 @@ public class StudentiJTable extends JTable {
 		if (isRowSelected(row)) {
 			c.setBackground(Color.CYAN);
 			selektovanStudent = true;
+			selektovanaVrsta = row;
 		} else {
 			c.setBackground(Color.WHITE);
+			selektovanStudent = false;
 		}
 		return c;
 	}

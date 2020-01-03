@@ -1,9 +1,11 @@
 package modeli;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import modeli.Student.Status;
+import tabele.StudentiJTable;
 
 
 
@@ -119,5 +121,36 @@ public class BazaStudenata {
 		this.studenti.add(s);
 	}
 
+//metoda za brisanje iz baze	
+	public void izbrisiStudenta(String brIndeksa) {				
+		for (Student s : studenti) {
+			if (s.getBrIndeksa().equals(brIndeksa)) {
+				studenti.remove(s);
+				break;
+			}
+		}
+	}	
+	
+//motoda za izmenu studenta u bazi
+	public void izmeniStudenta(String ime, String prezime, Date datumRodjenja, String adresa, String brojTelefona, String email,
+			String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, double prosecnaOcena,
+			List<String> spisakPredmeta, Status status) {		
+		
+		Student s = BazaStudenata.getInstance().getRow(StudentiJTable.selektovanaVrsta);
+
+		s.setIme(ime);
+		s.setPrezime(prezime);
+		s.setAdresa(adresa);
+		s.setBrojTelefona(brojTelefona);
+		s.setBrIndeksa(brIndeksa);
+		s.setDatumRodjenja(datumRodjenja);
+		s.setEmail(email);
+		s.setGodinaUpisa(godinaUpisa);
+		s.setTrenutnaGodinaStudija(trenutnaGodinaStudija);
+		s.setStatus(status);
+		s.setProsecnaOcena(prosecnaOcena);
+		s.setSpisakPredmeta(spisakPredmeta);
+		
+}
 	
 }
