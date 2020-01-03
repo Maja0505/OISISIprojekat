@@ -17,7 +17,8 @@ public class ProfesoriJTable extends JTable {
 	private static final long serialVersionUID = 1L;
 
 	public static boolean selektovanProfesor = false; //za izmenu i brisanje
-
+	public static int selektovanaVrsta=-1;
+	
 	public ProfesoriJTable() {
 		super();
 		this.setRowHeight(30);
@@ -42,8 +43,10 @@ public class ProfesoriJTable extends JTable {
 		if (isRowSelected(row)) {
 			c.setBackground(Color.CYAN);
 			selektovanProfesor = true;
+			selektovanaVrsta=row;	//pamti selektovanu vrstu
 		} else {
 			c.setBackground(Color.WHITE);
+			selektovanProfesor = false;		//vraca na false,kad nije selektovano nista
 		}
 		return c;
 	}
