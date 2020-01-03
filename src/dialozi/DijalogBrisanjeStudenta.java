@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,22 +16,24 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import tabele.StudentiJTable;
+
 public class DijalogBrisanjeStudenta {
 
 	public DijalogBrisanjeStudenta(boolean vidljiv) {
-		JDialog  dodajStudenta = new ModalniDijalog(new JFrame(), "Brisanje studenta", true,400,200);
+		JDialog  obrisiStudenta = new ModalniDijalog(new JFrame(), "Brisanje studenta", true,400,200);
 		
 		
 		JLabel statusBar = new JLabel();
-		dodajStudenta.add(statusBar,BorderLayout.SOUTH);
-		statusBar.setPreferredSize(new Dimension(dodajStudenta.getWidth(), 25));
+		obrisiStudenta.add(statusBar,BorderLayout.SOUTH);
+		statusBar.setPreferredSize(new Dimension(obrisiStudenta.getWidth(), 25));
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		panel.setBackground(Color.WHITE);
-		dodajStudenta.add(panel,BorderLayout.CENTER);
+		obrisiStudenta.add(panel,BorderLayout.CENTER);
 		
-		dodajStudenta.add(panel);
+		obrisiStudenta.add(panel);
 		
 		JLabel brisanje = new JLabel("Da li ste sigurni da zelite da obrisete studenta ?");
 		JLabel kantaZaBrisanje = new JLabel();
@@ -37,8 +41,29 @@ public class DijalogBrisanjeStudenta {
 		
 		
 	    JButton odustanak = new JButton("Odustanak");
+	    odustanak.setBackground(Color.LIGHT_GRAY);
 	    JButton potvrda = new JButton("Potvrda");
+	    potvrda.setBackground(Color.CYAN);
 	    
+	    potvrda.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				controlleri.StudentiController.getInstance().izbrisiStudenta(StudentiJTable.selektovanaVrsta);
+				obrisiStudenta.dispose();
+			}
+		});
+	    
+	    odustanak.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				obrisiStudenta.dispose();
+				
+			}
+		}); 
+
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -70,7 +95,7 @@ public class DijalogBrisanjeStudenta {
 		
 		
 		
-		dodajStudenta.setVisible(vidljiv);
+		obrisiStudenta.setVisible(vidljiv);
 		
 	}
 
