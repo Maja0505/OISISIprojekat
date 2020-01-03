@@ -19,16 +19,22 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import controlleri.StudentiController;
+import listeners.FocusListener;
+import listeners.KeyListener;
 import modeli.Student;
 import modeli.Student.Status;
 
 public class DijalogDodajStudenta {
 
+	private static int onemoguciTxtField = 0;  //omogucuje potvrdu ukoliko su sva polja validno uneta  
+	private static boolean onemoguciButton = false; //omgucuje potvrdu ukoliko je oznaceno jedno od dugmadi
+	
 	public DijalogDodajStudenta(boolean vidljiv) {
 		JDialog  dodajStudenta = new ModalniDijalog(new JFrame(), "Dodaj studenta", true,600,750);
 		
@@ -56,23 +62,50 @@ public class DijalogDodajStudenta {
 		JLabel godUpis = new JLabel("Godina upisa* ");
 		
 		JTextField Ime = new JTextField();
+		Ime.setName("Ime*");
 		Ime.setPreferredSize(new Dimension(100,30));
+		Ime.addFocusListener(new FocusListener());
+		
 		JTextField Prz = new JTextField();
+		Prz.setName("Prz*");
 		Prz.setPreferredSize(new Dimension(100,30));
+		Prz.addFocusListener(new FocusListener());
+		
 		JTextField Dat = new JTextField();
+		Dat.setName("Dat*");
 		Dat.setPreferredSize(new Dimension(100,30));
+		Dat.addFocusListener(new FocusListener());
+		
 		JTextField Adresa = new JTextField();
+		Adresa.setName("Adresa*");
 		Adresa.setPreferredSize(new Dimension(100,30));
+		Adresa.addFocusListener(new FocusListener());
+		
 		JTextField Broj = new JTextField();
+		Broj.setName("Broj*");
 		Broj.setPreferredSize(new Dimension(100,30));
+		Broj.addKeyListener(new KeyListener());
+		Broj.addFocusListener(new FocusListener());
+		
 		JTextField Indeks = new JTextField();
+		Indeks.setName("Indeks*");
 		Indeks.setPreferredSize(new Dimension(100,30));
+		Indeks.addFocusListener(new FocusListener());
+		
 		JTextField Email = new JTextField();
+		Email.setName("Email*");
 		Email.setPreferredSize(new Dimension(100,30));
+		Email.addFocusListener(new FocusListener());
+		
 		JTextField ProsecnaOcena = new JTextField();
+		ProsecnaOcena.setName("Prosecna ocena*");
 		ProsecnaOcena.setPreferredSize(new Dimension(100,30));
+		ProsecnaOcena.addFocusListener(new FocusListener());
+		
 		JTextField GodUpis = new JTextField();
+		GodUpis.setName("GodUpis*");
 		GodUpis.setPreferredSize(new Dimension(100,30));
+		GodUpis.addFocusListener(new FocusListener());
 		
 		List<String> predmeti = new ArrayList<String>();
 		Student student = new Student();
@@ -94,21 +127,28 @@ public class DijalogDodajStudenta {
 			}
 		});
 	    
+	    if(student.getGodinaUpisa() == 0)
+	    	student.setTrenutnaGodinaStudija(1); // ako nije izabrao ni jednu podrazumevana je prva godina
 	    
 	    JRadioButton button1 = new JRadioButton("Budzet");
 	    JRadioButton button2 = new JRadioButton("Samofinansiranje");
 	    ButtonGroup buttonGroup = new ButtonGroup();
+	    button1.setBackground(Color.WHITE);
+	    button2.setBackground(Color.WHITE);
 	    
 	    buttonGroup.add(button1);
 	    buttonGroup.add(button2);
+	    
 	    
 	    
 	   button1.addActionListener(new ActionListener() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(button1.isSelected())
+			if(button1.isSelected()) {
 				student.setStatus(Status.B);
+					onemoguciButton = true;
+			}
 		}
 	});
 	   
@@ -116,9 +156,11 @@ public class DijalogDodajStudenta {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(button2.isSelected())
+				if(button2.isSelected()) {
 					student.setStatus(Status.S);
-			}
+					onemoguciButton = true;
+				}
+				}
 		});
 	   
 	   
@@ -126,12 +168,46 @@ public class DijalogDodajStudenta {
 	   
 	    
 	    JButton odustanak = new JButton("Odustanak");
+	    odustanak.setBackground(Color.LIGHT_GRAY);
 	    JButton potvrda = new JButton("Potvrda");
-	    
+	    potvrda.setBackground(Color.CYAN);
 	    
 	    potvrda.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			
+				
+				
+				if(!Ime.getText().equals("")  && !Ime.getText().equals("Nije validan unos imena...")) {
+					onemoguciTxtField++;
+					}
+				if(!Prz.getText().equals("")  && !Prz.getText().equals("Nije validan unos prezimena...")) {
+					onemoguciTxtField++;
+					}
+				if(!Dat.getText().equals("") && !Dat.getText().equals("Nije validan format datuma (ocekivani 'YYYY - MM - DD')...")) {
+					onemoguciTxtField++;
+					}
+				if(!Adresa.getText().equals("") && !Adresa.getText().equals("Nije valian unos adrese...")) {
+					onemoguciTxtField++;
+					}
+				if(!Broj.getText().equals("") && !Broj.getText().equals("Validan format je +381*********...")) {
+					onemoguciTxtField++;
+					}
+				if(!Email.getText().equals("") && !Email.getText().equals("Nije validan format za email...")) {
+					onemoguciTxtField++;
+					}
+				if(!Indeks.getText().equals("") && !Indeks.getText().equals("Validan format je xxBROJ-20YY...")) {
+					onemoguciTxtField++;
+				}
+				if(!ProsecnaOcena.getText().equals("") && !ProsecnaOcena.getText().equals("Ocene su u rasponu od 6 - 10...")) {
+					onemoguciTxtField++;
+					}
+				if(!GodUpis.getText().equals("") && !GodUpis.getText().equals("Nije validan unos...")) {
+					onemoguciTxtField++;
+					}
+				
+		if(onemoguciButton) {		
+			if(onemoguciTxtField == 9) {
 				
 				String ime = Ime.getText();
 				student.setIme(ime);
@@ -143,7 +219,6 @@ public class DijalogDodajStudenta {
 					Date god = new Date(sdf.parse(dat).getTime());
 					student.setDatumRodjenja(god);
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				String adresa = Adresa.getText();
@@ -163,18 +238,30 @@ public class DijalogDodajStudenta {
 				
 				
 				StudentiController.getInstance().dodajStudenta(student);
-
+				onemoguciTxtField = 0;
 				dodajStudenta.dispose();
 			}
+			else {
+				JOptionPane.showMessageDialog(null, "Niste uneli sva polja");
+				onemoguciTxtField = 0;
+				}
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Niste oznacili dugme");
+				
+				}
+			}
 		});
+	    
 	    
 	    
 	    odustanak.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				onemoguciTxtField = 0;
+				onemoguciButton = false;
 				dodajStudenta.dispose();
-				
 			}
 		});
 		
