@@ -23,6 +23,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import tabele.AbstractTableModelPredmeti;
+import tabele.AbstractTableModelProfesori;
 import tabele.AbstractTableModelStudenti;
 import tabele.PredmetiJTable;
 import tabele.ProfesoriJTable;
@@ -156,11 +157,18 @@ public class MainFrame extends JFrame {
 		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) tabelaPredmeta.getModel();
 		model.fireTableDataChanged();
 		validate();
-	}		
+	}
+	//metoda da azuriranje modela Profesora 	
+	public void azurirajTabeluProfesora() {
+		AbstractTableModelProfesori model=(AbstractTableModelProfesori) tabelaProfesora.getModel();
+		model.fireTableDataChanged();
+		validate();
+	}
 	
 	private void prikaziTabele() {
 		this.azurirajTabeluStudent();
 		this.azurirajTabeluPredmeta();
+		this.azurirajTabeluProfesora();
 	}
 	
 	
