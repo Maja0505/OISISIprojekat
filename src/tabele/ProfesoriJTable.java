@@ -25,7 +25,7 @@ public class ProfesoriJTable extends JTable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; 
 
 	public static boolean selektovanProfesor = false; //za izmenu i brisanje
 	public static int selektovanaVrsta=-1;
