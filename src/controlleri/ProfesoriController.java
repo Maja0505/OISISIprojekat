@@ -1,5 +1,7 @@
 package controlleri;
 
+import java.sql.Date;
+
 import gui.MainFrame;
 import modeli.BazaProfesora;
 import modeli.Profesor;
@@ -28,4 +30,21 @@ public class ProfesoriController {
 		// azuriranje prikaza
 		MainFrame.getInstance().azurirajTabeluProfesora();
     }
+	
+	
+	public void dodajProfesora(Profesor p) {
+		//izmena modela Profesor (dodavanje)
+		BazaProfesora.getInstance().dodajProfesora(p);
+		//azuriranje prikaza
+		MainFrame.getInstance().azurirajTabeluProfesora();
+	}
+	
+	public void izmeniProfesora(Profesor p) {
+		// izmena modela Profesor (izmena)
+		BazaProfesora.getInstance().izmeniProfesora(p.getIme(), p.getPrezime(), (Date) p.getDatum_rodjenja(), 
+				p.getAdresaStanivanja(), p.getKontaktTelefon(), p.getEmail(), p.getAdresaKancelarije(), 
+				p.getBrojLicneKarte(), p.getTitula(), p.getZvanje(), p.getSpisakPredmeta());
+		// azuriranje prikaza
+		MainFrame.getInstance().azurirajTabeluProfesora();
+	}
 }
