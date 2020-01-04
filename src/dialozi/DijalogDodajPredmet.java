@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controlleri.PredmetiController;
+import listeners.FocusListener;
 import modeli.BazaProfesora;
 import modeli.Predmet;
 
@@ -45,9 +46,14 @@ public class DijalogDodajPredmet {
 				
 				
 				JTextField Sifra = new JTextField();
+				Sifra.setName("Sifra predmeta*");
 				Sifra.setPreferredSize(new Dimension(100,30));
+				Sifra.addFocusListener(new FocusListener());
+				
 				JTextField NazivPredmeta = new JTextField();
+				NazivPredmeta.setName("Naziv predmeta*");
 				NazivPredmeta.setPreferredSize(new Dimension(100,30));
+				NazivPredmeta.addFocusListener(new FocusListener());
 				
 				
 			    String[] izborProfesora=new String[BazaProfesora.getInstance().getProfesori().size()];

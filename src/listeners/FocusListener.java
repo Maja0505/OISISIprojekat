@@ -238,5 +238,32 @@ public class FocusListener implements java.awt.event.FocusListener {
 				txt.setForeground(Color.BLACK);
 			}
 		}
+	 
+	 
+//ZA PREDMET
+	 if (txt.getName().equals("Sifra predmeta*")) {
+			Pattern regExp = Pattern.compile("[A-Z0-9]+[-]?[A-Z0-9]+");
+			Matcher m = regExp.matcher(txt.getText());
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Nije validan unos sifre! Sifru morate uneti velikim slovima") || !m.matches()) {
+				txt.setText("Nije validan unos sifre! Sifru morate uneti velikim slovima");
+				txt.setForeground(Color.RED);
+			} else {
+				txt.setForeground(Color.BLACK);
+			}
+		}
+	 
+	 if (txt.getName().equals("Naziv predmeta*")) {
+			Pattern regExp = Pattern.compile("[A-Z][a-z0-9 ]+");
+			Matcher m = regExp.matcher(txt.getText());
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Nije validan unos naziva predmeta...") || !m.matches()) {
+				txt.setText("Nije validan unos naziva predmeta...");
+				txt.setForeground(Color.RED);
+			} else {
+				txt.setForeground(Color.BLACK);
+			}
+		}
+	 
 	}
+	
+	
 }
