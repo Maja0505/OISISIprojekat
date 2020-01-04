@@ -6,30 +6,45 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controlleri.ProfesoriController;
+import listeners.FocusListener;
+import listeners.KeyListener;
+import modeli.Profesor;
+
 public class DijalogDodajProfesora {
 
+	private static int onemoguciTxtField = 0; //onemogucuje dodavanje profesora ako sva polja nisu uneta	
+	
 	public DijalogDodajProfesora(boolean vidljiv) {
-		JDialog  dodajStudenta = new ModalniDijalog(new JFrame(), "Dodaj profesora", true,600,750);
+		JDialog  dodajProfesora = new ModalniDijalog(new JFrame(), "Dodaj profesora", true,600,750);
 		
 		
 		JLabel statusBar = new JLabel();
-		dodajStudenta.add(statusBar,BorderLayout.SOUTH);
-		statusBar.setPreferredSize(new Dimension(dodajStudenta.getWidth(), 25));
+		dodajProfesora.add(statusBar,BorderLayout.SOUTH);
+		statusBar.setPreferredSize(new Dimension(dodajProfesora.getWidth(), 25));
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		panel.setBackground(Color.WHITE);
-		dodajStudenta.add(panel,BorderLayout.CENTER);
+		dodajProfesora.add(panel,BorderLayout.CENTER);
 		
-		dodajStudenta.add(panel);
+		dodajProfesora.add(panel);
 		
 		JLabel ime = new JLabel("Ime*");
 		JLabel prz = new JLabel("Prezime*");
@@ -43,31 +58,144 @@ public class DijalogDodajProfesora {
 		JLabel zvanje = new JLabel("Zvanje* ");
 		
 		JTextField Ime = new JTextField();
+		Ime.setName("ImeProf*");
 		Ime.setPreferredSize(new Dimension(100,30));
+		Ime.addFocusListener(new FocusListener());
+		
 		JTextField Prz = new JTextField();
+		Prz.setName("PrzProf*");
 		Prz.setPreferredSize(new Dimension(100,30));
+		Prz.addFocusListener(new FocusListener());
+		
 		JTextField Dat = new JTextField();
+		Dat.setName("DatProf*");
 		Dat.setPreferredSize(new Dimension(100,30));
+		Dat.addFocusListener(new FocusListener());
+		
 		JTextField Adresa = new JTextField();
+		Adresa.setName("AdresaProf*");
 		Adresa.setPreferredSize(new Dimension(100,30));
+		Adresa.addFocusListener(new FocusListener());
+		
 		JTextField Broj = new JTextField();
+		Broj.setName("BrojProf*");
 		Broj.setPreferredSize(new Dimension(100,30));
+		Broj.addKeyListener(new KeyListener());
+		Broj.addFocusListener(new FocusListener());
+		
 		JTextField AdresaKancelarije = new JTextField();
+		AdresaKancelarije.setName("AdresaProfKanc*");
 		AdresaKancelarije.setPreferredSize(new Dimension(100,30));
+		AdresaKancelarije.addFocusListener(new FocusListener());
+		
 		JTextField Email = new JTextField();
+		Email.setName("EmailProf*");
 		Email.setPreferredSize(new Dimension(100,30));
+		Email.addFocusListener(new FocusListener());
+		
 		JTextField BrojLicne = new JTextField();
+		BrojLicne.setName("BrojLicneProf*");
 		BrojLicne.setPreferredSize(new Dimension(100,30));
+		BrojLicne.addFocusListener(new FocusListener());
+		
 		JTextField Titula = new JTextField();
+		Titula.setName("TitulaProf*");
 		Titula.setPreferredSize(new Dimension(100,30));
+		Titula.addFocusListener(new FocusListener());
+		
 		JTextField Zvanje = new JTextField();
+		Zvanje.setName("ZvanjeProf*");
 		Zvanje.setPreferredSize(new Dimension(100,30));
+		Zvanje.addFocusListener(new FocusListener());
 		
 	    
 	    JButton odustanak = new JButton("Odustanak");
+	    odustanak.setBackground(Color.LIGHT_GRAY);
 	    JButton potvrda = new JButton("Potvrda");
-	    
+	    potvrda.setBackground(Color.CYAN);
 		
+	    
+	    potvrda.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				
+				if(!Ime.getText().equals("")  && !Ime.getText().equals("Nije validan unos imena...")) {
+					onemoguciTxtField++;
+					}
+				if(!Prz.getText().equals("")  && !Prz.getText().equals("Nije validan unos prezimena...")) {
+					onemoguciTxtField++;
+					}
+				if(!Dat.getText().equals("") && !Dat.getText().equals("Nije validan format datuma (ocekivani 'YYYY - MM - DD')...")) {
+					onemoguciTxtField++;
+					}
+				if(!Adresa.getText().equals("") && !Adresa.getText().equals("Nije valian unos adrese...")) {
+					onemoguciTxtField++;
+					}
+				if(!Broj.getText().equals("") && !Broj.getText().equals("Validan format je +381*********...")) {
+					onemoguciTxtField++;
+					}
+				if(!Email.getText().equals("") && !Email.getText().equals("Nije validan format za email...")) {
+					onemoguciTxtField++;
+					}
+				if(!AdresaKancelarije.getText().equals("") && !AdresaKancelarije.getText().equals("Nije valian unos adrese kancelarije...")) {
+					onemoguciTxtField++;
+				}
+				if(!BrojLicne.getText().equals("") && !BrojLicne.getText().equals("Nije validan unos...")) {
+					onemoguciTxtField++;
+					}
+				if(!Titula.getText().equals("") && !Titula.getText().equals("Nije validan unos titule...")) {
+					onemoguciTxtField++;
+					}
+				if(!Zvanje.getText().equals("") && !Zvanje.getText().equals("Nije validan unos zvanja...")) {
+					onemoguciTxtField++;
+					}
+				
+			if(onemoguciTxtField == 10) {
+				
+				String ime = Ime.getText();
+				String prz = Prz.getText();
+				String dat = Dat.getText();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+				Date god = null;
+				try {
+					 god = new Date(sdf.parse(dat).getTime());
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+				String adresa = Adresa.getText();
+				String broj = Broj.getText();
+				String email = Email.getText();
+				String adresaKancelarije = AdresaKancelarije.getText();
+				String zvanje = Zvanje.getText();
+				String titula = Titula.getText();
+				String brLicne = BrojLicne.getText();
+				List<String> spisakPredmeta = new ArrayList<String>();
+				
+				ProfesoriController.getInstance().dodajProfesora(new Profesor(ime, prz, god, adresa, broj, email, adresaKancelarije, brLicne, titula, zvanje, spisakPredmeta));
+				onemoguciTxtField = 0;
+				dodajProfesora.dispose();
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Niste uneli sva polja");
+				onemoguciTxtField = 0;
+				}
+			}
+			
+		});
+	    
+	    
+	    odustanak.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				onemoguciTxtField = 0;
+				dodajProfesora.dispose();
+			}
+		});
+	    
+	    
+	    
 		GridBagConstraints gbc = new GridBagConstraints();
 		
 		
@@ -172,7 +300,7 @@ public class DijalogDodajProfesora {
 		gbc.insets = new Insets(50, 170, 0, 150);
 		panel.add(odustanak, gbc);
 		
-		dodajStudenta.setVisible(vidljiv);
+		dodajProfesora.setVisible(vidljiv);
 	}
 
 }
