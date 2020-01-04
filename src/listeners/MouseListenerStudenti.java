@@ -39,7 +39,7 @@ public class MouseListenerStudenti extends MouseAdapter {
 	        Point point = event.getPoint();
 	        int column = table.columnAtPoint(point);
 	        int row=table.rowAtPoint(point);
-	        if(column == 6) {
+	        if(column == 8) {
 	        	
 	         
 			JDialog predmeti = new ModalniDijalog(new JFrame(), "Lista predmeta", true);
@@ -90,7 +90,7 @@ public class MouseListenerStudenti extends MouseAdapter {
 			
 	        }
 	        
-	        if(column == 7) {
+	        if(column == 9) {
 	        	JDialog predmeti = new ModalniDijalog(new JFrame(), "Informacije o studentima", true);
 	  	   	  
 				JLabel statusBar = new JLabel();
