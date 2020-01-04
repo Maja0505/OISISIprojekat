@@ -6,22 +6,15 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
-
-
-
 import javax.swing.ImageIcon;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import tabele.AbstractTableModelPredmeti;
 import tabele.AbstractTableModelProfesori;
 import tabele.AbstractTableModelStudenti;
@@ -170,7 +163,17 @@ public class MainFrame extends JFrame {
 		this.azurirajTabeluPredmeta();
 		this.azurirajTabeluProfesora();
 	}
-	
-	
 
+	public JTable getTabelaStudenata() {
+		return tabelaStudenata;
+	}
+
+	public JTable getTabelaPredmeta() {
+		return tabelaPredmeta;
+	}
+
+	public JTable getTabelaProfesora() {
+		return tabelaProfesora;
+	}
+	
 }

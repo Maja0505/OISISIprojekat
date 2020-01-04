@@ -43,7 +43,7 @@ public class BazaPredmeta {
 		List<String> listaStudenata = new ArrayList<String>();
 		
 		
-		predmeti.add(new Predmet("MA2-E2","Matematicka Analiza 2",3,2,"Mila Stojakovic",listaStudenata));
+		predmeti.add(new Predmet("MA2-E2","Matematicka analiza 2",3,2,"Mila Stojakovic",listaStudenata));
 		predmeti.add(new Predmet("BP2-E2","Baze podataka 2",7,4,"Ivan Lukovic",listaStudenata));
 		
 	
