@@ -35,6 +35,8 @@ public class BazaStudenata {
 		this.kolone.add("Prezime");
 		this.kolone.add("Godina upisa");
 		this.kolone.add("Godina studija");	
+		this.kolone.add("Datum rodjenja");
+		this.kolone.add("Prosecna ocena");
 		this.kolone.add("Status");
 		
 	}
@@ -47,7 +49,7 @@ public class BazaStudenata {
 		
 		studenti.add(new Student("Nemanja", "Jevtic", new java.sql.Date(98,9,13), "Mali Zvornik", "+381645656946", "njevtic998@gmail.com", "RA131-2017", 2017, 3, 8.96, listaPredmeta, Status.B));
 		studenti.add(new Student("Maja","Tomic",new java.sql.Date(98,9,13),"Novi Sad Vojvode Supljikca 19","+38164555511","majatomic0212@gmail.com","RA155-2017",2017, 3,9.5,listaPredmeta, Status.B));
-		studenti.add(new Student("Ignjat","Gacinovic",new java.sql.Date(98,4,14),"Kraljevo Petra Kocica 14a","+38164522511","ignjaBatica022@gmail.com","RA155-2017",2015, 4,7.89,listaPredmeta,Status.S));
+		studenti.add(new Student("Ignjat","Gacinovic",new java.sql.Date(98,4,14),"Kraljevo Petra Kocica 14a","+38164522511","ignjaBatica022@gmail.com","RA157-2017",2015, 4,7.89,listaPredmeta,Status.S));
 	
 	}
 
@@ -69,7 +71,7 @@ public class BazaStudenata {
 	
 	//broj koliko kolona ima
 	public int getColumnCount() {
-		return 6;
+		return 8;
 	}
 	
 	public String getColumnName(int index) {
@@ -95,7 +97,11 @@ public class BazaStudenata {
 		case 4:
 			return Integer.toString(student.getTrenutnaGodinaStudija());
 		case 5:
-			return student.getStatus().toString();
+			return student.getDatumRodjenja().toString();
+		case 6:
+			return Double.toString(student.getProsecnaOcena());
+		case 7:
+			return student.getStatus().toString();	
 		default:
 			return null;
 		}

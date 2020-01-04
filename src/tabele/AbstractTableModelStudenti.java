@@ -26,7 +26,7 @@ public class AbstractTableModelStudenti extends AbstractTableModel {
 	
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex >= 6;
+		return columnIndex >= 8;
 	}
 
 	@Override
@@ -58,11 +58,13 @@ public class AbstractTableModelStudenti extends AbstractTableModel {
 		case 2:
 		case 3:
 		case 4:
-		case 5:		
+		case 5:	
+		case 6:	
+		case 7:	
 			return String.class;
-		case 6:
+		case 8:
 			return JPanel.class;
-		case 7:
+		case 9:
 			return JPanel.class;
 		default:
 		return null;
@@ -72,9 +74,9 @@ public class AbstractTableModelStudenti extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		if(columnIndex <= 5)
+		if(columnIndex <= 7)
 			return BazaStudenata.getInstance().getValueAt(rowIndex, columnIndex);
-		else if(columnIndex == 6)
+		else if(columnIndex == 8)
 			return "prikaz";
 		else
 			return "info";
