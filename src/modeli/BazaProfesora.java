@@ -1,7 +1,10 @@
 package modeli;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import tabele.ProfesoriJTable;
 
 public class BazaProfesora {
 	private static BazaProfesora instance = null;
@@ -111,5 +114,32 @@ public class BazaProfesora {
 			}
 		}
 	}
+	
+//metoda da dodavanje profesora u bazu	
+		public void dodajProfesora(Profesor p) {
+			this.Profesori.add(p);
+		}
+		
+//metoda za imenu profesora u bazi		
+		public void izmeniProfesora(String ime, String prezime, Date datum_rodjenja, String adresaStanivanja, String kontaktTelefon,
+				String email, String adresaKancelarije, String brojLicneKarte, String titula, String zvanje,
+				List<String> spisakPredmeta) {		
+			
+			Profesor p = BazaProfesora.getInstance().getRow(ProfesoriJTable.selektovanaVrsta);
+			
+			p.setIme(ime);
+			p.setPrezime(prezime);
+			p.setDatum_rodjenja(datum_rodjenja);
+			p.setAdresaStanivanja(adresaStanivanja);
+			p.setKontaktTelefon(kontaktTelefon);
+			p.setEmail(email);
+			p.setAdresaKancelarije(adresaKancelarije);
+			p.setBrojLicneKarte(brojLicneKarte);
+			p.setTitula(titula);
+			p.setZvanje(zvanje);
+			p.setSpisakPredmeta(spisakPredmeta);
+			
+	}
+	
 	
 }
