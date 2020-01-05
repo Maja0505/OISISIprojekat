@@ -118,6 +118,7 @@ public class BazaProfesora {
 //metoda da dodavanje profesora u bazu	
 		public void dodajProfesora(Profesor p) {
 			this.Profesori.add(p);
+			this.popunjavanjeListePredmeta();
 		}
 		
 //metoda za imenu profesora u bazi		

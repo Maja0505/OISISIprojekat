@@ -125,6 +125,7 @@ public class BazaStudenata {
 //metoda da dodavanje studenta u Bazu	
 	public void dodajStudenta(Student s) {
 		this.studenti.add(s);
+		this.popunjavanjeListePredmeta();
 	}
 
 //metoda za brisanje iz baze	
