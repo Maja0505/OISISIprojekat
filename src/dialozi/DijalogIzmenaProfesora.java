@@ -34,7 +34,7 @@ public class DijalogIzmenaProfesora {
 private static int onemoguciTxtField = 0;
 	
 	public DijalogIzmenaProfesora(boolean vidljiv) {
-		JDialog  izmeniProfesora = new ModalniDijalog(new JFrame(), "Dodaj profesora", true,600,750);
+		JDialog  izmeniProfesora = new ModalniDijalog(new JFrame(), "Izmena profesora", true,600,750);
 		
 		
 		JLabel statusBar = new JLabel();
@@ -173,6 +173,7 @@ private static int onemoguciTxtField = 0;
 				String titula = Titula.getText();
 				String brLicne = BrojLicne.getText();
 				List<String> spisakPredmeta = new ArrayList<String>();
+				spisakPredmeta = BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getSpisakPredmeta();
 				
 				ProfesoriController.getInstance().izmeniProfesora(new Profesor(ime, prz, god, adresa, broj, email, adresaKancelarije, brLicne, titula, zvanje, spisakPredmeta));
 				onemoguciTxtField = 0;

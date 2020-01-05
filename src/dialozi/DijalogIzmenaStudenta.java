@@ -39,7 +39,7 @@ public class DijalogIzmenaStudenta {
 	private static int onemoguciTxtField = 0;
 	
 	public DijalogIzmenaStudenta(boolean vidljiv) {
-JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Dodaj studenta", true,600,750);
+JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", true,600,750);
 		
 		
 		JLabel statusBar = new JLabel();
@@ -218,7 +218,6 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Dodaj studenta", tru
 					onemoguciTxtField++;
 					}
 				
-				System.out.println(onemoguciTxtField);
 			if(onemoguciTxtField == 9) {
 				String ime = Ime.getText();
 				student.setIme(ime);
@@ -246,7 +245,7 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Dodaj studenta", tru
 				String godString = GodUpis.getText();
 				int godUpis = Integer.parseInt(godString);
 				student.setGodinaUpisa(godUpis);
-				
+				student.setSpisakPredmeta(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getSpisakPredmeta());
 				
 				StudentiController.getInstance().izmeniStudenta(student);
 				onemoguciTxtField = 0;
