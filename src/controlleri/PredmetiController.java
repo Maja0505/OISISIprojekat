@@ -44,5 +44,18 @@ private static PredmetiController instance = null;
 		MainFrame.getInstance().azurirajTabeluPredmeta();
 	}
 	
+	public void dodajStudentaNaPredmet(String indeks,int rowSelectedIndex) {
+		//dodavanje studenta na predmet
+		BazaPredmeta.getInstance().dodajStudentaNapredmet(indeks, rowSelectedIndex);
+		//azurira tabelu
+		MainFrame.getInstance().azurirajTabeluPredmeta();
+	}
+	
+	public void izbrisiStudentaSaPredmeta(int index,int rowSelectedIndex) {
+		//brisanje studenta na predmet
+		BazaPredmeta.getInstance().obrisiStudentaSaPredmeta(index, rowSelectedIndex);
+		//azurira tabelu
+		MainFrame.getInstance().azurirajTabeluPredmeta();
+	}
 	
 }

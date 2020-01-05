@@ -47,5 +47,17 @@ private static StudentiController instance = null;
 		MainFrame.getInstance().azurirajTabeluStudent();
 	}
 	
+	public void dodajPredmetStudentu(String sifra,int rowSelectedIndex) {
+		//dodavanje predmeta studentu
+		BazaStudenata.getInstance().dodajPredmetStudentu(sifra, rowSelectedIndex);
+		//azurira tabelu
+		MainFrame.getInstance().azurirajTabeluStudent();
+	}
 	
+	public void obrisiPredmetStudentu(int index,int rowSelectedIndex) {
+		//dodavanje predmeta studentu
+		BazaStudenata.getInstance().obrisiPredmetStudentu(index, rowSelectedIndex);
+		//azurira tabelu
+		MainFrame.getInstance().azurirajTabeluStudent();
+	}
 }
