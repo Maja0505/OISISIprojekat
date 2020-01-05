@@ -21,7 +21,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import dialozi.ModalniDijalog;
-import modeli.BazaPredmeta;
 import modeli.BazaStudenata;
 
 
@@ -56,12 +55,11 @@ public class MouseListenerStudenti extends MouseAdapter {
 			
 			 String nizPredmeta[] = new String[BazaStudenata.getInstance().getStudenti().size()]; 
 			    
-				for(int i = 0;i<BazaPredmeta.getInstance().getPredmeti().size();i++) {
-					if(BazaStudenata.getInstance().getValueAt(row, 4).equals(BazaPredmeta.getInstance().getValueAt(i, 3))){
-							nizPredmeta[i]=BazaPredmeta.getInstance().getValueAt(i, 0).toString();
+				for(int i = 0;i<BazaStudenata.getInstance().getStudenti().get(row).getSpisakPredmeta().size();i++) {
+					
+							nizPredmeta[i]=BazaStudenata.getInstance().getStudenti().get(row).getSpisakPredmeta().get(i);
 						
 							
-					}
 				
 			}
 			

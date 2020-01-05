@@ -9,17 +9,23 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import controlleri.PredmetiController;
+import controlleri.StudentiController;
 import dialozi.ModalniDijalog;
 import modeli.BazaPredmeta;
 import modeli.BazaStudenata;
@@ -53,12 +59,10 @@ public class MouseListenerPredmeti extends MouseAdapter {
 				String nizIndeksa[] = new String[BazaStudenata.getInstance().getStudenti().size()]; 
 	    
 	    
-				for(int i = 0;i<BazaStudenata.getInstance().getStudenti().size();i++) {
-					if(BazaStudenata.getInstance().getValueAt(i, 4).equals(BazaPredmeta.getInstance().getValueAt(row, 3))){
-							nizIndeksa[i]=BazaStudenata.getInstance().getValueAt(i, 0).toString();
+				for(int i = 0;i<BazaPredmeta.getInstance().getPredmeti().get(row).getSpisakStudenata().size();i++) {
+							nizIndeksa[i]=BazaPredmeta.getInstance().getPredmeti().get(row).getSpisakStudenata().get(i);
 							
 							
-					}
 			
 		}
 		
@@ -76,7 +80,15 @@ public class MouseListenerPredmeti extends MouseAdapter {
 		       gbc.gridy=1;
 		       gbc.insets = new Insets(10,70,10, 0);
 		       panel.add(nazadButton,gbc);
-		      
+		
+		  nazadButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				studenti.dispose();
+			}
+		});     
+		       
 	    JButton obrisiButton = new JButton("Obrisi");
 			   gbc.gridx=1;
 			   gbc.gridy=1;
@@ -85,7 +97,8 @@ public class MouseListenerPredmeti extends MouseAdapter {
 
 			   panel.add(obrisiButton,gbc);  
 			        
-			  
+	   
+			   
 				
 			   Font f = new Font(Font.DIALOG, Font.BOLD, 15);
 			   list.setFont(f);
@@ -94,7 +107,7 @@ public class MouseListenerPredmeti extends MouseAdapter {
 				   
 		 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 					
-				    
+		
 				gbc.gridx = 0;
 				gbc.gridy = 0;
 				gbc.weightx = 100;
@@ -103,7 +116,46 @@ public class MouseListenerPredmeti extends MouseAdapter {
 				gbc.insets = new Insets(20, 70, 0, 0);					
 					
 				panel.add(scrollPane,gbc);
-			
+				
+		 obrisiButton.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent arg0) {
+							String indeks = (String) list.getSelectedValue();
+							int studentKojiSeBrise = 0;
+					if(indeks != null) {		
+							for(int i = 0;i < BazaPredmeta.getInstance().getPredmeti().get(row).getSpisakStudenata().size();i++) {
+								if(indeks.equals(BazaPredmeta.getInstance().getPredmeti().get(row).getSpisakStudenata().get(i))) {
+									studentKojiSeBrise = i;
+									break;
+								}
+							}
+							int vrstaPredmetaKojaSeBrise = 0;
+							
+							for(int i = 0;i < BazaStudenata.getInstance().getStudenti().size();i++) {
+								if(indeks.equals(BazaStudenata.getInstance().getStudenti().get(i).getBrIndeksa())) {
+									vrstaPredmetaKojaSeBrise = i;
+									break;
+								}
+							}
+							int predmetKojiSeBrise = 0;
+							
+							for(int i = 0; i < BazaStudenata.getInstance().getStudenti().get(vrstaPredmetaKojaSeBrise).getSpisakPredmeta().size();i++) {
+								if(BazaPredmeta.getInstance().getPredmeti().get(row).getNazivPredmet().equals(BazaStudenata.getInstance().getStudenti().get(vrstaPredmetaKojaSeBrise).getSpisakPredmeta().get(i))) {
+									predmetKojiSeBrise = i;
+									break;
+								}
+							}
+							
+							
+							PredmetiController.getInstance().izbrisiStudentaSaPredmeta(studentKojiSeBrise, row);
+							StudentiController.getInstance().obrisiPredmetStudentu(predmetKojiSeBrise, vrstaPredmetaKojaSeBrise);
+							studenti.dispose();
+					}else
+						JOptionPane.showMessageDialog(null, "Niste izabrali studenta za brisanje");
+					}
+					});   		
+				
 	   	     
 	   	  		studenti.setVisible(true);
 	        }
