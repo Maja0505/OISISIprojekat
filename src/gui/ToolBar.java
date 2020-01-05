@@ -23,6 +23,7 @@ import dialozi.DijalogBrisanjeProfesora;
 import dialozi.DijalogBrisanjeStudenta;
 import dialozi.DijalogDodajPredmet;
 import dialozi.DijalogDodajProfesora;
+import dialozi.DijalogDodajProfesoraNaPredmet;
 import dialozi.DijalogDodajStudenta;
 import dialozi.DijalogDodajStudentaNaPredmet;
 import dialozi.DijalogIzmenaPredmeta;
@@ -141,6 +142,22 @@ public class ToolBar extends JToolBar {
 		JButton profesorButton=new JButton();
 		profesorButton.setToolTipText("Dodavanje profesora na predmet");
 		profesorButton.setIcon(new ImageIcon("images/profesor.jpg"));
+		
+		profesorButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MainFrame.tab==2) {
+					if(PredmetiJTable.selektovanPredmet) {
+						new DijalogDodajProfesoraNaPredmet();
+					}else {
+						JOptionPane.showMessageDialog(null, "Niste oznacili predmet na koji zelite da dodate profesora");
+					}
+				}
+				
+			}
+		});
+		
 		
 		add(profesorButton);
 		
