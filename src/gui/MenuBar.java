@@ -1,13 +1,29 @@
 package gui;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+
+import dialozi.DijalogBrisanjePredmeta;
+import dialozi.DijalogBrisanjeProfesora;
+import dialozi.DijalogBrisanjeStudenta;
+import dialozi.DijalogDodajPredmet;
+import dialozi.DijalogDodajProfesora;
+import dialozi.DijalogDodajStudenta;
+import dialozi.DijalogHelp;
+import dialozi.DijalogIzmenaPredmeta;
+import dialozi.DijalogIzmenaProfesora;
+import dialozi.DijalogIzmenaStudenta;
+import tabele.PredmetiJTable;
+import tabele.ProfesoriJTable;
+import tabele.StudentiJTable;
 
 public class MenuBar extends JMenuBar {
 
@@ -35,6 +51,28 @@ public class MenuBar extends JMenuBar {
 		New.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));
 		close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
 		
+		New.addActionListener(new ActionListener() {
+			//iskace odgovarajuvi dijalog za dodavanje			
+				@Override  
+			public void actionPerformed(ActionEvent e) {
+				if(MainFrame.tab == 0) {
+					new DijalogDodajStudenta(true);
+				}else if(MainFrame.tab == 1) {
+					new DijalogDodajProfesora(true);
+				}else if(MainFrame.tab == 2) {
+					new DijalogDodajPredmet(true);
+					}
+				}
+			});
+		
+		close.addActionListener(new ActionListener() {
+			//zatvara JFrame prozor
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainFrame.getInstance().dispose();
+			}
+		});
+		
 		file.add(New);	 	
 		file.addSeparator();	
 		file.add(close);
@@ -55,6 +93,52 @@ public class MenuBar extends JMenuBar {
 		//Acceleratori za edit i delete
 		editItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.CTRL_MASK));
 		delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK));
+		
+		editItem.addActionListener(new ActionListener() {
+			//iskace odgovarajuvi dijalog za izmenu			
+			@Override  
+			public void actionPerformed(ActionEvent e) {
+				if(MainFrame.tab == 0 ) {
+					if(StudentiJTable.selektovanStudent) 
+							new DijalogIzmenaStudenta(true);
+					else
+						JOptionPane.showMessageDialog(null, "Niste oznacili studenta za izmenu");
+				 }else if(MainFrame.tab == 1) {
+					 if(ProfesoriJTable.selektovanProfesor) 
+							new DijalogIzmenaProfesora(true);
+					else
+						JOptionPane.showMessageDialog(null, "Niste oznacili profesora za izmenu");
+			     }else if(MainFrame.tab == 2) {
+			    	 if(PredmetiJTable.selektovanPredmet) 
+							new DijalogIzmenaPredmeta(true);
+					else
+						JOptionPane.showMessageDialog(null, "Niste oznacili predmet za izmenu");
+				 }
+			}
+		});
+		
+		delete.addActionListener(new ActionListener() {
+			//iskace odgovarajuvi dijalog za brisanje			
+			@Override  
+			public void actionPerformed(ActionEvent e) {
+					if(MainFrame.tab == 0 ) {
+						if(StudentiJTable.selektovanStudent) 
+								new DijalogBrisanjeStudenta(true);
+						else
+							JOptionPane.showMessageDialog(null, "Niste oznacili studenta za brisanje");
+					 }else if(MainFrame.tab == 1) {
+						 if(ProfesoriJTable.selektovanProfesor) 
+								new DijalogBrisanjeProfesora(true);
+						else
+							JOptionPane.showMessageDialog(null, "Niste oznacili profesora za brisanje");
+				     }else if(MainFrame.tab == 2) {
+				    	 if(PredmetiJTable.selektovanPredmet) 
+								new DijalogBrisanjePredmeta(true);
+						else
+							JOptionPane.showMessageDialog(null, "Niste oznacili predmet za brisanje");
+					 }
+			}
+		});
 		
 		edit.add(editItem);
 		edit.addSeparator();
@@ -77,12 +161,21 @@ public class MenuBar extends JMenuBar {
 		helpItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,ActionEvent.CTRL_MASK));
 		aboutItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,ActionEvent.CTRL_MASK));
 		
+		helpItem.addActionListener(new ActionListener() {
+			//iskace dijalog za pomoc
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new DijalogHelp();
+			}
+		});
+		
 		
 		help.add(helpItem);
 		help.addSeparator();
 		help.add(aboutItem);
 		
 		add(help);
+		
 	}
 	
 	
