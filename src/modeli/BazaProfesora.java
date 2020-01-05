@@ -3,7 +3,6 @@ package modeli;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 import tabele.ProfesoriJTable;
 
 public class BazaProfesora {
@@ -141,6 +140,25 @@ public class BazaProfesora {
 			p.setSpisakPredmeta(spisakPredmeta);
 			
 	}
+
+		public void dodajPredmetProfesoru(String brojLicne, int rowSelectedIndex) {
+		boolean postoji=false;
+		for(int i=0; i<this.Profesori.get(rowSelectedIndex).getSpisakPredmeta().size();i++) {
+				if(this.Profesori.get(rowSelectedIndex).getSpisakPredmeta().get(i).equals(brojLicne)) {
+					postoji=true;
+				}
+			
+			}
+			if(postoji==false) {
+				this.Profesori.get(rowSelectedIndex).getSpisakPredmeta().add(brojLicne);
+			}
+		}
+
+		public void izbrisiPredmet(int predmetKojiSeBrise, int row) {
+		
+			this.Profesori.get(row).getSpisakPredmeta().remove(predmetKojiSeBrise);
+			
+		}
 	
 	
 }

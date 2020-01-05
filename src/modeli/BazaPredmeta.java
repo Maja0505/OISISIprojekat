@@ -3,6 +3,7 @@ package modeli;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui.MainFrame;
 import tabele.PredmetiJTable;
 
 
@@ -147,6 +148,18 @@ public class BazaPredmeta {
 	
 	public void obrisiStudentaSaPredmeta(int index,int  rowSelectedIndex) {
 			BazaPredmeta.getInstance().getPredmeti().get(rowSelectedIndex).obrisiStudentaIzListe(index);
+	}
+
+	public void dodajProfesoraNaPredmet(int rowSelectedIndexProfesora, int selektovanaVrsta) {
+		Profesor p=BazaProfesora.getInstance().getRow(rowSelectedIndexProfesora);
+		BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).setPredmetniProfesor(p.getIme().concat(" ").concat(p.getPrezime()));
+		
+		MainFrame.getInstance().azurirajTabeluPredmeta();
+	}
+
+	public void izbrisiProfesora(Predmet p) {
+		p.setPredmetniProfesor("");
+		
 	}
 	
 	
