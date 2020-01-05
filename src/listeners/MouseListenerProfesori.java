@@ -8,6 +8,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -15,11 +17,13 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import controlleri.PredmetiController;
+import controlleri.ProfesoriController;
 import dialozi.ModalniDijalog;
-import modeli.BazaPredmeta;
 import modeli.BazaProfesora;
 
 
@@ -35,7 +39,7 @@ public class MouseListenerProfesori extends MouseAdapter {
 	        Point point = event.getPoint();
 	        int column = table.columnAtPoint(point);
 	        int row=table.rowAtPoint(point);
-	        if(column==3) {
+	        if(column==3) { //prikazi
 		        	JDialog predmeti = new ModalniDijalog(new JFrame(), "Predmeti", true);
 			  	   	  
 					JLabel statusBar = new JLabel();
@@ -48,15 +52,15 @@ public class MouseListenerProfesori extends MouseAdapter {
 					panel.setBackground(Color.CYAN);
 					predmeti.add(panel,BorderLayout.CENTER);
 		        
-					String nizSifriPredmeta[] = new String[BazaPredmeta.getInstance().getPredmeti().size()]; 
+					String nizSifriPredmeta[] = new String[BazaProfesora.getInstance().getProfesori().get(row).getSpisakPredmeta().size()]; 
 		    
-		    
-					for(int i = 0;i<BazaPredmeta.getInstance().getPredmeti().size();i++) {
-						if(BazaPredmeta.getInstance().getValueAt(i, 4).equals(BazaProfesora.getInstance().getValueAt(row, 0).concat(" ").concat(BazaProfesora.getInstance().getValueAt(row, 1)))){
-								nizSifriPredmeta[i]=BazaPredmeta.getInstance().getValueAt(i, 0).toString();
+					//popunjavanje niza svim predmetima na kojima profesor predaje
+					for(int i = 0;i<BazaProfesora.getInstance().getProfesori().get(row).getSpisakPredmeta().size();i++) {
+						
+								nizSifriPredmeta[i]=BazaProfesora.getInstance().getProfesori().get(row).getSpisakPredmeta().get(i);
 								
 								
-						}
+						
 			
 					}
 		
@@ -74,14 +78,57 @@ public class MouseListenerProfesori extends MouseAdapter {
 					       gbc.gridy=1;
 					       gbc.insets = new Insets(10,70,10, 0);
 					       panel.add(nazadButton,gbc);
+					       
+					       nazadButton.addActionListener(new ActionListener() {
+						
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									predmeti.dispose(); 
+									
+								}
+					       });
+					       
+					  
 				      
 				     JButton obrisiButton = new JButton("Obrisi");
 						   gbc.gridx=1;
 						   gbc.gridy=1;
 						   gbc.anchor = GridBagConstraints.EAST;
 						   gbc.insets = new Insets(10,0,10, 100);
-			
+						   panel.add(obrisiButton,gbc); 	
 						   panel.add(obrisiButton,gbc);  
+						   
+						   obrisiButton.addActionListener(new ActionListener(){
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								String sifra=(String) list.getSelectedValue();	//koja sifra predmeta je selektovana
+								int predmetKojiSeBrise=0;			
+								
+								if(sifra!=null) {
+									for(int i=0;i<BazaProfesora.getInstance().getProfesori().get(row).getSpisakPredmeta().size();i++) {
+										if(sifra.equals(BazaProfesora.getInstance().getProfesori().get(row).getSpisakPredmeta().get(i))) {
+											predmetKojiSeBrise=i;				//indeks predmeta koji treba da izbrisemo
+											break;
+										}
+									}
+									
+									
+									
+									ProfesoriController.getInstance().izbrisiPredmetProfesoru(predmetKojiSeBrise, row);
+									PredmetiController.getInstance().izbrisiProfesoraSaPredmeta(sifra);
+									predmeti.dispose();
+								}else {
+								
+									JOptionPane.showMessageDialog(null, "Niste izabrali predmet za brisanje");
+							}
+								
+							}
+	        				
+
+						});
+			
+						 	
 					        
 					  
 						
@@ -108,7 +155,7 @@ public class MouseListenerProfesori extends MouseAdapter {
 
 	        }
 	        
-	        if(column==4) {
+	        if(column==4) {  //info
 	        	
 	        	
 				        	JDialog predmeti = new ModalniDijalog(new JFrame(), "Informacije o profesorima", true);
