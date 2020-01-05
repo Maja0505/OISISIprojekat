@@ -60,4 +60,12 @@ public class Predmet {
 		this.spisakStudenata = spisakStudenata;
 	}
 	
+	public void dodajStudentaUlistu(String indeks) {
+		this.spisakStudenata.add(indeks);
+	}
+	
+	public void obrisiStudentaIzListe(int index) {
+		this.spisakStudenata.remove(index);
+	}
+	
 }

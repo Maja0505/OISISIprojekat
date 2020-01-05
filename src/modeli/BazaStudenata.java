@@ -159,4 +159,12 @@ public class BazaStudenata {
 		
 }
 	
+	public void dodajPredmetStudentu(String sifra,int rowSelectedIndex) {
+		  BazaStudenata.getInstance().getStudenti().get(rowSelectedIndex).dodajPredmetStudentu(sifra);
+	}
+	
+	public void obrisiPredmetStudentu(int index,int rowSelectedIndex) {
+		  BazaStudenata.getInstance().getStudenti().get(rowSelectedIndex).obrisiPredmetStudentu(index);
+	}
+	
 }

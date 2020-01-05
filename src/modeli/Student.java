@@ -171,8 +171,13 @@ public class Student {
 		this.status = status;
 	};
 	
+	public void dodajPredmetStudentu(String sifra) {
+		this.spisakPredmeta.add(sifra);
+	}
 	
-	
+	public void obrisiPredmetStudentu(int index) {
+		this.spisakPredmeta.remove(index);
+	}
 	
 	
 }

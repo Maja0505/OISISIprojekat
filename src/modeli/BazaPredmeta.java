@@ -141,4 +141,13 @@ public class BazaPredmeta {
 		
 	}
 	
+	public void dodajStudentaNapredmet(String indeks,int rowSelectedIndex) {
+		  BazaPredmeta.getInstance().getPredmeti().get(rowSelectedIndex).dodajStudentaUlistu(indeks);
+	}
+	
+	public void obrisiStudentaSaPredmeta(int index,int  rowSelectedIndex) {
+			BazaPredmeta.getInstance().getPredmeti().get(rowSelectedIndex).obrisiStudentaIzListe(index);
+	}
+	
+	
 }
