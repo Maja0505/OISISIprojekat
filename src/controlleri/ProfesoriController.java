@@ -47,4 +47,20 @@ public class ProfesoriController {
 		// azuriranje prikaza
 		MainFrame.getInstance().azurirajTabeluProfesora();
 	}
+	
+	public void dodajPredmetProfesoru(String brojLicne,int rowSelectedIndex) {
+		//dodavanje predmeta profesoru
+		BazaProfesora.getInstance().dodajPredmetProfesoru(brojLicne, rowSelectedIndex);
+		//azurira tabelu
+		MainFrame.getInstance().azurirajTabeluProfesora();
+	}
+
+	public void izbrisiPredmetProfesoru(int predmetKojiSeBrise, int row) {
+		System.out.println(row);
+		System.out.println(predmetKojiSeBrise);
+		BazaProfesora.getInstance().izbrisiPredmet(predmetKojiSeBrise,row);
+		MainFrame.getInstance().azurirajTabeluProfesora();
+	}
+
+	
 }
