@@ -24,6 +24,7 @@ import dialozi.DijalogBrisanjeStudenta;
 import dialozi.DijalogDodajPredmet;
 import dialozi.DijalogDodajProfesora;
 import dialozi.DijalogDodajStudenta;
+import dialozi.DijalogDodajStudentaNaPredmet;
 import dialozi.DijalogIzmenaPredmeta;
 import dialozi.DijalogIzmenaProfesora;
 import dialozi.DijalogIzmenaStudenta;
@@ -119,6 +120,19 @@ public class ToolBar extends JToolBar {
 		JButton studentButton=new JButton();
 		studentButton.setToolTipText("Dodavanje studenta na predmet");
 		studentButton.setIcon(new ImageIcon("images/add.jpg"));
+		
+		studentButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(MainFrame.tab == 2)
+					if(PredmetiJTable.selektovanPredmet)
+						new DijalogDodajStudentaNaPredmet();
+					else
+						JOptionPane.showMessageDialog(null, "Niste oznacili predmet na koji zelite da dodate studenta");
+			}
+		});
+		
 		
 		add(studentButton);
 		
