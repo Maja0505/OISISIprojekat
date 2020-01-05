@@ -55,7 +55,24 @@ private static PredmetiController instance = null;
 		//brisanje studenta na predmet
 		BazaPredmeta.getInstance().obrisiStudentaSaPredmeta(index, rowSelectedIndex);
 		//azurira tabelu
-		MainFrame.getInstance().azurirajTabeluPredmeta();
+		
+	}
+
+	public void dodajProfeosraNaPredmet(int rowSelectedIndexProfesora, int selektovanaVrstaPredmeta) {
+		
+		BazaPredmeta.getInstance().dodajProfesoraNaPredmet(rowSelectedIndexProfesora,selektovanaVrstaPredmeta);
+		
+		
+	}
+
+	public void izbrisiProfesoraSaPredmeta(String sifra) {
+		// TODO Auto-generated method stub
+		for(Predmet p:BazaPredmeta.getInstance().getPredmeti()) {
+			if(p.getSifraPredmeta().equals(sifra)) {
+				BazaPredmeta.getInstance().izbrisiProfesora(p);
+			}
+		}
+		
 	}
 	
 }
