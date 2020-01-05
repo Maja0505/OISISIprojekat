@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 import controlleri.ProfesoriController;
 import listeners.FocusListener;
 import listeners.KeyListener;
+import modeli.BazaProfesora;
 import modeli.Profesor;
 
 public class DijalogDodajProfesora {
@@ -172,9 +173,24 @@ public class DijalogDodajProfesora {
 				String brLicne = BrojLicne.getText();
 				List<String> spisakPredmeta = new ArrayList<String>();
 				
-				ProfesoriController.getInstance().dodajProfesora(new Profesor(ime, prz, god, adresa, broj, email, adresaKancelarije, brLicne, titula, zvanje, spisakPredmeta));
-				onemoguciTxtField = 0;
-				dodajProfesora.dispose();
+				boolean mogucUnos = true;
+				
+				for(int i = 0;i < BazaProfesora.getInstance().getProfesori().size();i++) {
+					if(brLicne.equals(BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte())) {
+						mogucUnos = false;
+						break;
+					}
+				}
+				
+				if(mogucUnos) {
+					ProfesoriController.getInstance().dodajProfesora(new Profesor(ime, prz, god, adresa, broj, email, adresaKancelarije, brLicne, titula, zvanje, spisakPredmeta));
+					onemoguciTxtField = 0;
+					dodajProfesora.dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "Vec postoji takav profesor");
+					onemoguciTxtField = 0;	
+				}
+					
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Niste uneli sva polja");

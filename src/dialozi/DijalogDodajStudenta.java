@@ -27,6 +27,7 @@ import javax.swing.JTextField;
 import controlleri.StudentiController;
 import listeners.FocusListener;
 import listeners.KeyListener;
+import modeli.BazaStudenata;
 import modeli.Student;
 import modeli.Student.Status;
 
@@ -236,10 +237,23 @@ public class DijalogDodajStudenta {
 				int godUpis = Integer.parseInt(godString);
 				student.setGodinaUpisa(godUpis);
 				
+				boolean mogucUnos = true;
 				
+				for(int i = 0;i<BazaStudenata.getInstance().getStudenti().size();i++) {
+					if(indeks.equals(BazaStudenata.getInstance().getStudenti().get(i).getBrIndeksa())) {
+						mogucUnos = false;
+						break;
+					}
+				}	
+				
+				if(mogucUnos) {
 				StudentiController.getInstance().dodajStudenta(student);
 				onemoguciTxtField = 0;
 				dodajStudenta.dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "Vec postoji takav student");
+					onemoguciTxtField = 0;	
+				}
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Niste uneli sva polja");

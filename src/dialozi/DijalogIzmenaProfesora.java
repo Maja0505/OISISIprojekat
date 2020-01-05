@@ -175,9 +175,25 @@ private static int onemoguciTxtField = 0;
 				List<String> spisakPredmeta = new ArrayList<String>();
 				spisakPredmeta = BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getSpisakPredmeta();
 				
-				ProfesoriController.getInstance().izmeniProfesora(new Profesor(ime, prz, god, adresa, broj, email, adresaKancelarije, brLicne, titula, zvanje, spisakPredmeta));
-				onemoguciTxtField = 0;
-				izmeniProfesora.dispose();
+				boolean omoguciIzmenu = true;
+				
+				for(int i = 0;i < BazaProfesora.getInstance().getProfesori().size();i++) {
+					if(!brLicne.equals(BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getBrojLicneKarte())) {
+						if(brLicne.equals(BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte())) {
+							omoguciIzmenu = false;
+							break;
+						}
+					}
+				}
+				
+				if(omoguciIzmenu) {
+						ProfesoriController.getInstance().izmeniProfesora(new Profesor(ime, prz, god, adresa, broj, email, adresaKancelarije, brLicne, titula, zvanje, spisakPredmeta));
+						onemoguciTxtField = 0;
+						izmeniProfesora.dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "Ne mozes izmeniti taj broj licne karte jer vec postoji");
+					onemoguciTxtField = 0;	
+				}
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Niste uneli sva polja");

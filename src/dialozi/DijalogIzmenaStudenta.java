@@ -247,9 +247,25 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 				student.setGodinaUpisa(godUpis);
 				student.setSpisakPredmeta(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getSpisakPredmeta());
 				
-				StudentiController.getInstance().izmeniStudenta(student);
-				onemoguciTxtField = 0;
-				izmeniStudenta.dispose();
+				boolean omoguciIzmenu = true;
+				
+				for(int i = 0;i < BazaStudenata.getInstance().getStudenti().size();i++) {
+					if(!indeks.equals(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getBrIndeksa())) {
+						if(indeks.equals(BazaStudenata.getInstance().getStudenti().get(i).getBrIndeksa())) {
+							omoguciIzmenu = false;
+							break;
+						}
+					}
+				}
+				
+				if(omoguciIzmenu) {
+					StudentiController.getInstance().izmeniStudenta(student);
+					onemoguciTxtField = 0;
+					izmeniStudenta.dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "Ne mozes izmeniti taj indeks jer vec postoji");
+					onemoguciTxtField = 0;	
+				}
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Niste uneli sva polja");
