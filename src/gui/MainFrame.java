@@ -15,6 +15,9 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 import tabele.AbstractTableModelPredmeti;
 import tabele.AbstractTableModelProfesori;
 import tabele.AbstractTableModelStudenti;
@@ -130,6 +133,12 @@ public class MainFrame extends JFrame {
 				public void stateChanged(ChangeEvent e) {
 					JTabbedPane sourceJTabbedPane = (JTabbedPane) e.getSource();
 					tab = sourceJTabbedPane.getSelectedIndex();
+					if(tab==2) {
+						@SuppressWarnings("unchecked")
+						TableRowSorter<TableModel> sorter=(TableRowSorter<TableModel>) MainFrame.getInstance().getTabelaPredmeta().getRowSorter();
+						sorter.setRowFilter(null);
+						azurirajTabeluPredmeta();
+					}
 				}
 	      	});
 	      	
