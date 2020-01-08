@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 
 import controlleri.PredmetiController;
 import controlleri.StudentiController;
+import gui.MainFrame;
 import listeners.FocusListener;
 import modeli.BazaPredmeta;
 import modeli.BazaStudenata;
@@ -55,6 +56,8 @@ public class DijalogDodajStudentaNaPredmet {
 		 JButton potvrda = new JButton("Potvrda");
 		 potvrda.setBackground(Color.CYAN);
 		 
+		int selektovanaVrsta = MainFrame.getInstance().getTabelaPredmeta().getRowSorter().convertRowIndexToModel(PredmetiJTable.selektovanaVrsta);
+		 
 		 potvrda.addActionListener(new ActionListener() {
 			
 			@Override
@@ -66,22 +69,27 @@ public class DijalogDodajStudentaNaPredmet {
 						 indeksStudentaKojiSeUnosi = Indeks.getText();
 					for(int i = 0;i<BazaStudenata.getInstance().getStudenti().size();i++) {
 						if(indeksStudentaKojiSeUnosi.equals(BazaStudenata.getInstance().getStudenti().get(i).getBrIndeksa()) 
-								&& BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija() > BazaPredmeta.getInstance().getPredmeti().get(PredmetiJTable.selektovanaVrsta).getGodinaIzvodjenjaPredmeta()){
+								&& BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija() >= BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getGodinaIzvodjenjaPredmeta()){
 							omoguci = true;
 							rowSelectedIndex = i;
 							break;
 						}
+						if(indeksStudentaKojiSeUnosi.equals(BazaStudenata.getInstance().getStudenti().get(i).getBrIndeksa()) 
+								&& BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija() < BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getGodinaIzvodjenjaPredmeta()){
+							JOptionPane.showMessageDialog(null, "Student mora da bude odgovarajuca godina");
+							return;
+						}
 					}
-					for(int i = 0;i< BazaPredmeta.getInstance().getPredmeti().get(PredmetiJTable.selektovanaVrsta).getSpisakStudenata().size();i++) {
-						if(indeksStudentaKojiSeUnosi.equals(BazaPredmeta.getInstance().getPredmeti().get(PredmetiJTable.selektovanaVrsta).getSpisakStudenata().get(i))) {
+					for(int i = 0;i< BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSpisakStudenata().size();i++) {
+						if(indeksStudentaKojiSeUnosi.equals(BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSpisakStudenata().get(i))) {
 							omoguci = false;
 						}
 					}
 					
 					if(omoguci) {
 						
-						PredmetiController.getInstance().dodajStudentaNaPredmet(indeksStudentaKojiSeUnosi, PredmetiJTable.selektovanaVrsta);
-						StudentiController.getInstance().dodajPredmetStudentu(BazaPredmeta.getInstance().getPredmeti().get(PredmetiJTable.selektovanaVrsta).getSifraPredmeta(), rowSelectedIndex);
+						PredmetiController.getInstance().dodajStudentaNaPredmet(indeksStudentaKojiSeUnosi, selektovanaVrsta);
+						StudentiController.getInstance().dodajPredmetStudentu(BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSifraPredmeta(), rowSelectedIndex);
 						dodajStudentaNaPredmet.dispose();
 
 					}else {

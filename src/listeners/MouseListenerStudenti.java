@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import dialozi.ModalniDijalog;
+import gui.MainFrame;
 import modeli.BazaStudenata;
 
 
@@ -37,7 +38,8 @@ public class MouseListenerStudenti extends MouseAdapter {
 	    public void mouseClicked(MouseEvent event) {
 	        Point point = event.getPoint();
 	        int column = table.columnAtPoint(point);
-	        int row=table.rowAtPoint(point);
+	        int row1=table.rowAtPoint(point);
+			int row = MainFrame.getInstance().getTabelaStudenata().getRowSorter().convertRowIndexToModel(row1);
 	        if(column == 8) {
 	        	
 	         
@@ -52,6 +54,7 @@ public class MouseListenerStudenti extends MouseAdapter {
 			panel.setLayout(new GridBagLayout());
 			panel.setBackground(Color.CYAN);
 			predmeti.add(panel,BorderLayout.CENTER);
+			
 			
 			 String nizPredmeta[] = new String[BazaStudenata.getInstance().getStudenti().get(row).getSpisakPredmeta().size()]; 
 			    

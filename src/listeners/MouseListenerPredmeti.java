@@ -27,6 +27,7 @@ import javax.swing.JTable;
 import controlleri.PredmetiController;
 import controlleri.StudentiController;
 import dialozi.ModalniDijalog;
+import gui.MainFrame;
 import modeli.BazaPredmeta;
 import modeli.BazaStudenata;
 
@@ -41,8 +42,9 @@ public class MouseListenerPredmeti extends MouseAdapter {
 	    public void mouseClicked(MouseEvent event) {
 	        Point point = event.getPoint();
 	        int column = table.columnAtPoint(point);
-	        int row=table.rowAtPoint(point);
-	        if(column==5) {
+	        int row1=table.rowAtPoint(point);
+			int row = MainFrame.getInstance().getTabelaPredmeta().getRowSorter().convertRowIndexToModel(row1);
+			if(column==5) {
 	       
 	        	JDialog studenti = new ModalniDijalog(new JFrame(), "Spisak studenata", true);
 		  	   	  
