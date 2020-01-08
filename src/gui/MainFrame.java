@@ -148,10 +148,10 @@ public class MainFrame extends JFrame {
 						getTabelaProfesora().setRowSorter(sorter);
 					}
 					if(tab==2) {
-						@SuppressWarnings("unchecked")
-						TableRowSorter<TableModel> sorter=(TableRowSorter<TableModel>) MainFrame.getInstance().getTabelaPredmeta().getRowSorter();
-						sorter.setRowFilter(null);
-						azurirajTabeluPredmeta();
+						TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(getTabelaPredmeta().getModel());
+						sorter.setSortable(4, false);
+						sorter.setSortable(5, false);
+						getTabelaPredmeta().setRowSorter(sorter);
 					}
 				}
 	      	});
