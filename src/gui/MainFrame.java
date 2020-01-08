@@ -127,12 +127,26 @@ public class MainFrame extends JFrame {
 	    tabbedPane.setForeground(Color.WHITE);
 	    tabbedPane.setBackground(Color.GRAY);
 	      
+	      	
+	    
 	      //reaguje na promenu taba	
 	      tabbedPane.addChangeListener(new ChangeListener() {
 				@Override
 				public void stateChanged(ChangeEvent e) {
 					JTabbedPane sourceJTabbedPane = (JTabbedPane) e.getSource();
 					tab = sourceJTabbedPane.getSelectedIndex();
+					if(tab == 0) {
+						TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(getTabelaStudenata().getModel());
+						sorter.setSortable(8, false);
+						sorter.setSortable(9, false);
+						getTabelaStudenata().setRowSorter(sorter);
+					}
+					if(tab == 1) {
+						TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(getTabelaProfesora().getModel());
+						sorter.setSortable(3, false);
+						sorter.setSortable(4, false);
+						getTabelaProfesora().setRowSorter(sorter);
+					}
 					if(tab==2) {
 						@SuppressWarnings("unchecked")
 						TableRowSorter<TableModel> sorter=(TableRowSorter<TableModel>) MainFrame.getInstance().getTabelaPredmeta().getRowSorter();
