@@ -157,7 +157,7 @@ public class DijalogDodajProfesora {
 				String ime = Ime.getText();
 				String prz = Prz.getText();
 				String dat = Dat.getText();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				Date god = null;
 				try {
 					 god = new Date(sdf.parse(dat).getTime());

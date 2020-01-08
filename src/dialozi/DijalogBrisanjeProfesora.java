@@ -14,6 +14,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import gui.MainFrame;
 import tabele.ProfesoriJTable;
 
 public class DijalogBrisanjeProfesora {
@@ -49,13 +51,15 @@ public class DijalogBrisanjeProfesora {
 					}
 	    	}); 
 
+			int selektovanaVrsta = MainFrame.getInstance().getTabelaProfesora().getRowSorter().convertRowIndexToModel(ProfesoriJTable.selektovanaVrsta);
+
 	    	
 	    	potvrda.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						
-						controlleri.ProfesoriController.getInstance().izbrisiProfesora(ProfesoriJTable.selektovanaVrsta);
+						controlleri.ProfesoriController.getInstance().izbrisiProfesora(selektovanaVrsta);
 						obrisiProfesora.dispose();
 					}
 		});
