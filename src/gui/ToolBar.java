@@ -29,6 +29,7 @@ import dialozi.DijalogIzmenaPredmeta;
 import dialozi.DijalogIzmenaProfesora;
 import dialozi.DijalogIzmenaStudenta;
 import tabele.AbstractTableModelPredmeti;
+import tabele.AbstractTableModelStudenti;
 import tabele.PredmetiJTable;
 import tabele.ProfesoriJTable;
 import tabele.StudentiJTable;
@@ -176,6 +177,88 @@ public class ToolBar extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				if(MainFrame.tab == 0) {
+					if(!textField.getText().equals("") ) {
+						
+						if(textField.getText().contains(":")) {
+							String[] kolone=textField.getText().split(";");
+							String nazivKolone;
+							String tekst=null;
+								@SuppressWarnings("unchecked")
+								TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>)  MainFrame.getInstance().getTabelaStudenata().getRowSorter();
+								List<RowFilter<Object,Object>> filters = new ArrayList<RowFilter<Object,Object>>(2);
+							for(int i=0;i<kolone.length;i++) {
+								String[] podela2=kolone[i].split(":");
+									if(podela2.length == 2) {
+										nazivKolone = podela2[0];
+										tekst = podela2[1];
+										AbstractTableModelStudenti atms = new AbstractTableModelStudenti();
+										String indeks = null;
+										String ime = null;
+										String prezime = null;
+										String godinaUpisa = null;
+										String godinaStudija = null;
+										String datum = null;
+										String prosecnaOcena = null;
+										String status = null;
+									
+										if(nazivKolone.toLowerCase().equals(atms.getColumnName(0).toLowerCase())) {
+											indeks = tekst;
+											filters.add(RowFilter.regexFilter("(?i)" + indeks,0));
+										}else if(nazivKolone.toLowerCase().equals(atms.getColumnName(1).toLowerCase())) {
+											ime = tekst;
+											filters.add(RowFilter.regexFilter("(?i)" + ime,1));
+										}else if(nazivKolone.toLowerCase().equals(atms.getColumnName(2).toLowerCase())) {
+											prezime = tekst;
+											filters.add(RowFilter.regexFilter("(?i)" + prezime,2));
+										}else if(nazivKolone.toLowerCase().equals(atms.getColumnName(3).toLowerCase())) {
+											godinaUpisa = tekst;
+											filters.add(RowFilter.regexFilter("(?i)" + godinaUpisa,3));
+										}else if(nazivKolone.toLowerCase().equals(atms.getColumnName(4).toLowerCase())) {
+											godinaStudija = tekst;
+											filters.add(RowFilter.regexFilter("(?i)" + godinaStudija,4));
+										}else if(nazivKolone.toLowerCase().equals(atms.getColumnName(5).toLowerCase())) {
+											datum = tekst;
+											filters.add(RowFilter.regexFilter("(?i)" + datum,5));
+										}else if(nazivKolone.toLowerCase().equals(atms.getColumnName(6).toLowerCase())) {
+											prosecnaOcena = tekst;
+											filters.add(RowFilter.regexFilter("(?i)" + prosecnaOcena,6));
+										}else if(nazivKolone.toLowerCase().equals(atms.getColumnName(7).toLowerCase())) {
+											status = tekst;
+											filters.add(RowFilter.regexFilter("(?i)" + status,7));
+										}else {
+											JOptionPane.showMessageDialog(null, "Ne postoji kolona " + nazivKolone + " u tabeli predmeta", "Greska",0);
+											break;
+										}
+										
+									
+										sorter = new TableRowSorter<TableModel>( MainFrame.getInstance().getTabelaStudenata().getModel());
+									    sorter.setRowFilter(RowFilter.andFilter(filters));
+					
+									    
+										 MainFrame.getInstance().getTabelaStudenata().setRowSorter(sorter);
+										 textField.setText("");
+									
+									}else {
+										JOptionPane.showMessageDialog(null, "Neispravan format pretrage pravilno [Ime:******;Prezime:*****;...]");
+									}
+									
+							}	
+							
+						}else {
+							JOptionPane.showMessageDialog(null, "Neispravan format pretrage pravilno [Ime:******;Prezime:*****;...]");
+						}
+						
+					}else {
+						
+						@SuppressWarnings("unchecked")
+						TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) MainFrame.getInstance().getTabelaStudenata().getRowSorter();
+						
+					    sorter.setRowFilter(null);
+					}
+				}
+				
 				if (MainFrame.tab == 2) {
 					if (!textField.getText().equals("")) {
 						if (textField.getText().contains(":")) {
