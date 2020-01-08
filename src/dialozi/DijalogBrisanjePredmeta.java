@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import gui.MainFrame;
 import tabele.PredmetiJTable;
 
 public class DijalogBrisanjePredmeta {
@@ -51,12 +52,15 @@ public class DijalogBrisanjePredmeta {
 							}
 						}); 
 		
+				int selektovanaVrsta=MainFrame.getInstance().getTabelaPredmeta().getRowSorter().convertRowIndexToModel(PredmetiJTable.selektovanaVrsta);
+
+				
 			    potvrda.addActionListener(new ActionListener() {
 				
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								
-								controlleri.PredmetiController.getInstance().izbrisiPredmet(PredmetiJTable.selektovanaVrsta);
+								controlleri.PredmetiController.getInstance().izbrisiPredmet(selektovanaVrsta);
 								obrisiPredmet.dispose();
 							}
 						});

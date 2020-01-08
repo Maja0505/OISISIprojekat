@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controlleri.PredmetiController;
+import gui.MainFrame;
 import modeli.BazaPredmeta;
 import modeli.BazaProfesora;
 import modeli.Predmet;
@@ -47,10 +48,11 @@ public class DijalogIzmenaPredmeta {
 			JLabel godinaIzvodjenja = new JLabel("Godina studija izvodjenja*");
 			JLabel profesor = new JLabel("Predmetni profesor*");
 			
+			int selektovanaVrsta=MainFrame.getInstance().getTabelaPredmeta().getRowSorter().convertRowIndexToModel(PredmetiJTable.selektovanaVrsta);
 			
-			JTextField Sifra = new JTextField(BazaPredmeta.getInstance().getRow(PredmetiJTable.selektovanaVrsta).getSifraPredmeta());
+			JTextField Sifra = new JTextField(BazaPredmeta.getInstance().getRow(selektovanaVrsta).getSifraPredmeta());
 			 Sifra.setPreferredSize(new Dimension(100,30));
-		    JTextField NazivPredmeta = new JTextField(BazaPredmeta.getInstance().getRow(PredmetiJTable.selektovanaVrsta).getNazivPredmet());
+		    JTextField NazivPredmeta = new JTextField(BazaPredmeta.getInstance().getRow(selektovanaVrsta).getNazivPredmet());
 			 NazivPredmeta.setPreferredSize(new Dimension(100,30));
 	
 			//PremdetniProfesor comboBox		
@@ -61,20 +63,20 @@ public class DijalogIzmenaPredmeta {
 				}
 			    final JComboBox<String> Profesor = new JComboBox<String>(izborProfesora);
 			    Profesor.setPreferredSize(new Dimension(100,30));
-			    Profesor.setSelectedItem(BazaPredmeta.getInstance().getRow(PredmetiJTable.selektovanaVrsta).getPredmetniProfesor());
+			    Profesor.setSelectedItem(BazaPredmeta.getInstance().getRow(selektovanaVrsta).getPredmetniProfesor());
 			//Semestar comboBox    
 			 String[] izbor = { "1 (prvi)","2 (drugi) ", "3 (treci)","4 (cetvrti)", "5 (peti)","6 (sesti) ", "7 (sedmi)","8 (osmi)",};
 
 			    final JComboBox<String> semestarCB = new JComboBox<String>(izbor);
 			    semestarCB.setPreferredSize(new Dimension(100,30));
-			    String s=semestarCB.getItemAt(BazaPredmeta.getInstance().getRow(PredmetiJTable.selektovanaVrsta).getSemestar()-1);
+			    String s=semestarCB.getItemAt(BazaPredmeta.getInstance().getRow(selektovanaVrsta).getSemestar()-1);
 			    semestarCB.setSelectedItem(s);
 			//GodinaIzvodjenja comboBox    
 			 String[] izbor1 = { "I (prva)","II (druga) ", "III (treca)","IV (cetvrta)"};
 
 			    final JComboBox<String> godinaIzvodjenjaCB = new JComboBox<String>(izbor1);
 			    godinaIzvodjenjaCB.setPreferredSize(new Dimension(100,30));
-			    String g=godinaIzvodjenjaCB.getItemAt(BazaPredmeta.getInstance().getRow(PredmetiJTable.selektovanaVrsta).getGodinaIzvodjenjaPredmeta()-1);
+			    String g=godinaIzvodjenjaCB.getItemAt(BazaPredmeta.getInstance().getRow(selektovanaVrsta).getGodinaIzvodjenjaPredmeta()-1);
 			    godinaIzvodjenjaCB.setSelectedItem(g);
 		    
 		    JButton odustanak = new JButton("Odustanak");
