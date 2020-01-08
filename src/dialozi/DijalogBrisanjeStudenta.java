@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import gui.MainFrame;
 import tabele.StudentiJTable;
 
 public class DijalogBrisanjeStudenta {
@@ -45,12 +46,14 @@ public class DijalogBrisanjeStudenta {
 	    JButton potvrda = new JButton("Potvrda");
 	    potvrda.setBackground(Color.CYAN);
 	    
+		int selektovanaVrsta = MainFrame.getInstance().getTabelaStudenata().getRowSorter().convertRowIndexToModel(StudentiJTable.selektovanaVrsta);
+	    
 	    potvrda.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				controlleri.StudentiController.getInstance().izbrisiStudenta(StudentiJTable.selektovanaVrsta);
+				controlleri.StudentiController.getInstance().izbrisiStudenta(selektovanaVrsta);
 				obrisiStudenta.dispose();
 			}
 		});

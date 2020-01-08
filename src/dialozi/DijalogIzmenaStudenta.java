@@ -26,6 +26,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import controlleri.StudentiController;
+import gui.MainFrame;
 import listeners.FocusListener;
 import listeners.KeyListener;
 import modeli.BazaStudenata;
@@ -64,48 +65,52 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 		JLabel prosecnaOcena = new JLabel("Prosecna ocena* ");
 		JLabel godUpis = new JLabel("Godina upisa* ");
 		
-		JTextField Ime = new JTextField(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getIme());
+
+		int selektovanaVrsta = MainFrame.getInstance().getTabelaStudenata().getRowSorter().convertRowIndexToModel(StudentiJTable.selektovanaVrsta);
+		
+		
+		JTextField Ime = new JTextField(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getIme());
 		Ime.setName("Ime*");
 		Ime.setPreferredSize(new Dimension(100,30));
 		Ime.addFocusListener(new FocusListener());
 		
-		JTextField Prz = new JTextField(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getPrezime());
+		JTextField Prz = new JTextField(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getPrezime());
 		Prz.setName("Prz*");
 		Prz.setPreferredSize(new Dimension(100,30));
 		Prz.addFocusListener(new FocusListener());
 		
-		JTextField Dat = new JTextField(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getDatumRodjenja().toString());
+		JTextField Dat = new JTextField(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getDatumRodjenja().toString());
 		Dat.setName("Dat*");
 		Dat.setPreferredSize(new Dimension(100,30));
 		Dat.addFocusListener(new FocusListener());
 		
-		JTextField Adresa = new JTextField(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getAdresa());
+		JTextField Adresa = new JTextField(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getAdresa());
 		Adresa.setName("Adresa*");
 		Adresa.setPreferredSize(new Dimension(100,30));
 		Adresa.addFocusListener(new FocusListener());
 		
-		JTextField Broj = new JTextField(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getBrojTelefona());
+		JTextField Broj = new JTextField(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getBrojTelefona());
 		Broj.setName("Broj*");
 		Broj.setPreferredSize(new Dimension(100,30));
 		Broj.addKeyListener(new KeyListener());
 		Broj.addFocusListener(new FocusListener());
 		
-		JTextField Indeks = new JTextField(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getBrIndeksa());
+		JTextField Indeks = new JTextField(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getBrIndeksa());
 		Indeks.setName("Indeks*");
 		Indeks.setPreferredSize(new Dimension(100,30));
 		Indeks.addFocusListener(new FocusListener());
 		
-		JTextField Email = new JTextField(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getEmail());
+		JTextField Email = new JTextField(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getEmail());
 		Email.setName("Email*");
 		Email.setPreferredSize(new Dimension(100,30));
 		Email.addFocusListener(new FocusListener());
 		
-		JTextField ProsecnaOcena = new JTextField(String.valueOf(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getProsecnaOcena()));
+		JTextField ProsecnaOcena = new JTextField(String.valueOf(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getProsecnaOcena()));
 		ProsecnaOcena.setName("Prosecna ocena*");
 		ProsecnaOcena.setPreferredSize(new Dimension(100,30));
 		ProsecnaOcena.addFocusListener(new FocusListener());
 		
-		JTextField GodUpis = new JTextField(String.valueOf(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getGodinaUpisa()));
+		JTextField GodUpis = new JTextField(String.valueOf(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getGodinaUpisa()));
 		GodUpis.setName("GodUpis*");
 		GodUpis.setPreferredSize(new Dimension(100,30));
 		GodUpis.addFocusListener(new FocusListener());
@@ -120,7 +125,7 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 
 	    final JComboBox<String> cb = new JComboBox<String>(izbor);
 	    cb.setPreferredSize(new Dimension(100,30));
-	    String godina = cb.getItemAt(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getTrenutnaGodinaStudija() - 1);
+	    String godina = cb.getItemAt(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getTrenutnaGodinaStudija() - 1);
 	    cb.setSelectedItem(godina);
 	    
 	    
@@ -142,7 +147,7 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 	    button1.setBackground(Color.WHITE);
 	    button2.setBackground(Color.WHITE);
 	   
-	    if(String.valueOf(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getStatus()) == "B") {
+	    if(String.valueOf(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getStatus()) == "B") {
 	    	button1.setSelected(true);
 	    	student.setStatus(Status.B);
 	    	}else {
@@ -224,7 +229,7 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 				String prz = Prz.getText();
 				student.setPrezime(prz);
 				String dat = Dat.getText();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				try {
 					Date god = new Date(sdf.parse(dat).getTime());
 					student.setDatumRodjenja(god);
@@ -245,7 +250,7 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 				String godString = GodUpis.getText();
 				int godUpis = Integer.parseInt(godString);
 				student.setGodinaUpisa(godUpis);
-				student.setSpisakPredmeta(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getSpisakPredmeta());
+				student.setSpisakPredmeta(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getSpisakPredmeta());
 				
 				boolean omoguciIzmenu = true;
 				
