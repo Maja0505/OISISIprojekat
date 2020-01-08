@@ -29,6 +29,7 @@ import dialozi.DijalogIzmenaPredmeta;
 import dialozi.DijalogIzmenaProfesora;
 import dialozi.DijalogIzmenaStudenta;
 import tabele.AbstractTableModelPredmeti;
+import tabele.AbstractTableModelProfesori;
 import tabele.AbstractTableModelStudenti;
 import tabele.PredmetiJTable;
 import tabele.ProfesoriJTable;
@@ -256,6 +257,71 @@ public class ToolBar extends JToolBar {
 						TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) MainFrame.getInstance().getTabelaStudenata().getRowSorter();
 						
 					    sorter.setRowFilter(null);
+					}
+				}
+				
+				if (MainFrame.tab == 1) {
+					if (!textField.getText().equals("")) {
+						if (textField.getText().contains(":")) {
+							String[] kolone = textField.getText().split(";");
+							String nazivKolone;
+							String tekst = null;
+							@SuppressWarnings("unchecked")
+							TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) MainFrame.getInstance()
+									.getTabelaPredmeta().getRowSorter();
+							List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(2);
+							for (int i = 0; i < kolone.length; i++) {
+								String[] podela2 = kolone[i].split(":");
+								if (podela2.length == 2) {
+									nazivKolone = podela2[0];
+									tekst = podela2[1];
+									AbstractTableModelProfesori atmp = new AbstractTableModelProfesori();
+									String ime = null;
+									String prezime = null;
+									String datumRodjenja = null;
+									
+
+									if (nazivKolone.toLowerCase().equals(atmp.getColumnName(0).toLowerCase())) {
+										ime = tekst;
+
+										filters.add(RowFilter.regexFilter("(?i)" + ime, 0));
+
+									} else if (nazivKolone.toLowerCase().equals(atmp.getColumnName(1).toLowerCase())) {
+										prezime = tekst;
+
+										filters.add(RowFilter.regexFilter("(?i)" + prezime, 1));
+
+									} else if (nazivKolone.toLowerCase().equals(atmp.getColumnName(2).toLowerCase())) {
+										datumRodjenja = tekst;
+
+										filters.add(RowFilter.regexFilter("(?i)" + datumRodjenja, 2));
+
+									
+									} else {
+										JOptionPane.showMessageDialog(null,
+												"Ne postoji kolona " + nazivKolone + " u tabeli predmeta", "Greska", 0);
+										break;
+									}
+
+									sorter = new TableRowSorter<TableModel>(MainFrame.getInstance().getTabelaProfesora().getModel());
+									sorter.setRowFilter(RowFilter.andFilter(filters));
+
+									MainFrame.getInstance().getTabelaProfesora().setRowSorter(sorter);
+									textField.setText("");
+
+								}else {
+									JOptionPane.showMessageDialog(null, "Neispravan format pretrage! PRAVILNO [Ime:***;Prezime:***;...]");
+								}
+							}
+						}else {
+							JOptionPane.showMessageDialog(null, "Neispravan format pretrage! PRAVILNO [Ime:***;Prezime:***;...]");
+						}
+
+					} else {
+
+						@SuppressWarnings("unchecked")
+						TableRowSorter<TableModel> sorter=(TableRowSorter<TableModel>) MainFrame.getInstance().getTabelaProfesora().getRowSorter();
+						sorter.setRowFilter(null);
 					}
 				}
 				
