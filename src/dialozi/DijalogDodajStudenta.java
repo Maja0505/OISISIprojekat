@@ -215,7 +215,7 @@ public class DijalogDodajStudenta {
 				String prz = Prz.getText();
 				student.setPrezime(prz);
 				String dat = Dat.getText();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				try {
 					Date god = new Date(sdf.parse(dat).getTime());
 					student.setDatumRodjenja(god);
