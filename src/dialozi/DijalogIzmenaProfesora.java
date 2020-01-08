@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controlleri.ProfesoriController;
+import gui.MainFrame;
 import listeners.FocusListener;
 import listeners.KeyListener;
 import modeli.BazaProfesora;
@@ -59,53 +60,55 @@ private static int onemoguciTxtField = 0;
 		JLabel titula = new JLabel("Titula* ");
 		JLabel zvanje = new JLabel("Zvanje* ");
 		
-		JTextField Ime = new JTextField(BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getIme());
+		int selektovanaVrsta = MainFrame.getInstance().getTabelaProfesora().getRowSorter().convertRowIndexToModel(ProfesoriJTable.selektovanaVrsta);
+		
+		JTextField Ime = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getIme());
 		Ime.setName("ImeProf*");
 		Ime.setPreferredSize(new Dimension(100,30));
 		Ime.addFocusListener(new FocusListener());
 		
-		JTextField Prz = new JTextField(BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getPrezime());
+		JTextField Prz = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getPrezime());
 		Prz.setName("PrzProf*");
 		Prz.setPreferredSize(new Dimension(100,30));
 		Prz.addFocusListener(new FocusListener());
 		
-		JTextField Dat = new JTextField(BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getDatum_rodjenja().toString());
+		JTextField Dat = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getDatum_rodjenja().toString());
 		Dat.setName("DatProf*");
 		Dat.setPreferredSize(new Dimension(100,30));
 		Dat.addFocusListener(new FocusListener());
 		
-		JTextField Adresa = new JTextField(BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getAdresaStanivanja());
+		JTextField Adresa = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getAdresaStanivanja());
 		Adresa.setName("AdresaProf*");
 		Adresa.setPreferredSize(new Dimension(100,30));
 		Adresa.addFocusListener(new FocusListener());
 		
-		JTextField Broj = new JTextField(BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getKontaktTelefon());
+		JTextField Broj = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getKontaktTelefon());
 		Broj.setName("BrojProf*");
 		Broj.setPreferredSize(new Dimension(100,30));
 		Broj.addKeyListener(new KeyListener());
 		Broj.addFocusListener(new FocusListener());
 		
-		JTextField AdresaKancelarije = new JTextField(BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getAdresaKancelarije());
+		JTextField AdresaKancelarije = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getAdresaKancelarije());
 		AdresaKancelarije.setName("AdresaProfKanc*");
 		AdresaKancelarije.setPreferredSize(new Dimension(100,30));
 		AdresaKancelarije.addFocusListener(new FocusListener());
 		
-		JTextField Email = new JTextField(BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getEmail());
+		JTextField Email = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getEmail());
 		Email.setName("EmailProf*");
 		Email.setPreferredSize(new Dimension(100,30));
 		Email.addFocusListener(new FocusListener());
 		
-		JTextField BrojLicne = new JTextField(BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getBrojLicneKarte());
+		JTextField BrojLicne = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getBrojLicneKarte());
 		BrojLicne.setName("BrojLicneProf*");
 		BrojLicne.setPreferredSize(new Dimension(100,30));
 		BrojLicne.addFocusListener(new FocusListener());
 		
-		JTextField Titula = new JTextField(BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getTitula());
+		JTextField Titula = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getTitula());
 		Titula.setName("TitulaProf*");
 		Titula.setPreferredSize(new Dimension(100,30));
 		Titula.addFocusListener(new FocusListener());
 		
-		JTextField Zvanje = new JTextField(BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getZvanje());
+		JTextField Zvanje = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getZvanje());
 		Zvanje.setName("ZvanjeProf*");
 		Zvanje.setPreferredSize(new Dimension(100,30));
 		Zvanje.addFocusListener(new FocusListener());
@@ -158,7 +161,7 @@ private static int onemoguciTxtField = 0;
 				String ime = Ime.getText();
 				String prz = Prz.getText();
 				String dat = Dat.getText();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				Date god = null;
 				try {
 					 god = new Date(sdf.parse(dat).getTime());
@@ -173,12 +176,12 @@ private static int onemoguciTxtField = 0;
 				String titula = Titula.getText();
 				String brLicne = BrojLicne.getText();
 				List<String> spisakPredmeta = new ArrayList<String>();
-				spisakPredmeta = BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getSpisakPredmeta();
+				spisakPredmeta = BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getSpisakPredmeta();
 				
 				boolean omoguciIzmenu = true;
 				
 				for(int i = 0;i < BazaProfesora.getInstance().getProfesori().size();i++) {
-					if(!brLicne.equals(BazaProfesora.getInstance().getProfesori().get(ProfesoriJTable.selektovanaVrsta).getBrojLicneKarte())) {
+					if(!brLicne.equals(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getBrojLicneKarte())) {
 						if(brLicne.equals(BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte())) {
 							omoguciIzmenu = false;
 							break;
