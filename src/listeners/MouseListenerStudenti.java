@@ -53,7 +53,7 @@ public class MouseListenerStudenti extends MouseAdapter {
 			panel.setBackground(Color.CYAN);
 			predmeti.add(panel,BorderLayout.CENTER);
 			
-			 String nizPredmeta[] = new String[BazaStudenata.getInstance().getStudenti().size()]; 
+			 String nizPredmeta[] = new String[BazaStudenata.getInstance().getStudenti().get(row).getSpisakPredmeta().size()]; 
 			    
 				for(int i = 0;i<BazaStudenata.getInstance().getStudenti().get(row).getSpisakPredmeta().size();i++) {
 					
