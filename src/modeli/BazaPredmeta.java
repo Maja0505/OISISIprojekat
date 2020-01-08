@@ -151,6 +151,16 @@ public class BazaPredmeta {
 	}
 
 	public void dodajProfesoraNaPredmet(int rowSelectedIndexProfesora, int selektovanaVrsta) {
+		for(int i=0;i<BazaProfesora.getInstance().getProfesori().size();i++) {		//brise predmet sa profesora koga smo zamenili
+			if(BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getPredmetniProfesor().equals(BazaProfesora.getInstance().getProfesori().get(i).getIme().concat(" ").concat(BazaProfesora.getInstance().getProfesori().get(i).getPrezime()))) {
+				for(int j=0;j<BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().size();j++) {
+					if(BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().get(j).equals(BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSifraPredmeta())) {
+						BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().remove(j);
+					}
+				}
+			}
+		}
+		
 		Profesor p=BazaProfesora.getInstance().getRow(rowSelectedIndexProfesora);
 		BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).setPredmetniProfesor(p.getIme().concat(" ").concat(p.getPrezime()));
 		

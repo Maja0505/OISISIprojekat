@@ -56,8 +56,8 @@ public class ProfesoriController {
 	}
 
 	public void izbrisiPredmetProfesoru(int predmetKojiSeBrise, int row) {
-		System.out.println(row);
-		System.out.println(predmetKojiSeBrise);
+		
+		
 		BazaProfesora.getInstance().izbrisiPredmet(predmetKojiSeBrise,row);
 		MainFrame.getInstance().azurirajTabeluProfesora();
 	}

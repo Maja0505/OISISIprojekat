@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 
 import controlleri.PredmetiController;
 import controlleri.ProfesoriController;
+import gui.MainFrame;
 import listeners.FocusListener;
 import modeli.BazaPredmeta;
 import modeli.BazaProfesora;
@@ -55,7 +56,7 @@ public class DijalogDodajProfesoraNaPredmet {
 		 JButton potvrda = new JButton("Potvrda");
 		 potvrda.setBackground(Color.CYAN);
 	
-		 
+		 int selektovanaVrsta=MainFrame.getInstance().getTabelaPredmeta().getRowSorter().convertRowIndexToModel(PredmetiJTable.selektovanaVrsta);
 		 potvrda.addActionListener(new ActionListener() {
 			
 			@Override
@@ -78,8 +79,8 @@ public class DijalogDodajProfesoraNaPredmet {
 					
 					if(omoguci) {
 						
-						PredmetiController.getInstance().dodajProfeosraNaPredmet(rowSelectedIndex, PredmetiJTable.selektovanaVrsta);
-						ProfesoriController.getInstance().dodajPredmetProfesoru(BazaPredmeta.getInstance().getPredmeti().get(PredmetiJTable.selektovanaVrsta).getSifraPredmeta(), rowSelectedIndex);
+						PredmetiController.getInstance().dodajProfeosraNaPredmet(rowSelectedIndex,selektovanaVrsta);
+						ProfesoriController.getInstance().dodajPredmetProfesoru(BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSifraPredmeta(), rowSelectedIndex);
 						dodajProfeosraNaPredmet.dispose();
 
 					}else {

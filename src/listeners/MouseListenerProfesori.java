@@ -24,6 +24,7 @@ import javax.swing.JTable;
 import controlleri.PredmetiController;
 import controlleri.ProfesoriController;
 import dialozi.ModalniDijalog;
+import gui.MainFrame;
 import modeli.BazaProfesora;
 
 
@@ -38,7 +39,8 @@ public class MouseListenerProfesori extends MouseAdapter {
 	  public void mouseClicked(MouseEvent event) {
 	        Point point = event.getPoint();
 	        int column = table.columnAtPoint(point);
-	        int row=table.rowAtPoint(point);
+	        int row1=table.rowAtPoint(point);
+			int row = MainFrame.getInstance().getTabelaProfesora().getRowSorter().convertRowIndexToModel(row1);
 	        if(column==3) { //prikazi
 		        	JDialog predmeti = new ModalniDijalog(new JFrame(), "Predmeti", true);
 			  	   	  
