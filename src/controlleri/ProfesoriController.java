@@ -48,9 +48,9 @@ public class ProfesoriController {
 		MainFrame.getInstance().azurirajTabeluProfesora();
 	}
 	
-	public void dodajPredmetProfesoru(String brojLicne,int rowSelectedIndex) {
+	public void dodajPredmetProfesoru(String sifraPredmeta,int rowSelectedIndex) {
 		//dodavanje predmeta profesoru
-		BazaProfesora.getInstance().dodajPredmetProfesoru(brojLicne, rowSelectedIndex);
+		BazaProfesora.getInstance().dodajPredmetProfesoru(sifraPredmeta, rowSelectedIndex);
 		//azurira tabelu
 		MainFrame.getInstance().azurirajTabeluProfesora();
 	}

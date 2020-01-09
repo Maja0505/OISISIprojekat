@@ -14,15 +14,21 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controlleri.PredmetiController;
 import listeners.FocusListener;
+import modeli.BazaPredmeta;
 import modeli.BazaProfesora;
 import modeli.Predmet;
 
 public class DijalogDodajPredmet {
+	
+	private static int onemoguciTxtField = 0;
+	
+	
 	public DijalogDodajPredmet(boolean vidljiv) {
 				JDialog  dodajPredmet = new ModalniDijalog(new JFrame(), "Dodaj predmet", true,600,750);
 				
@@ -59,7 +65,7 @@ public class DijalogDodajPredmet {
 			    String[] izborProfesora=new String[BazaProfesora.getInstance().getProfesori().size()];
 				
 					for(int i=0;i<BazaProfesora.getInstance().getProfesori().size();i++) {
-						izborProfesora[i]=BazaProfesora.getInstance().getProfesori().get(i).getIme().concat(" ").concat(BazaProfesora.getInstance().getProfesori().get(i).getPrezime());
+						izborProfesora[i]=BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte()+","+BazaProfesora.getInstance().getProfesori().get(i).getIme().concat(" ").concat(BazaProfesora.getInstance().getProfesori().get(i).getPrezime());
 					}
 					
 				    final JComboBox<String> Profesor = new JComboBox<String>(izborProfesora);
@@ -92,16 +98,52 @@ public class DijalogDodajPredmet {
 					
 				    potvrda.addActionListener(new ActionListener() {
 						
+				 
 						@Override
 						public void actionPerformed(ActionEvent e) {
+							
+							if(!Sifra.getText().equals("") && !Sifra.getText().equals("Nepravilan unos sifre predmeta")) {
+								onemoguciTxtField++;
+							}
+							if(!NazivPredmeta.getText().equals("") && !NazivPredmeta.getText().equals("Nepravilan unos naziva predmeta")) {
+								onemoguciTxtField++;
+							}
+							if(onemoguciTxtField==2) {
 							String sifra=Sifra.getText();
 							String naziv=NazivPredmeta.getText();
 							int  semestar=semestarCB.getSelectedIndex()+1;
 							int godinaIzvodjenja=godinaIzvodjenjaCB.getSelectedIndex()+1;
+							if(semestar!=godinaIzvodjenja*2 && semestar!=godinaIzvodjenja*2-1) {
+								JOptionPane.showMessageDialog(null, "Za godinu "+ godinaIzvodjenja + " morate izabrati ili "+ (godinaIzvodjenja*2-1) +" ili "+ godinaIzvodjenja*2 +" semestar, ili promenite godinu");
+								onemoguciTxtField = 0;
+								return;
+							}
 							String profesor=Profesor.getSelectedItem().toString();
 							Predmet predmet=new Predmet(sifra, naziv, semestar, godinaIzvodjenja, profesor, null);
+							
+							
+							boolean mogucUnos = true;
+							for(int i=0;i<BazaPredmeta.getInstance().getPredmeti().size();i++) {
+								if(sifra.equals(BazaPredmeta.getInstance().getPredmeti().get(i).getSifraPredmeta())) {
+									mogucUnos = false;
+									break;
+								}
+							}
+							
+							
+							
+							if(mogucUnos) {
 							PredmetiController.getInstance().dodajPredmet(predmet);
+							onemoguciTxtField = 0;
 							dodajPredmet.dispose();
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Vec postoji takav predmet");
+							}
+							}else {
+								JOptionPane.showMessageDialog(null, "Niste uneli sva polja");
+								onemoguciTxtField = 0;
+							}
 						}
 					});
 			    

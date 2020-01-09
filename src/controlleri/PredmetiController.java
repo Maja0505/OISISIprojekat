@@ -38,7 +38,7 @@ private static PredmetiController instance = null;
 	
 	public void izmeniPredmet(Predmet p) {
 		
-		BazaPredmeta.getInstance().izmeniPredmet(p.getSifraPredmeta(), p.getNazivPredmet(),p.getSemestar(),p.getGodinaIzvodjenjaPredmeta(),p.getPredmetniProfesor());
+		BazaPredmeta.getInstance().izmeniPredmet(p.getSifraPredmeta(), p.getNazivPredmet(),p.getSemestar(),p.getGodinaIzvodjenjaPredmeta(),p.getPredmetniProfesor(),p.getSpisakStudenata());
 	
 		// azuriranje prikaza
 		MainFrame.getInstance().azurirajTabeluPredmeta();

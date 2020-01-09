@@ -64,7 +64,7 @@ public class DijalogDodajProfesoraNaPredmet {
 				
 				String brojLicneKojaSeUnosi = null;
 				int rowSelectedIndex = 0;
-				if(!brojLicneKarte.getText().equals("") && !brojLicneKarte.getText().equals("Nije validan unos...")) {
+				if(!brojLicneKarte.getText().equals("") && !brojLicneKarte.getText().equals("Nepravilan unos licne karte")) {
 					brojLicneKojaSeUnosi = brojLicneKarte.getText();
 					for(int i = 0;i<BazaProfesora.getInstance().getProfesori().size();i++) {
 						if(brojLicneKojaSeUnosi.equals(BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte())){

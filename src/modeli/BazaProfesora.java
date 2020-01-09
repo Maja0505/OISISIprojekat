@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import tabele.ProfesoriJTable;
@@ -105,14 +106,15 @@ public class BazaProfesora {
 	}
 	
 	public String getValueAt(int row, int column) {
-		Profesor Profesor = this.profesori.get(row);
+		Profesor profesor = this.profesori.get(row);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.");
 		switch (column) {
 		case 0:
-			return Profesor.getIme();
+			return profesor.getIme();
 		case 1:
-			return Profesor.getPrezime();
+			return profesor.getPrezime();
 		case 2:
-			return Profesor.getDatum_rodjenja().toString();	
+			return sdf.format(profesor.getDatum_rodjenja());	
 		default:
 			return null;
 		}
@@ -122,7 +124,7 @@ public class BazaProfesora {
 		for(int j = 0;j<BazaProfesora.getInstance().getProfesori().size();j++) {	
 			List<String> listaPredmeta = new ArrayList<String>();
 			for(int i = 0;i<BazaPredmeta.getInstance().getPredmeti().size();i++) {
-				if(BazaProfesora.getInstance().getValueAt(j, 0).concat(" ").concat(BazaProfesora.getInstance().getValueAt(j, 1)).equals(BazaPredmeta.getInstance().getPredmeti().get(i).getPredmetniProfesor())){
+				if ((BazaProfesora.getInstance().getProfesori().get(j).getBrojLicneKarte()+ "," +BazaProfesora.getInstance().getValueAt(j, 0).concat(" ").concat(BazaProfesora.getInstance().getValueAt(j, 1))).equals(BazaPredmeta.getInstance().getPredmeti().get(i).getPredmetniProfesor())){
 						listaPredmeta.add(BazaPredmeta.getInstance().getValueAt(i, 0).toString());
 						
 					}
@@ -169,16 +171,16 @@ public class BazaProfesora {
 			
 	}
 
-		public void dodajPredmetProfesoru(String brojLicne, int rowSelectedIndex) {
+		public void dodajPredmetProfesoru(String sifraPredmeta, int rowSelectedIndex) {
 		boolean postoji=false;
 		for(int i=0; i<this.profesori.get(rowSelectedIndex).getSpisakPredmeta().size();i++) {
-				if(this.profesori.get(rowSelectedIndex).getSpisakPredmeta().get(i).equals(brojLicne)) {
+				if(this.profesori.get(rowSelectedIndex).getSpisakPredmeta().get(i).equals(sifraPredmeta)) {
 					postoji=true;
 				}
 			
 			}
 			if(postoji==false) {
-				this.profesori.get(rowSelectedIndex).getSpisakPredmeta().add(brojLicne);
+				this.profesori.get(rowSelectedIndex).getSpisakPredmeta().add(sifraPredmeta);
 			}
 		}
 

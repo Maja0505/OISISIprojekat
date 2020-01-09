@@ -282,22 +282,27 @@ public class FocusListener implements java.awt.event.FocusListener {
 	 if (txt.getName().equals("Sifra predmeta*")) {
 			Pattern regExp = Pattern.compile("[A-Z0-9]+[-]?[A-Z0-9]+");
 			Matcher m = regExp.matcher(txt.getText());
-			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Nije validan unos sifre! Sifru morate uneti velikim slovima") || !m.matches()) {
-				txt.setText("Nije validan unos sifre! Sifru morate uneti velikim slovima");
-				txt.setForeground(Color.RED);
-			} else {
-				txt.setForeground(Color.BLACK);
-			}
+			if (!txt.getText().trim().equals("")) {
+				if( txt.getText().trim().equals("Nepravilan unos sifre predmeta") || !m.matches()) {
+					txt.setText("Nepravilan unos sifre predmeta");
+					txt.setForeground(Color.RED);
+				} else {
+					txt.setForeground(Color.BLACK);
+				}
+		}
+	
 		}
 	 
 	 if (txt.getName().equals("Naziv predmeta*")) {
 			Pattern regExp = Pattern.compile("[A-Z][a-z0-9 ]+");
 			Matcher m = regExp.matcher(txt.getText());
-			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Nije validan unos naziva predmeta...") || !m.matches()) {
-				txt.setText("Nije validan unos naziva predmeta...");
-				txt.setForeground(Color.RED);
-			} else {
-				txt.setForeground(Color.BLACK);
+			if (!txt.getText().trim().equals("")) {
+					if( txt.getText().trim().equals("Nepravilan unos naziva predmeta") || !m.matches()) {
+						txt.setText("Nepravilan unos naziva predmeta");
+						txt.setForeground(Color.RED);
+					} else {
+						txt.setForeground(Color.BLACK);
+					}
 			}
 		}
 	 

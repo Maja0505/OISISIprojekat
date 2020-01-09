@@ -111,18 +111,18 @@ public class BazaPredmeta {
 	}
 	
 	public String getValueAt(int row, int column) {
-		Predmet Predmet = this.predmeti.get(row);
+		Predmet predmet = this.predmeti.get(row);
 		switch (column) {
 		case 0:
-			return Predmet.getSifraPredmeta();
+			return predmet.getSifraPredmeta();
 		case 1:
-			return Predmet.getNazivPredmet();
+			return predmet.getNazivPredmet();
 		case 2:
-			return Integer.toString(Predmet.getSemestar());
+			return Integer.toString(predmet.getSemestar());
 		case 3:
-			return Integer.toString(Predmet.getGodinaIzvodjenjaPredmeta());
+			return Integer.toString(predmet.getGodinaIzvodjenjaPredmeta());
 		case 4:
-			return Predmet.getPredmetniProfesor();
+			return predmet.getPredmetniProfesor();
 		default:
 			return null;
 		}
@@ -133,7 +133,7 @@ public class BazaPredmeta {
 			List<String> listaStudenata = new ArrayList<String>();
 			for(int i = 0;i<BazaStudenata.getInstance().getStudenti().size();i++) {
 				if(Integer.parseInt(BazaStudenata.getInstance().getValueAt(i, 4))==BazaPredmeta.getInstance().getPredmeti().get(j).getGodinaIzvodjenjaPredmeta()){
-						listaStudenata.add(BazaStudenata.getInstance().getValueAt(i, 0).toString());
+						listaStudenata.add(BazaStudenata.getInstance().getValueAt(i, 0).toString() + "," + BazaStudenata.getInstance().getStudenti().get(i).getIme() + " " + BazaStudenata.getInstance().getStudenti().get(i).getPrezime());
 						
 					}
 			}
@@ -160,7 +160,7 @@ public class BazaPredmeta {
 		
 	}
 	
-	public void izmeniPredmet(String sifra, String nazivPredmet, int semestar, int godinaIzvodjenjaPredmeta, String predmetniProfesor) {		//menja u bazi
+	public void izmeniPredmet(String sifra, String nazivPredmet, int semestar, int godinaIzvodjenjaPredmeta, String predmetniProfesor,List<String> listaStudenata) {		//menja u bazi
 				Predmet p=BazaPredmeta.getInstance().getRow(PredmetiJTable.selektovanaVrsta);
 	
 				p.setSifraPredmeta(sifra);
@@ -168,7 +168,7 @@ public class BazaPredmeta {
 				p.setSemestar(semestar);
 				p.setGodinaIzvodjenjaPredmeta(godinaIzvodjenjaPredmeta);
 				p.setPredmetniProfesor(predmetniProfesor);
-				p.setSpisakStudenata(null);
+				p.setSpisakStudenata(listaStudenata);
 			
 			
 		
@@ -183,7 +183,7 @@ public class BazaPredmeta {
 	}
 
 	public void dodajProfesoraNaPredmet(int rowSelectedIndexProfesora, int selektovanaVrsta) {
-		for(int i=0;i<BazaProfesora.getInstance().getProfesori().size();i++) {		//brise predmet sa profesora koga smo zamenili
+	/*	for(int i=0;i<BazaProfesora.getInstance().getProfesori().size();i++) {		//brise predmet sa profesora koga smo zamenili
 			if(BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getPredmetniProfesor().equals(BazaProfesora.getInstance().getProfesori().get(i).getIme().concat(" ").concat(BazaProfesora.getInstance().getProfesori().get(i).getPrezime()))) {
 				for(int j=0;j<BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().size();j++) {
 					if(BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().get(j).equals(BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSifraPredmeta())) {
@@ -192,9 +192,26 @@ public class BazaPredmeta {
 				}
 			}
 		}
+		*/
+		String[] niz=BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getPredmetniProfesor().split(",");
+		String brojLicne=niz[0];
+		int indeks = 0;
+		for(int i = 0;i < BazaProfesora.getInstance().getProfesori().size();i++) {
+			if(brojLicne.equals( BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte())) {
+				indeks = i;
+				break;
+			}
+		}
+		
+		for(int i = 0; i < BazaProfesora.getInstance().getProfesori().get(indeks).getSpisakPredmeta().size();i++) {
+			if(BazaProfesora.getInstance().getProfesori().get(indeks).getSpisakPredmeta().get(i).equals(BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSifraPredmeta())) {
+				BazaProfesora.getInstance().getProfesori().get(indeks).getSpisakPredmeta().remove(i);
+				break;
+			}
+		}
 		
 		Profesor p=BazaProfesora.getInstance().getRow(rowSelectedIndexProfesora);
-		BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).setPredmetniProfesor(p.getIme().concat(" ").concat(p.getPrezime()));
+		BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).setPredmetniProfesor(p.getBrojLicneKarte()+","+p.getIme().concat(" ").concat(p.getPrezime()));
 		
 		MainFrame.getInstance().azurirajTabeluPredmeta();
 	}
