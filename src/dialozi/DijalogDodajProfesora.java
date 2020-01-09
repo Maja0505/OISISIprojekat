@@ -40,7 +40,7 @@ public class DijalogDodajProfesora {
 		dodajProfesora.add(statusBar,BorderLayout.SOUTH);
 		statusBar.setPreferredSize(new Dimension(dodajProfesora.getWidth(), 25));
 		
-		JPanel panel = new JPanel();
+		JPanel panel = new JPanel(); 
 		panel.setLayout(new GridBagLayout());
 		panel.setBackground(Color.WHITE);
 		dodajProfesora.add(panel,BorderLayout.CENTER);

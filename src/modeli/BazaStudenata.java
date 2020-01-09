@@ -29,7 +29,7 @@ public class BazaStudenata {
 	}
 	
 	private List<Student> studenti;
-	private List<String> kolone;
+	private List<String> kolone; 
 	private File file;
 	
 	private BazaStudenata() {

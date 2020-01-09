@@ -64,7 +64,7 @@ public class DijalogDodajStudentaNaPredmet {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String indeksStudentaKojiSeUnosi = null;
-				int rowSelectedIndex = 0;
+				int rowSelectedIndex = 0; 
 				if(!Indeks.getText().equals("") && !Indeks.getText().equals("Nije pravilan unos indeska")) {
 						 indeksStudentaKojiSeUnosi = Indeks.getText();
 					for(int i = 0;i<BazaStudenata.getInstance().getStudenti().size();i++) {

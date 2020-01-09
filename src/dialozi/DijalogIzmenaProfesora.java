@@ -42,7 +42,7 @@ private static int onemoguciTxtField = 0;
 		izmeniProfesora.add(statusBar,BorderLayout.SOUTH);
 		statusBar.setPreferredSize(new Dimension(izmeniProfesora.getWidth(), 25));
 		
-		JPanel panel = new JPanel();
+		JPanel panel = new JPanel(); 
 		panel.setLayout(new GridBagLayout());
 		panel.setBackground(Color.WHITE);
 		izmeniProfesora.add(panel,BorderLayout.CENTER);

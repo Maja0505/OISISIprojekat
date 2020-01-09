@@ -17,7 +17,7 @@ public class Student implements Serializable{
 	
 	private String ime;
 	private String prezime;
-	private Date datumRodjenja;
+	private Date datumRodjenja; 
 	private String adresa;
 	private String brojTelefona;
 	private String email;

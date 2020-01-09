@@ -16,7 +16,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 		txt.setBackground(Color.WHITE);
 	}
 
-	@Override
+	@Override 
 	public void focusLost(FocusEvent arg0) {
 		// TODO Auto-generated method stub
 		JTextField txt = (JTextField) arg0.getComponent();

@@ -48,7 +48,7 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
-		panel.setBackground(Color.WHITE);
+		panel.setBackground(Color.WHITE); 
 		izmeniStudenta.add(panel,BorderLayout.CENTER);
 		
 		izmeniStudenta.add(panel);

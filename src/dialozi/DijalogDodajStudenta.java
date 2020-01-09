@@ -44,7 +44,7 @@ public class DijalogDodajStudenta {
 		statusBar.setPreferredSize(new Dimension(dodajStudenta.getWidth(), 25));
 		
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridBagLayout());
+		panel.setLayout(new GridBagLayout()); 
 		panel.setBackground(Color.WHITE);
 		dodajStudenta.add(panel,BorderLayout.CENTER);
 		
