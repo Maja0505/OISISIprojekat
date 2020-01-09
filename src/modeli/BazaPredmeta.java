@@ -1,5 +1,11 @@
 package modeli;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +27,15 @@ public class BazaPredmeta {
 	
 	private List<Predmet> predmeti;
 	private List<String> kolone;
+	private File file;
 	
 	private BazaPredmeta() {
-		
+		this.predmeti = new ArrayList<Predmet>();
+	    this.file = new File("predmeti.txt");
+	    if(file.length() != 0)
+	    	initPredmeti(); 
 	
-		initPredmeti();
+		
 
 		this.kolone = new ArrayList<String>();
 		this.kolone.add("Sifra");
@@ -38,17 +48,37 @@ public class BazaPredmeta {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void initPredmeti() {
 		
-		this.predmeti = new ArrayList<Predmet>();
-		List<String> listaStudenata = new ArrayList<String>();
+		ArrayList<?> listaPredmeta = null;
 		
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+			listaPredmeta = (ArrayList<Object>) ois.readObject();
+			ois.close();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		
-		predmeti.add(new Predmet("MA2-E2","Matematicka analiza 2",3,2,"Mila Stojakovic",listaStudenata));
-		predmeti.add(new Predmet("BP2-E2","Baze podataka 2",7,4,"Ivan Lukovic",listaStudenata));
+		if(predmeti != null) {
+			for(Object p : listaPredmeta)
+				this.predmeti.add((Predmet) p);
+		}
 		
 	
 }
+	public void savePredmete() {
+		 file = new File("predmeti.txt");
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+			oos.writeObject(predmeti);
+			oos.close();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	public List<Predmet> getPredmeti() {
 		return predmeti;
@@ -123,7 +153,9 @@ public class BazaPredmeta {
 	
 	public void dodajPredmet(Predmet p) {				//dodaje u bazu
 		this.predmeti.add(p);
+		this.popunjavanjeListeStudenata();
 		BazaProfesora.getInstance().popunjavanjeListePredmeta();
+		BazaStudenata.getInstance().popunjavanjeListePredmeta();
 		
 		
 	}

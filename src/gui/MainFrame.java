@@ -21,6 +21,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import modeli.BazaPredmeta;
 import modeli.BazaStudenata;
 import tabele.AbstractTableModelPredmeti;
 import tabele.AbstractTableModelProfesori;
@@ -98,6 +99,7 @@ public class MainFrame extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				// TODO Auto-generated method stub
 				BazaStudenata.getInstance().saveStudente();
+				BazaPredmeta.getInstance().savePredmete();
 			}
 			
 			@Override
