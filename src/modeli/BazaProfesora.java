@@ -1,5 +1,11 @@
 package modeli;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +21,15 @@ public class BazaProfesora {
 		return instance;
 	}
 	
-	private List<Profesor> Profesori;
+	private List<Profesor> profesori;
 	private List<String> kolone;
+	private File file;
 	
 	private BazaProfesora() {
-		
-	
-		initProfesori();
+		this.profesori = new ArrayList<Profesor>();
+	    this.file = new File("profesori.txt");
+	    if(file.length() != 0)
+	    	initProfesori(); 
 
 		this.kolone = new ArrayList<String>();
 		this.kolone.add("Ime");
@@ -34,24 +42,44 @@ public class BazaProfesora {
 		
 	}
 	
-	@SuppressWarnings({ "deprecation" })
+	@SuppressWarnings({ "unchecked" })
 	private void initProfesori() {
 		
-		this.Profesori = new ArrayList<Profesor>();
-		List<String> listaPredmeta = new ArrayList<String>();
+		ArrayList<?> listaProfesora = null;
 		
-		Profesori.add(new Profesor("Mila","Stojakovic",new java.sql.Date(60,9,9),"Novi Sad","	021/485-2304","	mila@uns.ac.rs","FTN,Kabinet 604","0909601234","DR.","Redovni profesor",listaPredmeta));
-		Profesori.add(new Profesor("Ivan","Lukovic",new java.sql.Date(60,9,9),"Novi Sad","021/485-2445","	ivan@uns.ac.rs","Radnicka 9,JUG-216","0909601235","DR.","Redovni profesor",listaPredmeta));
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+			listaProfesora = (ArrayList<Object>) ois.readObject();
+			ois.close();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		if(profesori != null) {
+			for(Object p : listaProfesora)
+				this.profesori.add((Profesor) p);
+		}
 		
 	
 }
-
-	public List<Profesor> getProfesori() {
-		return Profesori;
+	
+	public void saveProfesore() {
+		 file = new File("profesori.txt");
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+			oos.writeObject(profesori);
+			oos.close();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void setProfesori(List<Profesor> Profesori) {
-		this.Profesori = Profesori;
+	public List<Profesor> getProfesori() {
+		return profesori;
+	}
+
+	public void setProfesori(List<Profesor> profesori) {
+		this.profesori = profesori;
 	}
 
 	public List<String> getKolone() {
@@ -73,11 +101,11 @@ public class BazaProfesora {
 	
 	
 	public Profesor getRow(int rowIndex) {
-		return this.Profesori.get(rowIndex);
+		return this.profesori.get(rowIndex);
 	}
 	
 	public String getValueAt(int row, int column) {
-		Profesor Profesor = this.Profesori.get(row);
+		Profesor Profesor = this.profesori.get(row);
 		switch (column) {
 		case 0:
 			return Profesor.getIme();
@@ -105,9 +133,9 @@ public class BazaProfesora {
 	}
 	
 	public void izbrisiProfesora(String id) {				//brise iz baze
-		for (Profesor p : Profesori) {
+		for (Profesor p : profesori) {
 			if (p.getBrojLicneKarte().equals(id)) {
-				Profesori.remove(p);
+				profesori.remove(p);
 				
 				break;
 			}
@@ -116,7 +144,7 @@ public class BazaProfesora {
 	
 //metoda da dodavanje profesora u bazu	
 		public void dodajProfesora(Profesor p) {
-			this.Profesori.add(p);
+			this.profesori.add(p);
 			this.popunjavanjeListePredmeta();
 		}
 		
@@ -143,20 +171,20 @@ public class BazaProfesora {
 
 		public void dodajPredmetProfesoru(String brojLicne, int rowSelectedIndex) {
 		boolean postoji=false;
-		for(int i=0; i<this.Profesori.get(rowSelectedIndex).getSpisakPredmeta().size();i++) {
-				if(this.Profesori.get(rowSelectedIndex).getSpisakPredmeta().get(i).equals(brojLicne)) {
+		for(int i=0; i<this.profesori.get(rowSelectedIndex).getSpisakPredmeta().size();i++) {
+				if(this.profesori.get(rowSelectedIndex).getSpisakPredmeta().get(i).equals(brojLicne)) {
 					postoji=true;
 				}
 			
 			}
 			if(postoji==false) {
-				this.Profesori.get(rowSelectedIndex).getSpisakPredmeta().add(brojLicne);
+				this.profesori.get(rowSelectedIndex).getSpisakPredmeta().add(brojLicne);
 			}
 		}
 
 		public void izbrisiPredmet(int predmetKojiSeBrise, int row) {
 		
-			this.Profesori.get(row).getSpisakPredmeta().remove(predmetKojiSeBrise);
+			this.profesori.get(row).getSpisakPredmeta().remove(predmetKojiSeBrise);
 			
 		}
 	
