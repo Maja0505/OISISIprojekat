@@ -28,7 +28,6 @@ import javax.swing.JTextField;
 import controlleri.StudentiController;
 import gui.MainFrame;
 import listeners.FocusListener;
-import listeners.KeyListener;
 import modeli.BazaStudenata;
 import modeli.Student;
 import modeli.Student.Status;
@@ -79,7 +78,9 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 		Prz.setPreferredSize(new Dimension(100,30));
 		Prz.addFocusListener(new FocusListener());
 		
-		JTextField Dat = new JTextField(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getDatumRodjenja().toString());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.");
+		
+		JTextField Dat = new JTextField(sdf.format(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getDatumRodjenja()));
 		Dat.setName("Dat*");
 		Dat.setPreferredSize(new Dimension(100,30));
 		Dat.addFocusListener(new FocusListener());
@@ -92,7 +93,6 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 		JTextField Broj = new JTextField(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getBrojTelefona());
 		Broj.setName("Broj*");
 		Broj.setPreferredSize(new Dimension(100,30));
-		Broj.addKeyListener(new KeyListener());
 		Broj.addFocusListener(new FocusListener());
 		
 		JTextField Indeks = new JTextField(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getBrIndeksa());
@@ -110,7 +110,7 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 		ProsecnaOcena.setPreferredSize(new Dimension(100,30));
 		ProsecnaOcena.addFocusListener(new FocusListener());
 		
-		JTextField GodUpis = new JTextField(String.valueOf(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getGodinaUpisa()));
+		JTextField GodUpis = new JTextField(sdf.format(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getGodinaUpisa()));
 		GodUpis.setName("GodUpis*");
 		GodUpis.setPreferredSize(new Dimension(100,30));
 		GodUpis.addFocusListener(new FocusListener());
@@ -128,18 +128,6 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 	    String godina = cb.getItemAt(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getTrenutnaGodinaStudija() - 1);
 	    cb.setSelectedItem(godina);
 	    
-	    
-	    cb.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int godStud = cb.getSelectedIndex() + 1; 
-				student.setTrenutnaGodinaStudija(godStud);
-			}
-		});
-	    
-	    if(student.getGodinaUpisa() == 0)
-	    	student.setTrenutnaGodinaStudija(1); 
 	    
 	    JRadioButton button1 = new JRadioButton("Budzet");
 	    JRadioButton button2 = new JRadioButton("Samofinansiranje");
@@ -195,33 +183,34 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 			
 				
 				
-				if(!Ime.getText().equals("")  && !Ime.getText().equals("Nije validan unos imena...")) {
+				if(!Ime.getText().equals("")  && !Ime.getText().equals("Nepravilan unos imena")) {
 					onemoguciTxtField++;
 					}
-				if(!Prz.getText().equals("")  && !Prz.getText().equals("Nije validan unos prezimena...")) {
+				if(!Prz.getText().equals("")  && !Prz.getText().equals("Nepravilan unos prezimena")) {
 					onemoguciTxtField++;
 					}
-				if(!Dat.getText().equals("") && !Dat.getText().equals("Nije validan format datuma (ocekivani 'YYYY - MM - DD')...")) {
+				if(!Dat.getText().equals("") && !Dat.getText().equals("Nepravilan unos datuma")) {
 					onemoguciTxtField++;
 					}
-				if(!Adresa.getText().equals("") && !Adresa.getText().equals("Nije valian unos adrese...")) {
+				if(!Adresa.getText().equals("") && !Adresa.getText().equals("Nepravilan unos adrese")) {
 					onemoguciTxtField++;
 					}
-				if(!Broj.getText().equals("") && !Broj.getText().equals("Validan format je +381*********...")) {
+				if(!Broj.getText().equals("") && !Broj.getText().equals("Nepravilan unos broja telefona")) {
 					onemoguciTxtField++;
 					}
-				if(!Email.getText().equals("") && !Email.getText().equals("Nije validan format za email...")) {
+				if(!Email.getText().equals("") && !Email.getText().equals("Nepravilan unos email-a")) {
 					onemoguciTxtField++;
 					}
-				if(!Indeks.getText().equals("") && !Indeks.getText().equals("Validan format je xxBROJ-20YY...")) {
+				if(!Indeks.getText().equals("") && !Indeks.getText().equals("Nepravilan unos indeksa")) {
 					onemoguciTxtField++;
 				}
-				if(!ProsecnaOcena.getText().equals("") && !ProsecnaOcena.getText().equals("Ocene su u rasponu od 6 - 10...")) {
+				if(!ProsecnaOcena.getText().equals("") && !ProsecnaOcena.getText().equals("Nepravilan unos prosecne ocene")) {
 					onemoguciTxtField++;
 					}
-				if(!GodUpis.getText().equals("") && !GodUpis.getText().equals("Nije validan unos...")) {
+				if(!GodUpis.getText().equals("") && !GodUpis.getText().equals("Nepravilan unos datuma upisa")) {
 					onemoguciTxtField++;
 					}
+				
 				
 			if(onemoguciTxtField == 9) {
 				String ime = Ime.getText();
@@ -229,13 +218,14 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 				String prz = Prz.getText();
 				student.setPrezime(prz);
 				String dat = Dat.getText();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.");
+				Date god = null;
 				try {
-					Date god = new Date(sdf.parse(dat).getTime());
-					student.setDatumRodjenja(god);
+					 god = new Date(sdf.parse(dat).getTime());
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
+				student.setDatumRodjenja(god);
 				String adresa = Adresa.getText();
 				student.setAdresa(adresa);
 				String broj = Broj.getText();
@@ -245,11 +235,17 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 				String indeks = Indeks.getText();
 				student.setBrIndeksa(indeks);
 				String prosecnaOcena = ProsecnaOcena.getText();
-				float prosecna = Float.parseFloat(prosecnaOcena);
+				double prosecna = Double.parseDouble(prosecnaOcena);
 				student.setProsecnaOcena(prosecna);
 				String godString = GodUpis.getText();
-				int godUpis = Integer.parseInt(godString);
-				student.setGodinaUpisa(godUpis);
+				Date god1 = null;
+				try {
+					 god1 = new Date(sdf.parse(godString).getTime());
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+				student.setGodinaUpisa(god1);
+				student.setTrenutnaGodinaStudija(cb.getSelectedIndex() + 1);
 				student.setSpisakPredmeta(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getSpisakPredmeta());
 				
 				boolean omoguciIzmenu = true;

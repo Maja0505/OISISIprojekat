@@ -65,7 +65,7 @@ public class DijalogDodajStudentaNaPredmet {
 				
 				String indeksStudentaKojiSeUnosi = null;
 				int rowSelectedIndex = 0;
-				if(!Indeks.getText().equals("") && !Indeks.getText().equals("Validan format je xxBROJ-20YY...")) {
+				if(!Indeks.getText().equals("") && !Indeks.getText().equals("Nije pravilan unos indeska")) {
 						 indeksStudentaKojiSeUnosi = Indeks.getText();
 					for(int i = 0;i<BazaStudenata.getInstance().getStudenti().size();i++) {
 						if(indeksStudentaKojiSeUnosi.equals(BazaStudenata.getInstance().getStudenti().get(i).getBrIndeksa()) 

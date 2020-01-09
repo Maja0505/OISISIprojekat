@@ -22,7 +22,7 @@ public class Student implements Serializable{
 	private String brojTelefona;
 	private String email;
 	private String brIndeksa;
-	private int godinaUpisa;
+	private Date godinaUpisa;
 	private int trenutnaGodinaStudija;
 	private double prosecnaOcena;
 	private List<String> spisakPredmeta;
@@ -34,7 +34,7 @@ public class Student implements Serializable{
 	}
 	
 	public Student(String ime, String prezime, Date datumRodjenja, String adresa, String brojTelefona, String email,
-			String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, double prosecnaOcena,
+			String brIndeksa, Date godinaUpisa, int trenutnaGodinaStudija, double prosecnaOcena,
 			List<String> spisakPredmeta, Status status) {
 		super();
 		this.ime = ime;
@@ -52,33 +52,6 @@ public class Student implements Serializable{
 	}
 
 	
-	
-	public Student(String ime, String prezime, String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija,
-			Status status) {
-		super();
-		this.ime = ime;
-		this.prezime = prezime;
-		this.brIndeksa = brIndeksa;
-		this.godinaUpisa = godinaUpisa;
-		this.trenutnaGodinaStudija = trenutnaGodinaStudija;
-		this.status = status;
-	}
-
-
-
-	public Student(String ime, String prezime, Date datumRodjenja, String adresa, String brIndeksa, int godinaUpisa,
-			int trenutnaGodinaStudija, Status status) {
-		super();
-		this.ime = ime;
-		this.prezime = prezime;
-		this.datumRodjenja = datumRodjenja;
-		this.adresa = adresa;
-		this.brIndeksa = brIndeksa;
-		this.godinaUpisa = godinaUpisa;
-		this.trenutnaGodinaStudija = trenutnaGodinaStudija;
-		this.status = status;
-	}
-
 
 
 	public String getIme() {
@@ -137,11 +110,11 @@ public class Student implements Serializable{
 		this.brIndeksa = brIndeksa;
 	}
 
-	public int getGodinaUpisa() {
+	public Date getGodinaUpisa() {
 		return godinaUpisa;
 	}
 
-	public void setGodinaUpisa(int godinaUpisa) {
+	public void setGodinaUpisa(Date godinaUpisa) {
 		this.godinaUpisa = godinaUpisa;
 	}
 

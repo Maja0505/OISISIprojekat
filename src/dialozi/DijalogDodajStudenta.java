@@ -26,7 +26,6 @@ import javax.swing.JTextField;
 
 import controlleri.StudentiController;
 import listeners.FocusListener;
-import listeners.KeyListener;
 import modeli.BazaStudenata;
 import modeli.Student;
 import modeli.Student.Status;
@@ -85,7 +84,6 @@ public class DijalogDodajStudenta {
 		JTextField Broj = new JTextField();
 		Broj.setName("Broj*");
 		Broj.setPreferredSize(new Dimension(100,30));
-		Broj.addKeyListener(new KeyListener());
 		Broj.addFocusListener(new FocusListener());
 		
 		JTextField Indeks = new JTextField();
@@ -119,17 +117,7 @@ public class DijalogDodajStudenta {
 	    final JComboBox<String> cb = new JComboBox<String>(izbor);
 	    cb.setPreferredSize(new Dimension(100,30));
 		
-	    cb.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int godStud = cb.getSelectedIndex() + 1; //indeksiranje ide od 0
-				student.setTrenutnaGodinaStudija(godStud);
-			}
-		});
 	    
-	    if(student.getGodinaUpisa() == 0)
-	    	student.setTrenutnaGodinaStudija(1); // ako nije izabrao ni jednu podrazumevana je prva godina
 	    
 	    JRadioButton button1 = new JRadioButton("Budzet");
 	    JRadioButton button2 = new JRadioButton("Samofinansiranje");
@@ -179,31 +167,31 @@ public class DijalogDodajStudenta {
 			
 				
 				
-				if(!Ime.getText().equals("")  && !Ime.getText().equals("Nije validan unos imena...")) {
+				if(!Ime.getText().equals("")  && !Ime.getText().equals("Nepravilan unos imena")) {
 					onemoguciTxtField++;
 					}
-				if(!Prz.getText().equals("")  && !Prz.getText().equals("Nije validan unos prezimena...")) {
+				if(!Prz.getText().equals("")  && !Prz.getText().equals("Nepravilan unos prezimena")) {
 					onemoguciTxtField++;
 					}
-				if(!Dat.getText().equals("") && !Dat.getText().equals("Nije validan format datuma (ocekivani 'YYYY - MM - DD')...")) {
+				if(!Dat.getText().equals("") && !Dat.getText().equals("Nepravilan unos datuma")) {
 					onemoguciTxtField++;
 					}
-				if(!Adresa.getText().equals("") && !Adresa.getText().equals("Nije valian unos adrese...")) {
+				if(!Adresa.getText().equals("") && !Adresa.getText().equals("Nepravilan unos adrese")) {
 					onemoguciTxtField++;
 					}
-				if(!Broj.getText().equals("") && !Broj.getText().equals("Validan format je +381*********...")) {
+				if(!Broj.getText().equals("") && !Broj.getText().equals("Nepravilan unos broja telefona")) {
 					onemoguciTxtField++;
 					}
-				if(!Email.getText().equals("") && !Email.getText().equals("Nije validan format za email...")) {
+				if(!Email.getText().equals("") && !Email.getText().equals("Nepravilan unos email-a")) {
 					onemoguciTxtField++;
 					}
-				if(!Indeks.getText().equals("") && !Indeks.getText().equals("Validan format je xxBROJ-20YY...")) {
+				if(!Indeks.getText().equals("") && !Indeks.getText().equals("Nepravilan unos indeksa")) {
 					onemoguciTxtField++;
 				}
-				if(!ProsecnaOcena.getText().equals("") && !ProsecnaOcena.getText().equals("Ocene su u rasponu od 6 - 10...")) {
+				if(!ProsecnaOcena.getText().equals("") && !ProsecnaOcena.getText().equals("Nepravilan unos prosecne ocene")) {
 					onemoguciTxtField++;
 					}
-				if(!GodUpis.getText().equals("") && !GodUpis.getText().equals("Nije validan unos...")) {
+				if(!GodUpis.getText().equals("") && !GodUpis.getText().equals("Nepravilan unos datuma upisa")) {
 					onemoguciTxtField++;
 					}
 				
@@ -215,13 +203,14 @@ public class DijalogDodajStudenta {
 				String prz = Prz.getText();
 				student.setPrezime(prz);
 				String dat = Dat.getText();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.");
+				Date god = null;
 				try {
-					Date god = new Date(sdf.parse(dat).getTime());
-					student.setDatumRodjenja(god);
+					 god = new Date(sdf.parse(dat).getTime());
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
+                student.setDatumRodjenja(god);
 				String adresa = Adresa.getText();
 				student.setAdresa(adresa);
 				String broj = Broj.getText();
@@ -231,11 +220,18 @@ public class DijalogDodajStudenta {
 				String indeks = Indeks.getText();
 				student.setBrIndeksa(indeks);
 				String prosecnaOcena = ProsecnaOcena.getText();
-				float prosecna = Float.parseFloat(prosecnaOcena);
+				double prosecna = Double.parseDouble(prosecnaOcena);
 				student.setProsecnaOcena(prosecna);
 				String godString = GodUpis.getText();
-				int godUpis = Integer.parseInt(godString);
-				student.setGodinaUpisa(godUpis);
+				Date god2 = null;
+				try {
+					 god2 = new Date(sdf.parse(godString).getTime());
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+				student.setGodinaUpisa(god2);
+				
+				student.setTrenutnaGodinaStudija(cb.getSelectedIndex() + 1);
 				
 				boolean mogucUnos = true;
 				

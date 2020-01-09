@@ -56,7 +56,7 @@ private static int onemoguciTxtField = 0;
 		JLabel broj = new JLabel("Broj telefona*");
 		JLabel adresaKancelarije = new JLabel("Adresa kancelarije*");
 		JLabel email = new JLabel("Email* ");
-		JLabel brojLicne = new JLabel("Broj licne karte(JMBG)* ");
+		JLabel brojLicne = new JLabel("Broj licne karte*");
 		JLabel titula = new JLabel("Titula* ");
 		JLabel zvanje = new JLabel("Zvanje* ");
 		
@@ -72,7 +72,9 @@ private static int onemoguciTxtField = 0;
 		Prz.setPreferredSize(new Dimension(100,30));
 		Prz.addFocusListener(new FocusListener());
 		
-		JTextField Dat = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getDatum_rodjenja().toString());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.");
+		
+		JTextField Dat = new JTextField(sdf.format(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getDatum_rodjenja()));
 		Dat.setName("DatProf*");
 		Dat.setPreferredSize(new Dimension(100,30));
 		Dat.addFocusListener(new FocusListener());
@@ -85,7 +87,6 @@ private static int onemoguciTxtField = 0;
 		JTextField Broj = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getKontaktTelefon());
 		Broj.setName("BrojProf*");
 		Broj.setPreferredSize(new Dimension(100,30));
-		Broj.addKeyListener(new KeyListener());
 		Broj.addFocusListener(new FocusListener());
 		
 		JTextField AdresaKancelarije = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getAdresaKancelarije());
@@ -102,6 +103,7 @@ private static int onemoguciTxtField = 0;
 		BrojLicne.setName("BrojLicneProf*");
 		BrojLicne.setPreferredSize(new Dimension(100,30));
 		BrojLicne.addFocusListener(new FocusListener());
+		BrojLicne.addKeyListener(new KeyListener());
 		
 		JTextField Titula = new JTextField(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getTitula());
 		Titula.setName("TitulaProf*");
@@ -125,34 +127,34 @@ private static int onemoguciTxtField = 0;
 			public void actionPerformed(ActionEvent e) {
 			
 				
-				if(!Ime.getText().equals("")  && !Ime.getText().equals("Nije validan unos imena...")) {
+				if(!Ime.getText().equals("")  && !Ime.getText().equals("Nepravilan unos imena")) {
 					onemoguciTxtField++;
 					}
-				if(!Prz.getText().equals("")  && !Prz.getText().equals("Nije validan unos prezimena...")) {
+				if(!Prz.getText().equals("")  && !Prz.getText().equals("Nepravilan unos prezimena")) {
 					onemoguciTxtField++;
 					}
-				if(!Dat.getText().equals("") && !Dat.getText().equals("Nije validan format datuma (ocekivani 'YYYY - MM - DD')...")) {
+				if(!Dat.getText().equals("") && !Dat.getText().equals("Nepravilan unos datuma rodjenja")) {
 					onemoguciTxtField++;
 					}
-				if(!Adresa.getText().equals("") && !Adresa.getText().equals("Nije valian unos adrese...")) {
+				if(!Adresa.getText().equals("") && !Adresa.getText().equals("Nepravilan unos adrese stanovanja")) {
 					onemoguciTxtField++;
 					}
-				if(!Broj.getText().equals("") && !Broj.getText().equals("Validan format je +381*********...")) {
+				if(!Broj.getText().equals("") && !Broj.getText().equals("Nepravilan unos broja telefona")) {
 					onemoguciTxtField++;
 					}
-				if(!Email.getText().equals("") && !Email.getText().equals("Nije validan format za email...")) {
+				if(!Email.getText().equals("") && !Email.getText().equals("Nepravilan unos email-a")) {
 					onemoguciTxtField++;
 					}
-				if(!AdresaKancelarije.getText().equals("") && !AdresaKancelarije.getText().equals("Nije valian unos adrese kancelarije...")) {
+				if(!AdresaKancelarije.getText().equals("") && !AdresaKancelarije.getText().equals("Nepravilan unos adrese kancelarije")) {
 					onemoguciTxtField++;
 				}
-				if(!BrojLicne.getText().equals("") && !BrojLicne.getText().equals("Nije validan unos...")) {
+				if(!BrojLicne.getText().equals("") && !BrojLicne.getText().equals("Nepravilan unos licne karte")) {
 					onemoguciTxtField++;
 					}
-				if(!Titula.getText().equals("") && !Titula.getText().equals("Nije validan unos titule...")) {
+				if(!Titula.getText().equals("") && !Titula.getText().equals("Nepravilan unos titule")) {
 					onemoguciTxtField++;
 					}
-				if(!Zvanje.getText().equals("") && !Zvanje.getText().equals("Nije validan unos zvanja...")) {
+				if(!Zvanje.getText().equals("") && !Zvanje.getText().equals("Nepravilan unos zvanja")) {
 					onemoguciTxtField++;
 					}
 				
@@ -161,7 +163,7 @@ private static int onemoguciTxtField = 0;
 				String ime = Ime.getText();
 				String prz = Prz.getText();
 				String dat = Dat.getText();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.");
 				Date god = null;
 				try {
 					 god = new Date(sdf.parse(dat).getTime());

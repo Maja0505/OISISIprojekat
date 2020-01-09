@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,6 +114,7 @@ public class BazaStudenata {
 	
 	public String getValueAt(int row, int column) {
 		Student student = this.studenti.get(row);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.");
 		switch (column) {
 		case 0:
 			return student.getBrIndeksa();
@@ -121,11 +123,11 @@ public class BazaStudenata {
 		case 2:
 			return student.getPrezime();
 		case 3:
-			return Integer.toString(student.getGodinaUpisa());
+			return sdf.format(student.getGodinaUpisa());
 		case 4:
 			return Integer.toString(student.getTrenutnaGodinaStudija());
 		case 5:
-			return student.getDatumRodjenja().toString();
+			return sdf.format(student.getDatumRodjenja());
 		case 6:
 			return Double.toString(student.getProsecnaOcena());
 		case 7:
@@ -169,7 +171,7 @@ public class BazaStudenata {
 	
 //motoda za izmenu studenta u bazi
 	public void izmeniStudenta(String ime, String prezime, Date datumRodjenja, String adresa, String brojTelefona, String email,
-			String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, double prosecnaOcena,
+			String brIndeksa, Date godinaUpisa, int trenutnaGodinaStudija, double prosecnaOcena,
 			List<String> spisakPredmeta, Status status) {		
 		
 		Student s = BazaStudenata.getInstance().getRow(StudentiJTable.selektovanaVrsta);

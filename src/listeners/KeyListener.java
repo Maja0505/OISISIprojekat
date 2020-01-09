@@ -31,7 +31,7 @@ public class KeyListener implements java.awt.event.KeyListener {
 		}
 		char c = e.getKeyChar();
 		if (c != '0' && c != '1' && c != '2' && c != '3' && c != '4' && c != '5' && c != '6' && c != '7' && c != '8'
-				&& c != '9' && c != '+') {
+				&& c != '9') {
 			JOptionPane.showMessageDialog(null, "Dozvoljen je unos samo brojeva!");
 			JTextField txt = (JTextField) e.getComponent();
 			txt.setText(txt.getText().substring(0, txt.getText().length() - 1));
