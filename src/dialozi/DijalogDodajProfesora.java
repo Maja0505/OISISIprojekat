@@ -308,12 +308,12 @@ public class DijalogDodajProfesora {
 		
 		gbc.gridx = 1;
 		gbc.gridy = 10;
-		gbc.insets = new Insets(50, 300, 0, 40);
+		gbc.insets = new Insets(50, 320, 0, 30);
 		panel.add(potvrda, gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 10;
-		gbc.insets = new Insets(50, 170, 0, 150);
+		gbc.insets = new Insets(50, 170, 0, 170);
 		panel.add(odustanak, gbc);
 		
 		dodajProfesora.setVisible(vidljiv);

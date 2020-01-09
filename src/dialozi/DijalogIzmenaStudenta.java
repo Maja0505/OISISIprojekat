@@ -250,8 +250,9 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 				
 				boolean omoguciIzmenu = true;
 				
+				
 				for(int i = 0;i < BazaStudenata.getInstance().getStudenti().size();i++) {
-					if(!indeks.equals(BazaStudenata.getInstance().getStudenti().get(StudentiJTable.selektovanaVrsta).getBrIndeksa())) {
+					if(!indeks.equals(BazaStudenata.getInstance().getStudenti().get(selektovanaVrsta).getBrIndeksa())) {
 						if(indeks.equals(BazaStudenata.getInstance().getStudenti().get(i).getBrIndeksa())) {
 							omoguciIzmenu = false;
 							break;
