@@ -77,7 +77,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 			} 
 		
 		 if (txt.getName().equals("Broj*")) {
-				Pattern regExp = Pattern.compile("(\\+381|[0])[1-9]{2,2}[/][0-9]{3,4}[-][0-9]{3,3}$");
+				Pattern regExp = Pattern.compile("([+][0-9]{2,3}|[0])[1-9]{2,2}[/][0-9]{3,4}[-][0-9]{3,3}$");
 				Matcher m = regExp.matcher(txt.getText());
 				if(!txt.getText().trim().equals("")) {
 					if( txt.getText().trim().equals("Nepravilan unos broja telefona") || !m.matches()) {
@@ -198,7 +198,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 		} 
 	
 	 if (txt.getName().equals("BrojProf*")) {
-			Pattern regExp = Pattern.compile(" (\\+381|[0])[1-9]{2,2}[/][0-9]{3,4}[-][0-9]{3,3}$");
+			Pattern regExp = Pattern.compile("([+][0-9]{2,3}|[0])[1-9]{2,2}[/][0-9]{3,4}[-][0-9]{3,3}$");
 			Matcher m = regExp.matcher(txt.getText());
 			if(!txt.getText().trim().equals("")) {
 				if( txt.getText().trim().equals("Nepravilan unos broja telefona") || !m.matches()) {

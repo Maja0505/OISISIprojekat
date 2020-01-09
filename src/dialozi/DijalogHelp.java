@@ -60,7 +60,7 @@ public class DijalogHelp {
 		JLabel indeksOgranicenje = new JLabel("Ocekivani format indeksa : XXBROJ/GODINAUPISA");
 		JLabel datumOgranicenje = new JLabel("Ocekivani format za datume : yyyy.MM.dd.");
 		JLabel adresaOgranicenje = new JLabel("Ocekivani format za adresu : Ulica [broj] , grad");
-		JLabel brojTelefonaOgranicenje = new JLabel("Ocekivani format za broj tel : pb/****-***");
+		JLabel brojTelefonaOgranicenje = new JLabel("Ocekivani format za broj tel : pozivNaBroj**/****-***");
 		
 		JLabel Profesor = new JLabel("PROFESOR");
 		JLabel datumOgranicenje2 = new JLabel("Ocekivani format za datume : yyyy.MM.dd.");
