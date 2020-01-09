@@ -54,7 +54,7 @@ public class MouseListenerProfesori extends MouseAdapter {
 					panel.setBackground(Color.CYAN);
 					predmeti.add(panel,BorderLayout.CENTER);
 		        
-					String nizSifriPredmeta[] = new String[BazaProfesora.getInstance().getProfesori().get(row).getSpisakPredmeta().size()]; 
+					String[] nizSifriPredmeta = new String[BazaProfesora.getInstance().getProfesori().get(row).getSpisakPredmeta().size()]; 
 		    
 					//popunjavanje niza svim predmetima na kojima profesor predaje
 					for(int i = 0;i<BazaProfesora.getInstance().getProfesori().get(row).getSpisakPredmeta().size();i++) {
