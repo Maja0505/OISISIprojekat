@@ -1,5 +1,11 @@
 package modeli;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +29,14 @@ public class BazaStudenata {
 	
 	private List<Student> studenti;
 	private List<String> kolone;
+	private File file;
 	
 	private BazaStudenata() {
 		
-	
-		initStudente(); 
+		this.studenti = new ArrayList<Student>();
+	    this.file = new File("studenti.txt");
+	    if(file.length() != 0)
+	    	initStudente(); 
 
 		this.kolone = new ArrayList<String>();
 		this.kolone.add("Indeks");
@@ -41,16 +50,35 @@ public class BazaStudenata {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("unchecked")
 	private void initStudente() {
+			
+		ArrayList<?> listaStudenti = null;
 		
-		this.studenti = new ArrayList<Student>();
-		List<String> listaPredmeta = new ArrayList<String>();
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+			listaStudenti = (ArrayList<Object>) ois.readObject();
+			ois.close();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		
-		studenti.add(new Student("Nemanja", "Jevtic", new java.sql.Date(98,9,13), "Mali Zvornik", "+381645656946", "njevtic998@gmail.com", "RA131-2017", 2017, 3, 8.96, listaPredmeta, Status.B));
-		studenti.add(new Student("Maja","Tomic",new java.sql.Date(98,9,13),"Novi Sad Vojvode Supljikca 19","+38164555511","majatomic0212@gmail.com","RA155-2017",2017, 3,9.5,listaPredmeta, Status.B));
-		studenti.add(new Student("Ignjat","Gacinovic",new java.sql.Date(98,4,14),"Kraljevo Petra Kocica 14a","+38164522511","ignjaBatica022@gmail.com","RA157-2017",2015, 4,7.89,listaPredmeta,Status.S));
+		if(studenti != null) {
+			for(Object s : listaStudenti)
+				this.studenti.add((Student) s);
+		}
+		
+	}
 	
+	public void saveStudente() {
+		 file = new File("studenti.txt");
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+			oos.writeObject(studenti);
+			oos.close();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<Student> getStudenti() {
@@ -126,6 +154,7 @@ public class BazaStudenata {
 	public void dodajStudenta(Student s) {
 		this.studenti.add(s);
 		this.popunjavanjeListePredmeta();
+		BazaPredmeta.getInstance().popunjavanjeListeStudenata();
 	}
 
 //metoda za brisanje iz baze	

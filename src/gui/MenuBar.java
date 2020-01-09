@@ -21,6 +21,7 @@ import dialozi.DijalogHelp;
 import dialozi.DijalogIzmenaPredmeta;
 import dialozi.DijalogIzmenaProfesora;
 import dialozi.DijalogIzmenaStudenta;
+import modeli.BazaStudenata;
 import tabele.PredmetiJTable;
 import tabele.ProfesoriJTable;
 import tabele.StudentiJTable;
@@ -69,6 +70,7 @@ public class MenuBar extends JMenuBar {
 			//zatvara JFrame prozor
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				BazaStudenata.getInstance().saveStudente();
 				MainFrame.getInstance().dispose();
 			}
 		});

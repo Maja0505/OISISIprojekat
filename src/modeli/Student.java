@@ -1,11 +1,17 @@
 package modeli;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
 
 
-public class Student {
+public class Student implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public	enum Status {B,S};
 	
