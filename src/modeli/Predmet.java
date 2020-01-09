@@ -66,7 +66,14 @@ public class Predmet implements Serializable {
 	}
 	
 	public void dodajStudentaUlistu(String indeks) {
-		this.spisakStudenata.add(indeks);
+		int red = 0;
+		for(int i = 0;i < BazaStudenata.getInstance().getStudenti().size();i++) {
+			if(indeks.equals(BazaStudenata.getInstance().getStudenti().get(i).getBrIndeksa())) {
+				red = i;
+				break;
+			}
+		}
+		this.spisakStudenata.add(indeks + "," + BazaStudenata.getInstance().getStudenti().get(red).getIme() + " " + BazaStudenata.getInstance().getStudenti().get(red).getPrezime());
 	}
 	
 	public void obrisiStudentaIzListe(int index) {
