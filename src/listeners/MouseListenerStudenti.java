@@ -116,12 +116,10 @@ public class MouseListenerStudenti extends MouseAdapter {
 				Email.setFont(f);
 				JLabel adresa = new JLabel("Adresa :");
 				adresa.setFont(f);
-				JLabel datum = new JLabel("Datum rodjenja :");
-				datum.setFont(f);
+				
 				JLabel Adresa = new JLabel(BazaStudenata.getInstance().getStudenti().get(row).getAdresa());
 				Adresa.setFont(f);
-				JLabel Datum = new JLabel(BazaStudenata.getInstance().getStudenti().get(row).getDatumRodjenja().toString());
-				Datum.setFont(f);
+				
 				
 				
 				GridBagConstraints gbc = new GridBagConstraints();
@@ -154,12 +152,7 @@ public class MouseListenerStudenti extends MouseAdapter {
 				gbc.gridy = 2;
 				panel.add(Adresa,gbc);
 				
-				gbc.gridx = 0;
-				gbc.gridy = 3;
-				panel.add(datum,gbc);
-				gbc.gridx = 1;
-				gbc.gridy = 3;
-				panel.add(Datum,gbc);
+				
 	
 		   	     
 		   	  	predmeti.setVisible(true);

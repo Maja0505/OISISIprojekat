@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
+import dialozi.DijalogAbout;
 import dialozi.DijalogBrisanjePredmeta;
 import dialozi.DijalogBrisanjeProfesora;
 import dialozi.DijalogBrisanjeStudenta;
@@ -98,21 +99,21 @@ public class MenuBar extends JMenuBar {
 		delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
 
 		editItem.addActionListener(new ActionListener() {
-			// iskace odgovarajuvi dijalog za izmenu
+			// iskace odgovarajuvi dijalog za izmenu ukoliko je selektovan entitet
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (MainFrame.tab == 0) {
-					if (StudentiJTable.selektovanStudent)
+					if (StudentiJTable.selektovanaVrsta != -1)
 						new DijalogIzmenaStudenta(true);
 					else
 						JOptionPane.showMessageDialog(null, "Niste oznacili studenta za izmenu");
 				} else if (MainFrame.tab == 1) {
-					if (ProfesoriJTable.selektovanProfesor)
+					if (ProfesoriJTable.selektovanaVrsta != -1)
 						new DijalogIzmenaProfesora(true);
 					else
 						JOptionPane.showMessageDialog(null, "Niste oznacili profesora za izmenu");
 				} else if (MainFrame.tab == 2) {
-					if (PredmetiJTable.selektovanPredmet)
+					if (PredmetiJTable.selektovanaVrsta != -1)
 						new DijalogIzmenaPredmeta(true);
 					else
 						JOptionPane.showMessageDialog(null, "Niste oznacili predmet za izmenu");
@@ -121,21 +122,21 @@ public class MenuBar extends JMenuBar {
 		});
 
 		delete.addActionListener(new ActionListener() {
-			// iskace odgovarajuvi dijalog za brisanje
+			// iskace odgovarajuvi dijalog za brisanje ukoliko je selektovan entitet
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (MainFrame.tab == 0) {
-					if (StudentiJTable.selektovanStudent)
+					if (StudentiJTable.selektovanaVrsta != -1)
 						new DijalogBrisanjeStudenta(true);
 					else
 						JOptionPane.showMessageDialog(null, "Niste oznacili studenta za brisanje");
 				} else if (MainFrame.tab == 1) {
-					if (ProfesoriJTable.selektovanProfesor)
+					if (ProfesoriJTable.selektovanaVrsta != -1)
 						new DijalogBrisanjeProfesora(true);
 					else
 						JOptionPane.showMessageDialog(null, "Niste oznacili profesora za brisanje");
 				} else if (MainFrame.tab == 2) {
-					if (PredmetiJTable.selektovanPredmet)
+					if (PredmetiJTable.selektovanaVrsta != -1)
 						new DijalogBrisanjePredmeta(true);
 					else
 						JOptionPane.showMessageDialog(null, "Niste oznacili predmet za brisanje");
@@ -162,7 +163,15 @@ public class MenuBar extends JMenuBar {
 		// Acceleratori za help i about
 		helpItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
 		aboutItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, ActionEvent.CTRL_MASK));
-
+		
+		aboutItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new DijalogAbout();
+			}
+		});
+		
 		helpItem.addActionListener(new ActionListener() {
 			// iskace dijalog za pomoc
 			@Override

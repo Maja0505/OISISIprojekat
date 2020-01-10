@@ -36,6 +36,7 @@ public class StudentiJTable extends JTable {
 		this.setForeground(Color.BLACK);
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
+		this.getTableHeader().setReorderingAllowed(false);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelStudenti());
 		this.setShowHorizontalLines(false);
@@ -54,11 +55,9 @@ public class StudentiJTable extends JTable {
 		Component c = super.prepareRenderer(renderer, row, column);
 		if (isRowSelected(row)) {
 			c.setBackground(Color.CYAN);
-			selektovanStudent = true;
 			selektovanaVrsta = row;
 		} else {
 			c.setBackground(Color.WHITE);
-			selektovanStudent = false;
 		}
 		return c;
 	}
