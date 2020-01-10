@@ -31,6 +31,7 @@ public class ProfesoriJTable extends JTable {
 		this.setForeground(Color.BLACK);
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
+		this.getTableHeader().setReorderingAllowed(false);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelProfesori());
 		this.setShowHorizontalLines(false);

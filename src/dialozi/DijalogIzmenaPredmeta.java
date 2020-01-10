@@ -64,7 +64,9 @@ public class DijalogIzmenaPredmeta {
 		String[] izborProfesora = new String[BazaProfesora.getInstance().getProfesori().size()];
 
 		for (int i = 0; i < BazaProfesora.getInstance().getProfesori().size(); i++) {
-			izborProfesora[i] = BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte()+","+BazaProfesora.getInstance().getProfesori().get(i).getIme().concat(" ").concat(BazaProfesora.getInstance().getProfesori().get(i).getPrezime());
+			izborProfesora[i] = BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte() + ","
+					+ BazaProfesora.getInstance().getProfesori().get(i).getIme().concat(" ")
+							.concat(BazaProfesora.getInstance().getProfesori().get(i).getPrezime());
 		}
 		final JComboBox<String> Profesor = new JComboBox<String>(izborProfesora);
 		Profesor.setPreferredSize(new Dimension(100, 30));
@@ -116,6 +118,14 @@ public class DijalogIzmenaPredmeta {
 					String naziv = NazivPredmeta.getText();
 					int semestar = semestarCB.getSelectedIndex() + 1;
 					int godinaIzvodjenja = godinaIzvodjenjaCB.getSelectedIndex() + 1;
+					if (semestar != godinaIzvodjenja * 2 && semestar != godinaIzvodjenja * 2 - 1) {
+						JOptionPane.showMessageDialog(null,
+								"Za godinu " + godinaIzvodjenja + " morate izabrati ili " + (godinaIzvodjenja * 2 - 1)
+										+ " ili " + godinaIzvodjenja * 2 + " semestar, ili promenite godinu");
+						onemoguciTxtField = 0;
+						return;
+					}
+
 					String profesor = Profesor.getSelectedItem().toString();
 					List<String> lista = new ArrayList<String>();
 					lista = BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSpisakStudenata();
