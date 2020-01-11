@@ -182,18 +182,21 @@ public class MainFrame extends JFrame {
 					sorter.setSortable(8, false);
 					sorter.setSortable(9, false);
 					getTabelaStudenata().setRowSorter(sorter);
+					StudentiJTable.selektovanaVrsta = -1;
 				}
 				if (tab == 1) {
 					TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(getTabelaProfesora().getModel());
 					sorter.setSortable(3, false);
 					sorter.setSortable(4, false);
 					getTabelaProfesora().setRowSorter(sorter);
+					ProfesoriJTable.selektovanaVrsta = -1;
 				}
 				if (tab == 2) {
 					TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(getTabelaPredmeta().getModel());
 					sorter.setSortable(4, false);
 					sorter.setSortable(5, false);
 					getTabelaPredmeta().setRowSorter(sorter);
+					PredmetiJTable.selektovanaVrsta = -1;
 				}
 			}
 		});

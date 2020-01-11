@@ -210,8 +210,7 @@ public class ToolBar extends JToolBar {
 							String nazivKolone;
 							String tekst = null;
 							@SuppressWarnings("unchecked")
-							TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) MainFrame.getInstance()
-									.getTabelaStudenata().getRowSorter();
+							TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) MainFrame.getInstance().getTabelaStudenata().getRowSorter();
 							List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(2);
 							for (int i = 0; i < kolone.length; i++) {
 								String[] podela2 = kolone[i].split(":");
@@ -255,26 +254,29 @@ public class ToolBar extends JToolBar {
 									} else {
 										JOptionPane.showMessageDialog(null,
 												"Ne postoji kolona " + nazivKolone + " u tabeli predmeta", "Greska", 0);
-										break;
+										return;
 									}
-
-									sorter = new TableRowSorter<TableModel>(
-											MainFrame.getInstance().getTabelaStudenata().getModel());
-									sorter.setRowFilter(RowFilter.andFilter(filters));
-
-									MainFrame.getInstance().getTabelaStudenata().setRowSorter(sorter);
-									textField.setText("");
 
 								} else {
 									JOptionPane.showMessageDialog(null,
 											"Neispravan format pretrage pravilno [Ime:******;Prezime:*****;...]");
+									return;
 								}
 
 							}
+							
+							sorter = new TableRowSorter<TableModel>(
+									MainFrame.getInstance().getTabelaStudenata().getModel());
+							sorter.setRowFilter(RowFilter.andFilter(filters));
 
+							MainFrame.getInstance().getTabelaStudenata().setRowSorter(sorter);
+							textField.setText("");
+							
+							
 						} else {
 							JOptionPane.showMessageDialog(null,
 									"Neispravan format pretrage pravilno [Ime:******;Prezime:*****;...]");
+								return;
 						}
 
 					} else {

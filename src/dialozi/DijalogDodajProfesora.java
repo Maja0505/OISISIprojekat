@@ -27,6 +27,7 @@ import listeners.FocusListener;
 import listeners.KeyListener;
 import modeli.BazaProfesora;
 import modeli.Profesor;
+import tabele.ProfesoriJTable;
 
 public class DijalogDodajProfesora {
 
@@ -206,6 +207,7 @@ public class DijalogDodajProfesora {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				onemoguciTxtField = 0;
+				ProfesoriJTable.selektovanaVrsta = -1;
 				dodajProfesora.dispose();
 			}
 		});

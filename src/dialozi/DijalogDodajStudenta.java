@@ -29,6 +29,7 @@ import listeners.FocusListener;
 import modeli.BazaStudenata;
 import modeli.Student;
 import modeli.Student.Status;
+import tabele.StudentiJTable;
 
 public class DijalogDodajStudenta {
 
@@ -264,6 +265,7 @@ public class DijalogDodajStudenta {
 					
 				StudentiController.getInstance().dodajStudenta(student);
 				onemoguciTxtField = 0;
+				StudentiJTable.selektovanaVrsta = -1;
 				dodajStudenta.dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "Vec postoji takav student");

@@ -77,7 +77,7 @@ public class MenuBar extends JMenuBar {
 				BazaStudenata.getInstance().saveStudente();
 				BazaPredmeta.getInstance().savePredmete();
 				BazaProfesora.getInstance().saveProfesore();
-				MainFrame.getInstance().dispose();
+				System.exit(0);
 			}
 		});
 

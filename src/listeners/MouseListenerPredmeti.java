@@ -124,10 +124,13 @@ public class MouseListenerPredmeti extends MouseAdapter {
 						@Override
 						public void actionPerformed(ActionEvent arg0) {
 							String string = (String) list.getSelectedValue();
+						
+					if(string != null)
+						{
 							String[] niz = string.split(",");
 							String indeks = niz[0];
 							int studentKojiSeBrise = 0;
-					if(indeks != null) {		
+						
 							for(int i = 0;i < BazaPredmeta.getInstance().getPredmeti().get(row).getSpisakStudenata().size();i++) {
 								if(indeks.equals(BazaPredmeta.getInstance().getPredmeti().get(row).getSpisakStudenata().get(i))) {
 									studentKojiSeBrise = i;
