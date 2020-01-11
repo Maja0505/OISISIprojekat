@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui.MainFrame;
 import modeli.Student.Status;
 import tabele.StudentiJTable;
 
@@ -167,6 +168,7 @@ public class BazaStudenata {
 				break;
 			}
 		}
+		BazaPredmeta.getInstance().popunjavanjeListeStudenata();
 	}	
 	
 //motoda za izmenu studenta u bazi
@@ -174,7 +176,8 @@ public class BazaStudenata {
 			String brIndeksa, Date godinaUpisa, int trenutnaGodinaStudija, double prosecnaOcena,
 			List<String> spisakPredmeta, Status status) {		
 		
-		Student s = BazaStudenata.getInstance().getRow(StudentiJTable.selektovanaVrsta);
+		int selektovanaVrsta = MainFrame.getInstance().getTabelaStudenata().getRowSorter().convertRowIndexToModel(StudentiJTable.selektovanaVrsta);
+		Student s = BazaStudenata.getInstance().getRow(selektovanaVrsta);
 
 		s.setIme(ime);
 		s.setPrezime(prezime);
@@ -189,6 +192,8 @@ public class BazaStudenata {
 		s.setProsecnaOcena(prosecnaOcena);
 		s.setSpisakPredmeta(spisakPredmeta);
 		
+		this.popunjavanjeListePredmeta();
+		BazaPredmeta.getInstance().popunjavanjeListeStudenata();
 }
 	
 	public void dodajPredmetStudentu(String sifra,int rowSelectedIndex) {

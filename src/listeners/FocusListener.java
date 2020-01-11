@@ -116,7 +116,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 			}
 		 
 		 if (txt.getName().equals("Prosecna ocena*")) {
-				Pattern regExp = Pattern.compile("([6-9][.][0-9]*|[6789]|10)$");
+				Pattern regExp = Pattern.compile("([6-9][.][0-9]*|[06789]|10)$");
 				Matcher m = regExp.matcher(txt.getText());
 				if(!txt.getText().trim().equals("")) {
 					if( txt.getText().trim().equals("Nepravilan unos prosecne ocene") || !m.matches()) {

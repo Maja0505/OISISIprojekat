@@ -261,6 +261,25 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 				}
 				
 				if(omoguciIzmenu) {
+					
+					if(student.getTrenutnaGodinaStudija() == 1) {
+						if(student.getProsecnaOcena() != 0) {
+							student.setProsecnaOcena(0);
+						}
+					}else {
+						if(student.getProsecnaOcena() == 0) {
+							JOptionPane.showMessageDialog(null, "Student nije prva godina i mora imati prosek");
+							onemoguciTxtField = 0;
+							return;
+						}
+					}
+					
+					if(student.getDatumRodjenja().after(student.getGodinaUpisa())) {
+						JOptionPane.showMessageDialog(null, "Student mora biti rodjen pre upisa");
+						onemoguciTxtField = 0;
+						return;
+					}
+					
 					StudentiController.getInstance().izmeniStudenta(student);
 					onemoguciTxtField = 0;
 					izmeniStudenta.dispose();
