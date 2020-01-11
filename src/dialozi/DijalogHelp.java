@@ -10,14 +10,15 @@ import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import gui.MainFrame;
 
 public class DijalogHelp {
 
 	 public DijalogHelp() {
-		 JDialog  dijalogHelp = new ModalniDijalog(new JFrame(), "Pomoc i nacin koriscenja aplikacije", true,1200,700);
+		 JDialog  dijalogHelp = new ModalniDijalog(MainFrame.getInstance(), "Pomoc i nacin koriscenja aplikacije", true,1200,700);
 		 
 		 JLabel statusBar = new JLabel();
 		 dijalogHelp.add(statusBar,BorderLayout.SOUTH);

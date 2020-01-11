@@ -16,13 +16,13 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controlleri.ProfesoriController;
+import gui.MainFrame;
 import listeners.FocusListener;
 import listeners.KeyListener;
 import modeli.BazaProfesora;
@@ -33,7 +33,7 @@ public class DijalogDodajProfesora {
 	private static int onemoguciTxtField = 0; //onemogucuje dodavanje profesora ako sva polja nisu uneta	
 	
 	public DijalogDodajProfesora(boolean vidljiv) {
-		JDialog  dodajProfesora = new ModalniDijalog(new JFrame(), "Dodaj profesora", true,600,750);
+		JDialog  dodajProfesora = new ModalniDijalog(MainFrame.getInstance(), "Dodaj profesora", true,600,750);
 		
 		
 		JLabel statusBar = new JLabel();

@@ -16,7 +16,6 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,7 +34,7 @@ public class DijalogIzmenaProfesora {
 private static int onemoguciTxtField = 0;
 	
 	public DijalogIzmenaProfesora(boolean vidljiv) {
-		JDialog  izmeniProfesora = new ModalniDijalog(new JFrame(), "Izmena profesora", true,600,750);
+		JDialog  izmeniProfesora = new ModalniDijalog(MainFrame.getInstance(), "Izmena profesora", true,600,750);
 		
 		
 		JLabel statusBar = new JLabel();
@@ -194,6 +193,7 @@ private static int onemoguciTxtField = 0;
 				if(omoguciIzmenu) {
 						ProfesoriController.getInstance().izmeniProfesora(new Profesor(ime, prz, god, adresa, broj, email, adresaKancelarije, brLicne, titula, zvanje, spisakPredmeta));
 						onemoguciTxtField = 0;
+						ProfesoriJTable.selektovanaVrsta = -1;
 						izmeniProfesora.dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "Ne mozes izmeniti taj broj licne karte jer vec postoji");

@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -40,8 +41,10 @@ public class MenuBar extends JMenuBar {
 		super();
 
 		// File
+		Font f = new Font("Serif", Font.BOLD, 17);
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
+		file.setFont(f);
 
 		// dodavanje novog entiteta i zatvaranje aplikacije sa njihovim mnemonicima
 		JMenuItem New = new JMenuItem("New", new ImageIcon("images/plusIcon.jpg"));
@@ -87,7 +90,8 @@ public class MenuBar extends JMenuBar {
 		// Edit
 		JMenu edit = new JMenu("Edit");
 		edit.setMnemonic(KeyEvent.VK_E);
-
+		edit.setFont(f);
+		
 		// Izmena postojeceg i brisanje entiteta sa njihovim mnemonicima
 		JMenuItem editItem = new JMenuItem("Edit", new ImageIcon("images/editIcon.jpg"));
 		JMenuItem delete = new JMenuItem("Delete", new ImageIcon("images/deleteIcon.jpg"));
@@ -153,7 +157,8 @@ public class MenuBar extends JMenuBar {
 		// Help
 		JMenu help = new JMenu("Help");
 		help.setMnemonic(KeyEvent.VK_H);
-
+		help.setFont(f);
+		
 		// Help i delete sa njihovim mnemonicima
 		JMenuItem helpItem = new JMenuItem("Help", new ImageIcon("images/helpIcon.jpg"));
 		JMenuItem aboutItem = new JMenuItem("About", new ImageIcon("images/aboutIcon.jpg"));

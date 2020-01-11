@@ -18,7 +18,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -39,7 +38,7 @@ public class DijalogIzmenaStudenta {
 	private static int onemoguciTxtField = 0;
 	
 	public DijalogIzmenaStudenta(boolean vidljiv) {
-JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", true,600,750);
+JDialog  izmeniStudenta = new ModalniDijalog(MainFrame.getInstance(), "Izmena studenta", true,600,750);
 		
 		
 		JLabel statusBar = new JLabel();
@@ -282,6 +281,7 @@ JDialog  izmeniStudenta = new ModalniDijalog(new JFrame(), "Izmena studenta", tr
 					
 					StudentiController.getInstance().izmeniStudenta(student);
 					onemoguciTxtField = 0;
+					StudentiJTable.selektovanaVrsta = -1;
 					izmeniStudenta.dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "Ne mozes izmeniti taj indeks jer vec postoji");

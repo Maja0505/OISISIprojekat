@@ -17,7 +17,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,6 +24,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import controlleri.StudentiController;
+import gui.MainFrame;
 import listeners.FocusListener;
 import modeli.BazaStudenata;
 import modeli.Student;
@@ -36,7 +36,7 @@ public class DijalogDodajStudenta {
 	private static boolean onemoguciButton = false; //omgucuje potvrdu ukoliko je oznaceno jedno od dugmadi
 	
 	public DijalogDodajStudenta(boolean vidljiv) {
-		JDialog  dodajStudenta = new ModalniDijalog(new JFrame(), "Dodaj studenta", true,600,750);
+		JDialog  dodajStudenta = new ModalniDijalog(MainFrame.getInstance(), "Dodaj studenta", true,600,750);
 		
 		
 		JLabel statusBar = new JLabel();

@@ -125,7 +125,7 @@ public class MainFrame extends JFrame {
 
 		StatusBar statusBar = new StatusBar();
 		this.add(statusBar, BorderLayout.SOUTH);
-		statusBar.setPreferredSize((new Dimension(screenWidth, 25)));
+		statusBar.setPreferredSize((new Dimension(screenWidth, 35)));
 
 		inicijalizacijaTabbedPane();
 		prikaziTabele();

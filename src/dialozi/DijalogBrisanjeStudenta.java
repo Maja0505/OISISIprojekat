@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -22,7 +21,7 @@ import tabele.StudentiJTable;
 public class DijalogBrisanjeStudenta {
 
 	public DijalogBrisanjeStudenta(boolean vidljiv) {
-		JDialog  obrisiStudenta = new ModalniDijalog(new JFrame(), "Brisanje studenta", true,400,200);
+		JDialog  obrisiStudenta = new ModalniDijalog(MainFrame.getInstance(), "Brisanje studenta", true,400,200);
 		
 		
 		JLabel statusBar = new JLabel();
@@ -54,6 +53,7 @@ public class DijalogBrisanjeStudenta {
 			public void actionPerformed(ActionEvent e) {
 				
 				controlleri.StudentiController.getInstance().izbrisiStudenta(selektovanaVrsta);
+				StudentiJTable.selektovanaVrsta = -1;
 				obrisiStudenta.dispose();
 			}
 		});

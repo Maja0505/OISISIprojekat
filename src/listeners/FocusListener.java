@@ -24,7 +24,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 		
 	
 		if (txt.getName().equals("Ime*")) {
-			Pattern regExp = Pattern.compile("[A-Z][a-zA-Z]+$");
+			Pattern regExp = Pattern.compile("[A-Z\\p{InLATIN_EXTENDED_A}][a-zA-Z\\p{InLATIN_EXTENDED_A}]+$");
 			Matcher m = regExp.matcher(txt.getText());
 			if(!txt.getText().trim().equals("")) {
 				if( txt.getText().trim().equals("Nepravilan unos imena") || !m.matches()) {
@@ -37,7 +37,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 		}
 		
 		 if (txt.getName().equals("Prz*")) {
-			Pattern regExp = Pattern.compile("[A-Z][a-zA-Z]+$");
+			Pattern regExp = Pattern.compile("[A-Z\\p{InLATIN_EXTENDED_A}][a-zA-Z\\p{InLATIN_EXTENDED_A}]+$");
 			Matcher m = regExp.matcher(txt.getText());
 			if(!txt.getText().trim().equals("")) {
 				if( txt.getText().trim().equals("Nepravilan unos prezimena") || !m.matches()) {
@@ -64,7 +64,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 			} 
 		
 		 if (txt.getName().equals("Adresa*")) {
-				Pattern regExp = Pattern.compile("[A-Za-z0-9 ]+[,][A-Za-z ]+$");
+				Pattern regExp = Pattern.compile("[A-Za-z0-9 \\p{InLATIN_EXTENDED_A}]+[,][A-Za-z \\p{InLATIN_EXTENDED_A}]+$");
 				Matcher m = regExp.matcher(txt.getText());
 				if(!txt.getText().trim().equals("")) {
 					if( txt.getText().trim().equals("Nepravilan unos adrese") || !m.matches()) {
@@ -145,7 +145,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 //za profesora
 	
 	if (txt.getName().equals("ImeProf*")) {
-		Pattern regExp = Pattern.compile("[A-Z][a-zA-Z]+$");
+		Pattern regExp = Pattern.compile("[A-Z\\p{InLATIN_EXTENDED_A}][a-zA-Z\\p{InLATIN_EXTENDED_A}]+$");
 		Matcher m = regExp.matcher(txt.getText());
 		if(!txt.getText().trim().equals("")) {
 			if( txt.getText().trim().equals("Nepravilan unos imena") || !m.matches()) {
@@ -158,7 +158,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 	}
 	
 	 if (txt.getName().equals("PrzProf*")) {
-		Pattern regExp = Pattern.compile("[A-Z][a-zA-Z]+$");
+		Pattern regExp = Pattern.compile("[A-Z\\p{InLATIN_EXTENDED_A}][a-zA-Z\\p{InLATIN_EXTENDED_A}]+$");
 		Matcher m = regExp.matcher(txt.getText());
 		if(!txt.getText().trim().equals("")) {
 			if( txt.getText().trim().equals("Nepravilan unos prezimena") || !m.matches()) {
@@ -185,7 +185,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 		} 
 	
 	 if (txt.getName().equals("AdresaProf*")) {
-			Pattern regExp = Pattern.compile("[A-Za-z0-9 ]+[,][A-Za-z ]+$");
+			Pattern regExp = Pattern.compile("[A-Za-z0-9 \\p{InLATIN_EXTENDED_A}]+[,][A-Za-z \\p{InLATIN_EXTENDED_A}]+$");
 			Matcher m = regExp.matcher(txt.getText());
 			if(!txt.getText().trim().equals("")) {
 				if( txt.getText().trim().equals("Nepravilan unos adrese stanovanja") || !m.matches()) {
@@ -211,7 +211,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 		}
 	 
 	 if (txt.getName().equals("AdresaProfKanc*")) {
-			Pattern regExp = Pattern.compile("[A-Za-z0-9 ]+[,][A-Za-z ]+[,][A-Za-z0-9 ]+$");
+			Pattern regExp = Pattern.compile("[A-Za-z0-9 \\p{InLATIN_EXTENDED_A}]+[,][A-Za-z \\p{InLATIN_EXTENDED_A}]+[,][A-Za-z0-9 \\p{InLATIN_EXTENDED_A}]+$");
 			Matcher m = regExp.matcher(txt.getText());
 			if(!txt.getText().trim().equals("")) {
 				if( txt.getText().trim().equals("Nepravilan unos adrese kancelarije") || !m.matches()) {
@@ -252,7 +252,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 	 
 	 
 	 if (txt.getName().equals("TitulaProf*")) {
-			Pattern regExp = Pattern.compile("[A-Za-z]+[.]?[ ]?[a-z]+$");
+			Pattern regExp = Pattern.compile("[A-Za-z\\p{InLATIN_EXTENDED_A}]+[.]?[ ]?[a-z\\p{InLATIN_EXTENDED_A}]+$");
 			Matcher m = regExp.matcher(txt.getText());
 			if(!txt.getText().trim().equals("")) {
 				if( txt.getText().trim().equals("Nepravilan unos titule") || !m.matches()) {
@@ -265,7 +265,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 		}
 	 
 	 if (txt.getName().equals("ZvanjeProf*")) {
-			Pattern regExp = Pattern.compile("[A-Za-z ]{1,20}$");
+			Pattern regExp = Pattern.compile("[A-Za-z \\p{InLATIN_EXTENDED_A}]{1,20}$");
 			Matcher m = regExp.matcher(txt.getText());
 			if(!txt.getText().trim().equals("")) {
 				if( txt.getText().trim().equals("Nepravilan unos zvanja") || !m.matches()) {
@@ -294,7 +294,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 		}
 	 
 	 if (txt.getName().equals("Naziv predmeta*")) {
-			Pattern regExp = Pattern.compile("[A-Z][a-z0-9 ]+");
+			Pattern regExp = Pattern.compile("[A-Z\\p{InLATIN_EXTENDED_A}][a-z0-9 \\p{InLATIN_EXTENDED_A}]+");
 			Matcher m = regExp.matcher(txt.getText());
 			if (!txt.getText().trim().equals("")) {
 					if( txt.getText().trim().equals("Nepravilan unos naziva predmeta") || !m.matches()) {
