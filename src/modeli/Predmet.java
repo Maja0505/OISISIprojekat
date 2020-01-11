@@ -15,6 +15,19 @@ public class Predmet implements Serializable {
 	private int godinaIzvodjenjaPredmeta;
 	private String predmetniProfesor;
 	private List<String> spisakStudenata;
+	
+	
+	
+	
+	
+	public Predmet() {
+		super();
+	}
+
+
+
+
+
 	public Predmet(String sifraPredmeta, String nazivPredmet, int semestar, int godinaIzvodjenjaPredmeta,
 			String predmetniProfesor, List<String> spisakStudenata) {
 		super();
@@ -26,41 +39,54 @@ public class Predmet implements Serializable {
 		this.spisakStudenata = spisakStudenata;
 	}
 	
+	
+	
 
 
 	public String getSifraPredmeta() {
 		return sifraPredmeta;
 	}
+	
 	public void setSifraPredmeta(String sifraPredmeta) {
 		this.sifraPredmeta = sifraPredmeta;
 	}
+	
 	public String getNazivPredmet() {
 		return nazivPredmet;
 	}
+	
 	public void setNazivPredmet(String nazivPredmet) {
 		this.nazivPredmet = nazivPredmet;
 	}
+	
 	public int getSemestar() {
 		return semestar;
 	}
+	
 	public void setSemestar(int semestar) {
 		this.semestar = semestar;
 	}
+	
 	public int getGodinaIzvodjenjaPredmeta() {
 		return godinaIzvodjenjaPredmeta;
 	}
+	
 	public void setGodinaIzvodjenjaPredmeta(int godinaIzvodjenjaPredmeta) {
 		this.godinaIzvodjenjaPredmeta = godinaIzvodjenjaPredmeta;
 	}
+	
 	public String getPredmetniProfesor() {
 		return predmetniProfesor;
 	}
+	
 	public void setPredmetniProfesor(String predmetniProfesor) {
 		this.predmetniProfesor = predmetniProfesor;
 	}
+	
 	public List<String> getSpisakStudenata() {
 		return spisakStudenata;
 	}
+	
 	public void setSpisakStudenata(List<String> spisakStudenata) {
 		this.spisakStudenata = spisakStudenata;
 	}

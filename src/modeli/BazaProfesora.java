@@ -157,6 +157,8 @@ public class BazaProfesora {
 		int selektovanaVrsta = MainFrame.getInstance().getTabelaProfesora().getRowSorter().convertRowIndexToModel(ProfesoriJTable.selektovanaVrsta);
 		Profesor p = BazaProfesora.getInstance().getRow(selektovanaVrsta);
 		String staraLicna = p.getBrojLicneKarte();
+		String staroIme = p.getIme();
+		String staroPrezime = p.getPrezime();
 
 		p.setIme(ime);
 		p.setPrezime(prezime);
@@ -170,23 +172,29 @@ public class BazaProfesora {
 		p.setZvanje(zvanje);
 		p.setSpisakPredmeta(spisakPredmeta);
 
-		if (!staraLicna.equals(p.getBrojLicneKarte())) { // ako promenimo licnu kartu mora da se promeni i u predmetima
-															// u koloni predmetni profesor
-
+		if (!staraLicna.equals(p.getBrojLicneKarte()) || !staroIme.equals(p.getIme()) || !staroPrezime.equals(p.getPrezime())) {
+													/* ako promenimo licnu kartu,ime ili prezime mora da se promeni i u predmetima
+															 u koloni predmetni profesor*/
+													 											
 			for (int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size(); i++) {
-				String[] temp = BazaPredmeta.getInstance().getPredmeti().get(i).getPredmetniProfesor().split(",");
-				String lk = temp[0];
-				String naziv = temp[1];
-				if (staraLicna.equals(lk)) {
-
-					BazaPredmeta.getInstance().getPredmeti().get(i)
-							.setPredmetniProfesor(p.getBrojLicneKarte() + "," + naziv);
+				if( BazaPredmeta.getInstance().getPredmeti().get(i).getPredmetniProfesor().contains(",")) {
+					String[] temp = BazaPredmeta.getInstance().getPredmeti().get(i).getPredmetniProfesor().split(",");
+					
+					String lk = temp[0];
+					if (staraLicna.equals(lk)) {
+	
+						BazaPredmeta.getInstance().getPredmeti().get(i)
+								.setPredmetniProfesor(p.getBrojLicneKarte() + "," + p.getIme() + " " + p.getPrezime());
+					}
+	
 				}
 
 			}
-
 		}
-
+		
+		
+		
+		
 	}
 
 	public void dodajPredmetProfesoru(String sifraPredmeta, int rowSelectedIndex) {

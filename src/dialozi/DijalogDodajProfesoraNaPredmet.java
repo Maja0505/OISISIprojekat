@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,7 +29,7 @@ public class DijalogDodajProfesoraNaPredmet {
 	private static boolean omoguci = false;
 	
 	public DijalogDodajProfesoraNaPredmet() {
-		JDialog  dodajProfeosraNaPredmet = new ModalniDijalog(new JFrame(), "Predmet - dodavanje profesora", true,550,300);
+		JDialog  dodajProfeosraNaPredmet = new ModalniDijalog(MainFrame.getInstance(), "Predmet - dodavanje profesora", true,550,300);
 		
 		
 		JLabel statusBar = new JLabel();
@@ -81,6 +80,7 @@ public class DijalogDodajProfesoraNaPredmet {
 						
 						PredmetiController.getInstance().dodajProfeosraNaPredmet(rowSelectedIndex,selektovanaVrsta);
 						ProfesoriController.getInstance().dodajPredmetProfesoru(BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSifraPredmeta(), rowSelectedIndex);
+						PredmetiJTable.selektovanaVrsta = -1;
 						dodajProfeosraNaPredmet.dispose();
 
 					}else {

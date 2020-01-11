@@ -15,9 +15,6 @@ public class MyApp {
 				BazaPredmeta.getInstance();
 				BazaProfesora.getInstance();
 				MainFrame.getInstance(); 
-				BazaStudenata.getInstance().popunjavanjeListePredmeta();
-				BazaPredmeta.getInstance().popunjavanjeListeStudenata();
-				BazaProfesora.getInstance().popunjavanjeListePredmeta();
 	}
 
 }

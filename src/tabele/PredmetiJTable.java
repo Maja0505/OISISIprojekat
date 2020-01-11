@@ -17,7 +17,6 @@ public class PredmetiJTable extends JTable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static boolean selektovanPredmet = false; //da li je vrsta predmeta oznacena
 	public static int selektovanaVrsta=-1;
 	
 	public PredmetiJTable() {
@@ -50,11 +49,9 @@ public class PredmetiJTable extends JTable {
 		Component c = super.prepareRenderer(renderer, row, column);
 		if (isRowSelected(row)) {
 			c.setBackground(Color.CYAN);
-			selektovanPredmet = true;
 			selektovanaVrsta=row;			//pamti selektovanu vrstu
 		} else {
 			c.setBackground(Color.WHITE);
-			selektovanPredmet=false;		//vraca na false,kad nije selektovano nista
 		}
 		return c;
 	}

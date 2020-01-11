@@ -146,7 +146,7 @@ public class ToolBar extends JToolBar {
 				if(MainFrame.tab == 0 || MainFrame.tab == 1)
 					JOptionPane.showMessageDialog(null, "Ova opcija je dozvoljena samo u tabu PREDMETI");
 				if (MainFrame.tab == 2)
-					if (PredmetiJTable.selektovanPredmet)
+					if (PredmetiJTable.selektovanaVrsta != -1)
 						new DijalogDodajStudentaNaPredmet();
 					else
 						JOptionPane.showMessageDialog(null, "Niste oznacili predmet na koji zelite da dodate studenta");
@@ -168,7 +168,7 @@ public class ToolBar extends JToolBar {
 				if(MainFrame.tab == 0 || MainFrame.tab == 1)
 					JOptionPane.showMessageDialog(null, "Ova opcija je dozvoljena samo u tabu PREDMETI");
 				if (MainFrame.tab == 2) {
-					if (PredmetiJTable.selektovanPredmet) {
+					if (PredmetiJTable.selektovanaVrsta != -1) {
 						new DijalogDodajProfesoraNaPredmet();
 					} else {
 						JOptionPane.showMessageDialog(null,

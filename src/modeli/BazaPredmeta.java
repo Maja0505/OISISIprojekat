@@ -212,7 +212,7 @@ public class BazaPredmeta {
 	}
 
 	public void izbrisiProfesora(Predmet p) {
-		p.setPredmetniProfesor("");
+		p.setPredmetniProfesor("NEMA PROFESORA");
 		
 	}
 	

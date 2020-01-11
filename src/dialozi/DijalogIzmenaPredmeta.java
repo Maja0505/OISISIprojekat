@@ -14,7 +14,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,7 +31,7 @@ public class DijalogIzmenaPredmeta {
 	private static int onemoguciTxtField = 0;
 
 	public DijalogIzmenaPredmeta(boolean vidljiv) {
-		JDialog izmeniPredmet = new ModalniDijalog(new JFrame(), "Izmeni predmet", true, 600, 750);
+		JDialog izmeniPredmet = new ModalniDijalog(MainFrame.getInstance(), "Izmeni predmet", true, 600, 750);
 
 		JLabel statusBar = new JLabel();
 		izmeniPredmet.add(statusBar, BorderLayout.SOUTH);
@@ -61,24 +60,26 @@ public class DijalogIzmenaPredmeta {
 		NazivPredmeta.setPreferredSize(new Dimension(100, 30));
 
 		// PremdetniProfesor comboBox
-		String[] izborProfesora = new String[BazaProfesora.getInstance().getProfesori().size()];
+		String[] izborProfesora = new String[BazaProfesora.getInstance().getProfesori().size() + 1];
 
+		izborProfesora[0] = "NEMA PROFESORA";
+		int j=0;
+
+		
 		for (int i = 0; i < BazaProfesora.getInstance().getProfesori().size(); i++) {
-			izborProfesora[i] = BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte() + ","
+			
+			j = i + 1;
+			
+			izborProfesora[j] = BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte() + ","
 					+ BazaProfesora.getInstance().getProfesori().get(i).getIme().concat(" ")
 							.concat(BazaProfesora.getInstance().getProfesori().get(i).getPrezime());
 		}
+		
 		final JComboBox<String> Profesor;
-		if (BazaProfesora.getInstance().getProfesori().size() == 0) {
-			String[] izbor = { "" };
-			Profesor = new JComboBox<String>(izbor);
-			Profesor.setPreferredSize(new Dimension(100, 30));
-
-		} else {
+	
 			Profesor = new JComboBox<String>(izborProfesora);
-
 			Profesor.setPreferredSize(new Dimension(100, 30));
-		}
+			Profesor.setSelectedItem(BazaPredmeta.getInstance().getRow(selektovanaVrsta).getPredmetniProfesor());
 		// Semestar comboBox
 		String[] izbor = { "1 (prvi)", "2 (drugi) ", "3 (treci)", "4 (cetvrti)", "5 (peti)", "6 (sesti) ", "7 (sedmi)",
 				"8 (osmi)", };
@@ -98,6 +99,8 @@ public class DijalogIzmenaPredmeta {
 
 		JButton odustanak = new JButton("Odustanak");
 		JButton potvrda = new JButton("Potvrda");
+		odustanak.setBackground(Color.LIGHT_GRAY);
+		potvrda.setBackground(Color.CYAN);
 
 		odustanak.addActionListener(new ActionListener() {
 
@@ -154,6 +157,7 @@ public class DijalogIzmenaPredmeta {
 					if (omoguciIzmenu) {
 						PredmetiController.getInstance().izmeniPredmet(predmet);
 						onemoguciTxtField = 0;
+						PredmetiJTable.selektovanaVrsta = -1;
 						izmeniPredmet.dispose();
 					} else {
 						JOptionPane.showMessageDialog(null, "Vec postoji takav predmet");

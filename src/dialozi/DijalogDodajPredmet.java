@@ -12,13 +12,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controlleri.PredmetiController;
+import gui.MainFrame;
 import listeners.FocusListener;
 import modeli.BazaPredmeta;
 import modeli.BazaProfesora;
@@ -29,7 +29,7 @@ public class DijalogDodajPredmet {
 	private static int onemoguciTxtField = 0;
 
 	public DijalogDodajPredmet(boolean vidljiv) {
-		JDialog dodajPredmet = new ModalniDijalog(new JFrame(), "Dodaj predmet", true, 600, 750);
+		JDialog dodajPredmet = new ModalniDijalog(MainFrame.getInstance(), "Dodaj predmet", true, 600, 750);
 
 		JLabel statusBar = new JLabel();
 		dodajPredmet.add(statusBar, BorderLayout.SOUTH);
@@ -58,24 +58,24 @@ public class DijalogDodajPredmet {
 		NazivPredmeta.setPreferredSize(new Dimension(100, 30));
 		NazivPredmeta.addFocusListener(new FocusListener());
 
-		String[] izborProfesora = new String[BazaProfesora.getInstance().getProfesori().size()];
-
+		String[] izborProfesora = new String[BazaProfesora.getInstance().getProfesori().size() + 1];
+		
+		izborProfesora[0] = "NEMA PROFESORA";
+		int j=0;
+		
 		for (int i = 0; i < BazaProfesora.getInstance().getProfesori().size(); i++) {
-			izborProfesora[i] = BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte() + ","
+			j = i + 1;
+			izborProfesora[j] = BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte() + ","
 					+ BazaProfesora.getInstance().getProfesori().get(i).getIme().concat(" ")
 							.concat(BazaProfesora.getInstance().getProfesori().get(i).getPrezime());
 		}
+		
 		final JComboBox<String> Profesor;
-		if (BazaProfesora.getInstance().getProfesori().size() == 0) {
-			String[] izbor = { "" };
-			Profesor = new JComboBox<String>(izbor);
-			Profesor.setPreferredSize(new Dimension(100, 30));
-
-		} else {
+	
 			Profesor = new JComboBox<String>(izborProfesora);
 
 			Profesor.setPreferredSize(new Dimension(100, 30));
-		}
+		
 
 		String[] izbor = { "1 (prvi)", "2 (drugi) ", "3 (treci)", "4 (cetvrti)", "5 (peti)", "6 (sesti) ", "7 (sedmi)",
 				"8 (osmi)", };
@@ -90,6 +90,8 @@ public class DijalogDodajPredmet {
 
 		JButton odustanak = new JButton("Odustanak");
 		JButton potvrda = new JButton("Potvrda");
+		 odustanak.setBackground(Color.LIGHT_GRAY);
+		 potvrda.setBackground(Color.CYAN);
 
 		odustanak.addActionListener(new ActionListener() {
 

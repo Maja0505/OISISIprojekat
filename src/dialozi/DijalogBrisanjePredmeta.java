@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -21,7 +20,7 @@ import tabele.PredmetiJTable;
 
 public class DijalogBrisanjePredmeta {
 	public DijalogBrisanjePredmeta(boolean vidljiv) {
-				JDialog  obrisiPredmet = new ModalniDijalog(new JFrame(), "Brisanje predmeta", true,400,200);
+				JDialog  obrisiPredmet = new ModalniDijalog(MainFrame.getInstance(), "Brisanje predmeta", true,400,200);
 				
 				
 				JLabel statusBar = new JLabel();
@@ -61,6 +60,7 @@ public class DijalogBrisanjePredmeta {
 							public void actionPerformed(ActionEvent e) {
 								
 								controlleri.PredmetiController.getInstance().izbrisiPredmet(selektovanaVrsta);
+								PredmetiJTable.selektovanaVrsta = -1;
 								obrisiPredmet.dispose();
 							}
 						});

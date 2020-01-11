@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -22,7 +21,7 @@ import tabele.ProfesoriJTable;
 
 public class DijalogBrisanjeProfesora {
 	public DijalogBrisanjeProfesora(boolean vidljiv) {
-		JDialog  obrisiProfesora = new ModalniDijalog(new JFrame(), "Brisanje profesora", true,400,200);
+		JDialog  obrisiProfesora = new ModalniDijalog(MainFrame.getInstance(), "Brisanje profesora", true,400,200);
 		
 		
 		JLabel statusBar = new JLabel();
@@ -71,6 +70,7 @@ public class DijalogBrisanjeProfesora {
 						}
 						
 						controlleri.ProfesoriController.getInstance().izbrisiProfesora(selektovanaVrsta);
+						ProfesoriJTable.selektovanaVrsta = -1;
 						obrisiProfesora.dispose();
 					}
 		});

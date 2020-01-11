@@ -52,7 +52,7 @@ public class MainFrame extends JFrame {
 		return instance;
 	}
 
-	public MainFrame() throws HeadlessException {
+	private MainFrame() throws HeadlessException {
 
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
@@ -146,22 +146,25 @@ public class MainFrame extends JFrame {
 
 		tabelaStudenata = new StudentiJTable();
 		JScrollPane scrollPane = new JScrollPane(tabelaStudenata);
-		scrollPane.setPreferredSize(new Dimension(1300, 1500));
-		scrollPane.setBorder(new EmptyBorder(60, 50, 30, 40));
+		scrollPane.setPreferredSize(new Dimension(1300, 500));
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setBorder(new EmptyBorder(60, 50, 0, 50));
 
 		tabelaPredmeta = new PredmetiJTable();
 		JScrollPane scrollPane1 = new JScrollPane(tabelaPredmeta);
-		scrollPane1.setPreferredSize(new Dimension(1300, 1500));
-		scrollPane1.setBorder(new EmptyBorder(60, 50, 30, 40));
+		scrollPane1.setPreferredSize(new Dimension(1300, 500));
+		scrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane1.setBorder(new EmptyBorder(60, 50, 0, 50));
 
 		tabelaProfesora = new ProfesoriJTable();
 		JScrollPane scrollPane2 = new JScrollPane(tabelaProfesora);
-		scrollPane2.setPreferredSize(new Dimension(1300, 1500));
-		scrollPane2.setBorder(new EmptyBorder(60, 50, 30, 40));
+		scrollPane2.setPreferredSize(new Dimension(1300, 500));
+		scrollPane2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane2.setBorder(new EmptyBorder(60, 50, 0, 50));
 
-		panel1.add(scrollPane, BorderLayout.SOUTH);
-		panel2.add(scrollPane2, BorderLayout.SOUTH);
-		panel3.add(scrollPane1, BorderLayout.SOUTH);
+		panel1.add(scrollPane);
+		panel2.add(scrollPane2);
+		panel3.add(scrollPane1);
 
 		Font font = new Font("Serif", Font.BOLD, 20);
 		tabbedPane.setFont(font);
