@@ -68,9 +68,17 @@ public class DijalogIzmenaPredmeta {
 					+ BazaProfesora.getInstance().getProfesori().get(i).getIme().concat(" ")
 							.concat(BazaProfesora.getInstance().getProfesori().get(i).getPrezime());
 		}
-		final JComboBox<String> Profesor = new JComboBox<String>(izborProfesora);
-		Profesor.setPreferredSize(new Dimension(100, 30));
-		Profesor.setSelectedItem(BazaPredmeta.getInstance().getRow(selektovanaVrsta).getPredmetniProfesor());
+		final JComboBox<String> Profesor;
+		if (BazaProfesora.getInstance().getProfesori().size() == 0) {
+			String[] izbor = { "" };
+			Profesor = new JComboBox<String>(izbor);
+			Profesor.setPreferredSize(new Dimension(100, 30));
+
+		} else {
+			Profesor = new JComboBox<String>(izborProfesora);
+
+			Profesor.setPreferredSize(new Dimension(100, 30));
+		}
 		// Semestar comboBox
 		String[] izbor = { "1 (prvi)", "2 (drugi) ", "3 (treci)", "4 (cetvrti)", "5 (peti)", "6 (sesti) ", "7 (sedmi)",
 				"8 (osmi)", };

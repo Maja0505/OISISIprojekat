@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import gui.MainFrame;
+import modeli.BazaPredmeta;
+import modeli.BazaProfesora;
 import tabele.ProfesoriJTable;
 
 public class DijalogBrisanjeProfesora {
@@ -58,6 +60,15 @@ public class DijalogBrisanjeProfesora {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						
+						for(int i=0;i<BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getSpisakPredmeta().size();i++) {
+							for(int j=0;j<BazaPredmeta.getInstance().getPredmeti().size();j++) {
+								if(BazaPredmeta.getInstance().getPredmeti().get(j).getSifraPredmeta().equals(BazaProfesora.getInstance().getProfesori().get(selektovanaVrsta).getSpisakPredmeta().get(i))) {
+									BazaPredmeta.getInstance().izbrisiProfesora(BazaPredmeta.getInstance().getPredmeti().get(j));
+								}
+							}
+							
+						}
 						
 						controlleri.ProfesoriController.getInstance().izbrisiProfesora(selektovanaVrsta);
 						obrisiProfesora.dispose();

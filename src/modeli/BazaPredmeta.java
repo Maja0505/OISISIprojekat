@@ -149,6 +149,8 @@ public class BazaPredmeta {
 				break;
 			}
 		}
+		BazaStudenata.getInstance().popunjavanjeListePredmeta();
+		BazaProfesora.getInstance().popunjavanjeListePredmeta();
 	}
 	
 	public void dodajPredmet(Predmet p) {				//dodaje u bazu
@@ -170,7 +172,9 @@ public class BazaPredmeta {
 				p.setPredmetniProfesor(predmetniProfesor);
 				p.setSpisakStudenata(listaStudenata);
 			
-			
+				this.popunjavanjeListeStudenata();
+				BazaStudenata.getInstance().popunjavanjeListePredmeta();
+				BazaProfesora.getInstance().popunjavanjeListePredmeta();
 		
 	}
 	
@@ -183,16 +187,7 @@ public class BazaPredmeta {
 	}
 
 	public void dodajProfesoraNaPredmet(int rowSelectedIndexProfesora, int selektovanaVrsta) {
-	/*	for(int i=0;i<BazaProfesora.getInstance().getProfesori().size();i++) {		//brise predmet sa profesora koga smo zamenili
-			if(BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getPredmetniProfesor().equals(BazaProfesora.getInstance().getProfesori().get(i).getIme().concat(" ").concat(BazaProfesora.getInstance().getProfesori().get(i).getPrezime()))) {
-				for(int j=0;j<BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().size();j++) {
-					if(BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().get(j).equals(BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSifraPredmeta())) {
-						BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().remove(j);
-					}
-				}
-			}
-		}
-		*/
+	
 		String[] niz=BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getPredmetniProfesor().split(",");
 		String brojLicne=niz[0];
 		int indeks = 0;
