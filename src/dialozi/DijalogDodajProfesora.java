@@ -186,6 +186,7 @@ public class DijalogDodajProfesora {
 				if(mogucUnos) {
 					ProfesoriController.getInstance().dodajProfesora(new Profesor(ime, prz, god, adresa, broj, email, adresaKancelarije, brLicne, titula, zvanje, spisakPredmeta));
 					onemoguciTxtField = 0;
+					ProfesoriJTable.selektovanaVrsta = -1;
 					dodajProfesora.dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "Vec postoji takav profesor");
@@ -207,7 +208,6 @@ public class DijalogDodajProfesora {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				onemoguciTxtField = 0;
-				ProfesoriJTable.selektovanaVrsta = -1;
 				dodajProfesora.dispose();
 			}
 		});
