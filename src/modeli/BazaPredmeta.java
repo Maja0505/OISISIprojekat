@@ -180,12 +180,10 @@ public class BazaPredmeta {
 				if(staraGodina != p.getGodinaIzvodjenjaPredmeta()) {						//ukoliko se promeni godina brisemo sve studente iz liste i brisemo predmet iz svih listi predmeta u studntima u kojima je bio
 					p.setSpisakStudenata(new ArrayList<String>()); 
 					for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size(); i++) {
-						if(staraGodina == BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija()) {
 							for(int j = 0; j < BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().size(); j++) {
 								if(staraSifra.equals(BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().get(j))) {
 									BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().remove(j);
 								}
-							}
 						}
 					}
 					
@@ -195,13 +193,11 @@ public class BazaPredmeta {
 					if(!staraSifra.equals(p.getSifraPredmeta())) {
 						
 						for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size(); i++) {
-							if(p.getGodinaIzvodjenjaPredmeta() == BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija()) {
 								for(int j = 0; j < BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().size(); j++) {
 									if(staraSifra.equals(BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().get(j))) {
 										BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().set(j, p.getSifraPredmeta());
 										break;
 									}
-								}
 							}
 						}
 						
