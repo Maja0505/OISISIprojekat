@@ -128,18 +128,6 @@ public class BazaPredmeta {
 		}
 	}
 	
-	public void popunjavanjeListeStudenata() {
-		for(int j = 0;j<BazaPredmeta.getInstance().getPredmeti().size();j++) {	
-			List<String> listaStudenata = new ArrayList<String>();
-			for(int i = 0;i<BazaStudenata.getInstance().getStudenti().size();i++) {
-				if(Integer.parseInt(BazaStudenata.getInstance().getValueAt(i, 4))==BazaPredmeta.getInstance().getPredmeti().get(j).getGodinaIzvodjenjaPredmeta()){
-						listaStudenata.add(BazaStudenata.getInstance().getValueAt(i, 0).toString() + "," + BazaStudenata.getInstance().getStudenti().get(i).getIme() + " " + BazaStudenata.getInstance().getStudenti().get(i).getPrezime());
-						
-					}
-			}
-			BazaPredmeta.getInstance().getPredmeti().get(j).setSpisakStudenata(listaStudenata);
-		}		
-	}
 
 	public void izbrisiPredmet(String id) {				//brise iz baze
 		for (Predmet p : predmeti) {
@@ -149,7 +137,7 @@ public class BazaPredmeta {
 				break;
 			}
 		}
-		
+		//Ako izbrisemo predmet,potrebno je izbrisati ga i iz liste predmeta studenata i profesora koji ga slusaju/predaju
 		for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size();i++) {
 			for(int j = 0; j < BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().size();j++) {
 				if(id.equals(BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().get(j))) {
@@ -157,8 +145,6 @@ public class BazaPredmeta {
 				}
 			}
 		}
-		
-		
 		
 		for(int i = 0; i < BazaProfesora.getInstance().getProfesori().size();i++) {
 			for(int j = 0; j <BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().size();j++) {
@@ -172,42 +158,7 @@ public class BazaPredmeta {
 	
 	public void dodajPredmet(Predmet p) {				//dodaje u bazu
 		this.predmeti.add(p);
-		//this.popunjavanjeListeStudenata();
-		//BazaProfesora.getInstance().popunjavanjeListePredmeta();
-		//BazaStudenata.getInstance().popunjavanjeListePredmeta();
-	/*	
-		
-	  //popunjavanje liste studenata SAMO u dodatom predmetu
-		for(int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size(); i++) {
-			if(p.getSifraPredmeta().equals(BazaPredmeta.getInstance().getPredmeti().get(i).getSifraPredmeta())) {
-				for(int j = 0; j <  BazaStudenata.getInstance().getStudenti().size(); j++) {
-					if(p.getGodinaIzvodjenjaPredmeta() == BazaStudenata.getInstance().getStudenti().get(j).getTrenutnaGodinaStudija()) {
-						String student=  BazaStudenata.getInstance().getStudenti().get(j).getBrIndeksa() + "," + BazaStudenata.getInstance().getStudenti().get(j).getIme() + " " +  BazaStudenata.getInstance().getStudenti().get(j).getPrezime();
-						BazaPredmeta.getInstance().getPredmeti().get(i).getSpisakStudenata().add(student);
-						
-					}
-				}
-				break;
-			}
-		}
-		
-		
-		
-		//Kada dodamo predmet potrebno je da prodjeno kroz listu studenata i samo studentima koji su na godini studija na kojoj se predmet izvodi,njima dodati predmet
-		for(int i = 0;i < BazaStudenata.getInstance().getStudenti().size(); i++) {
-			if(p.getGodinaIzvodjenjaPredmeta()==BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija()) {
-				BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().add(p.getSifraPredmeta());
-			}
-		}
-		
-		for(int i = 0; i < BazaProfesora.getInstance().getProfesori().size(); i++) {
-			String[] niz = p.getPredmetniProfesor().split(",");
-			String licnaPredmetnogProfesora = niz[0];
-			if(licnaPredmetnogProfesora.equals(BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte())) {
-				BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().add(p.getSifraPredmeta());
-			}
-		}
-		*/
+
 	}
 	
 	
@@ -226,7 +177,7 @@ public class BazaPredmeta {
 				p.setPredmetniProfesor(predmetniProfesor);
 				
 			
-				if(staraGodina != p.getGodinaIzvodjenjaPredmeta()) {						//ukoliko se promeni godina brisemo sve studente iz liste
+				if(staraGodina != p.getGodinaIzvodjenjaPredmeta()) {						//ukoliko se promeni godina brisemo sve studente iz liste i brisemo predmet iz svih listi predmeta u studntima u kojima je bio
 					p.setSpisakStudenata(new ArrayList<String>()); 
 					for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size(); i++) {
 						if(staraGodina == BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija()) {
@@ -238,46 +189,40 @@ public class BazaPredmeta {
 						}
 					}
 					
-																	
+																
 				}else {
-					p.setSpisakStudenata(listaStudenata);
-				}
-				
-				
-				//this.popunjavanjeListeStudenata();
-				//BazaStudenata.getInstance().popunjavanjeListePredmeta();
-				//BazaProfesora.getInstance().popunjavanjeListePredmeta();
-		/*		
-			// Ako se izmeni godina studija moramo da zamenimo spisak studenata koji ga slusaju
-			if(staraGodina != p.getGodinaIzvodjenjaPredmeta()) {	
-				List<String> novaListaStudenata = new ArrayList<String>();
-				for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size(); i++) {
-					if(p.getGodinaIzvodjenjaPredmeta() == BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija()) {
-						String student = BazaStudenata.getInstance().getStudenti().get(i).getBrIndeksa() + "," + BazaStudenata.getInstance().getStudenti().get(i).getIme() + " " +  BazaStudenata.getInstance().getStudenti().get(i).getPrezime();
-						novaListaStudenata.add(student);
-					}
-				}
-				p.setSpisakStudenata(novaListaStudenata);
-				
-				//Ako smo promenili godinu izvodjenja moramo da obrisemo taj predmet iz svih studenata cija je trenutna godina studija jednaka staroj godini izvodjinja predmeta
-				for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size(); i++) {
-					if(staraGodina == BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija()) {
-						for(int j = 0; j < BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().size(); j++) {
-							if(staraSifra.equals(BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().get(j))) {
-								BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().remove(j);
+					//ako nismo izmenili godinu izvodjenja a izmenili smo sifru potrebno je promeniti sifru predmeta u spisku predmeta profesora i studenata koji predaju/slusaju taj predmet
+					if(!staraSifra.equals(p.getSifraPredmeta())) {
+						
+						for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size(); i++) {
+							if(p.getGodinaIzvodjenjaPredmeta() == BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija()) {
+								for(int j = 0; j < BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().size(); j++) {
+									if(staraSifra.equals(BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().get(j))) {
+										BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().set(j, p.getSifraPredmeta());
+										break;
+									}
+								}
+							}
+						}
+						
+						for(int i = 0; i < BazaProfesora.getInstance().getProfesori().size(); i++) {
+							String[] niz = p.getPredmetniProfesor().split(",");
+							String licna = niz[0];
+							if(licna.equals(BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte())) {
+								for(int j = 0; j < BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().size(); j++) {
+									if(staraSifra.equals(BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().get(j))) {
+										BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().set(j, p.getSifraPredmeta());
+										break;
+									}
+								}
 							}
 						}
 					}
+					
+					
+					p.setSpisakStudenata(listaStudenata);
 				}
-				
-				for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size(); i++) {
-					if(p.getGodinaIzvodjenjaPredmeta() == )
-				}
-			}	
-			
-	*/		
-	}
-	
+	}	
 	public void dodajStudentaNapredmet(String indeks,int rowSelectedIndex) {
 		  BazaPredmeta.getInstance().getPredmeti().get(rowSelectedIndex).dodajStudentaUlistu(indeks);
 	}
