@@ -34,9 +34,11 @@ import tabele.StudentiJTable;
 public class DijalogDodajStudenta {
 
 	private static int onemoguciTxtField = 0;  //omogucuje potvrdu ukoliko su sva polja validno uneta  
-	private static boolean onemoguciButton = false; //omgucuje potvrdu ukoliko je oznaceno jedno od dugmadi
+	private  boolean onemoguciButton; //omgucuje potvrdu ukoliko je oznaceno jedno od dugmadi
 	
 	public DijalogDodajStudenta(boolean vidljiv) {
+		
+		onemoguciButton = false;
 		JDialog  dodajStudenta = new ModalniDijalog(MainFrame.getInstance(), "Dodaj studenta", true,600,750);
 		
 		
@@ -196,7 +198,7 @@ public class DijalogDodajStudenta {
 					onemoguciTxtField++;
 					}
 				
-		if(onemoguciButton) {		
+		if(onemoguciButton) {	
 			if(onemoguciTxtField == 9) {
 				
 				String ime = Ime.getText();
@@ -279,7 +281,7 @@ public class DijalogDodajStudenta {
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Niste oznacili dugme");
-				
+				onemoguciTxtField = 0;
 				}
 			}
 		});

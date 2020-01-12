@@ -152,7 +152,6 @@ public class BazaProfesora {
 //metoda da dodavanje profesora u bazu	
 	public void dodajProfesora(Profesor p) {
 		this.profesori.add(p);
-		this.popunjavanjeListePredmeta();
 	}
 
 //metoda za imenu profesora u bazi		
@@ -178,29 +177,18 @@ public class BazaProfesora {
 		p.setZvanje(zvanje);
 		p.setSpisakPredmeta(spisakPredmeta);
 
-		if (!staraLicna.equals(p.getBrojLicneKarte()) || !staroIme.equals(p.getIme()) || !staroPrezime.equals(p.getPrezime())) {
-													/* ako promenimo licnu kartu,ime ili prezime mora da se promeni i u predmetima
-															 u koloni predmetni profesor*/
-													 											
-			for (int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size(); i++) {
-				if( BazaPredmeta.getInstance().getPredmeti().get(i).getPredmetniProfesor().contains(",")) {
-					String[] temp = BazaPredmeta.getInstance().getPredmeti().get(i).getPredmetniProfesor().split(",");
-					
-					String lk = temp[0];
-					if (staraLicna.equals(lk)) {
-	
-						BazaPredmeta.getInstance().getPredmeti().get(i)
-								.setPredmetniProfesor(p.getBrojLicneKarte() + "," + p.getIme() + " " + p.getPrezime());
+//Ukoliko se promeni licna karta ili ime ili prezime profesora potrebno je i kod Predmeta u polju predmetniProfesor zameniti stare podatke sa novim		
+	if (!staraLicna.equals(p.getBrojLicneKarte()) || !staroIme.equals(p.getIme()) || !staroPrezime.equals(p.getPrezime())) {
+		for (int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size(); i++) {
+					if( BazaPredmeta.getInstance().getPredmeti().get(i).getPredmetniProfesor().contains(",")) {
+						String[] temp = BazaPredmeta.getInstance().getPredmeti().get(i).getPredmetniProfesor().split(",");
+						String lk = temp[0];
+						if (staraLicna.equals(lk)) {
+							BazaPredmeta.getInstance().getPredmeti().get(i).setPredmetniProfesor(p.getBrojLicneKarte() + "," + p.getIme() + " " + p.getPrezime());
+						}
 					}
-	
 				}
-
 			}
-		}
-		
-		
-		
-		
 	}
 
 	public void dodajPredmetProfesoru(String sifraPredmeta, int rowSelectedIndex) {

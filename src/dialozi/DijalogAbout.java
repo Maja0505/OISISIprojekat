@@ -90,7 +90,6 @@ public class DijalogAbout {
 			
 			
 			
-			unutrasnjiPanel3.add(majaSlika);
 			
 			GridBagConstraints gbc = new GridBagConstraints();
 			

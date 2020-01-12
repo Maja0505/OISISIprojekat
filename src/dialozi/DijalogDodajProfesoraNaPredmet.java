@@ -26,12 +26,12 @@ import tabele.PredmetiJTable;
 
 public class DijalogDodajProfesoraNaPredmet {
 	
-	private static boolean omoguci = false;
+	private  boolean omoguci;
 	
 	public DijalogDodajProfesoraNaPredmet() {
 		JDialog  dodajProfeosraNaPredmet = new ModalniDijalog(MainFrame.getInstance(), "Predmet - dodavanje profesora", true,550,300);
 		
-		
+		omoguci = false;
 		JLabel statusBar = new JLabel();
 		dodajProfeosraNaPredmet.add(statusBar,BorderLayout.SOUTH);
 		statusBar.setPreferredSize(new Dimension(dodajProfeosraNaPredmet.getWidth(), 25));
@@ -62,7 +62,7 @@ public class DijalogDodajProfesoraNaPredmet {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String brojLicneKojaSeUnosi = null;
-				int rowSelectedIndex = 0;
+				int rowSelectedIndex = -1;
 				if(!brojLicneKarte.getText().equals("") && !brojLicneKarte.getText().equals("Nepravilan unos licne karte")) {
 					brojLicneKojaSeUnosi = brojLicneKarte.getText();
 					for(int i = 0;i<BazaProfesora.getInstance().getProfesori().size();i++) {

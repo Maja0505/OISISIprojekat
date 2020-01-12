@@ -26,12 +26,12 @@ import tabele.PredmetiJTable;
 
 public class DijalogDodajStudentaNaPredmet {
 
-	private static boolean omoguci = false; //omugucaca unos studenta na predmet
+	private  boolean omoguci; //omugucaca unos studenta na predmet
 	
 	public DijalogDodajStudentaNaPredmet() {
 		JDialog  dodajStudentaNaPredmet = new ModalniDijalog(MainFrame.getInstance(), "Predmet - dodavanje studenta", true,550,300);
 		
-		
+		omoguci = false;
 		JLabel statusBar = new JLabel();
 		dodajStudentaNaPredmet.add(statusBar,BorderLayout.SOUTH);
 		statusBar.setPreferredSize(new Dimension(dodajStudentaNaPredmet.getWidth(), 25));
@@ -63,7 +63,7 @@ public class DijalogDodajStudentaNaPredmet {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String indeksStudentaKojiSeUnosi = null;
-				int rowSelectedIndex = 0; 
+				int rowSelectedIndex = -1; 
 				if(!Indeks.getText().equals("") && !Indeks.getText().equals("Nije pravilan unos indeska")) {
 						 indeksStudentaKojiSeUnosi = Indeks.getText();
 					for(int i = 0;i<BazaStudenata.getInstance().getStudenti().size();i++) {
