@@ -80,8 +80,11 @@ public class DijalogDodajStudentaNaPredmet {
 						}
 					}
 					for(int i = 0;i< BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSpisakStudenata().size();i++) {
-						if(indeksStudentaKojiSeUnosi.equals(BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSpisakStudenata().get(i))) {
+							String[] niz = BazaPredmeta.getInstance().getPredmeti().get(selektovanaVrsta).getSpisakStudenata().get(i).split(",");
+							String indeksUListiStudenata = niz[0];
+						if(indeksStudentaKojiSeUnosi.equals(indeksUListiStudenata)) {
 							omoguci = false;
+							break;
 						}
 					}
 					

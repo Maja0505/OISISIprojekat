@@ -16,7 +16,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -46,7 +45,7 @@ public class MouseListenerPredmeti extends MouseAdapter {
 			int row = MainFrame.getInstance().getTabelaPredmeta().getRowSorter().convertRowIndexToModel(row1);
 			if(column==5) {
 	       
-	        	JDialog studenti = new ModalniDijalog(new JFrame(), "Spisak studenata", true);
+	        	JDialog studenti = new ModalniDijalog(MainFrame.getInstance(), "Spisak studenata", true);
 		  	   	  
 				JLabel statusBar = new JLabel();
 				studenti.add(statusBar,BorderLayout.SOUTH);
@@ -130,10 +129,11 @@ public class MouseListenerPredmeti extends MouseAdapter {
 						{
 							String[] niz = string.split(",");
 							String indeks = niz[0];
+							String imePrezime = niz[1];
 							int studentKojiSeBrise = 0;
 						
 							for(int i = 0;i < BazaPredmeta.getInstance().getPredmeti().get(row).getSpisakStudenata().size();i++) {
-								if(indeks.equals(BazaPredmeta.getInstance().getPredmeti().get(row).getSpisakStudenata().get(i))) {
+								if((indeks + "," + imePrezime).equals(BazaPredmeta.getInstance().getPredmeti().get(row).getSpisakStudenata().get(i))) {
 									studentKojiSeBrise = i;
 									break;
 								}
@@ -149,7 +149,7 @@ public class MouseListenerPredmeti extends MouseAdapter {
 							int predmetKojiSeBrise = 0;
 							
 							for(int i = 0; i < BazaStudenata.getInstance().getStudenti().get(vrstaPredmetaKojaSeBrise).getSpisakPredmeta().size();i++) {
-								if(BazaPredmeta.getInstance().getPredmeti().get(row).getNazivPredmet().equals(BazaStudenata.getInstance().getStudenti().get(vrstaPredmetaKojaSeBrise).getSpisakPredmeta().get(i))) {
+								if(BazaPredmeta.getInstance().getPredmeti().get(row).getSifraPredmeta().equals(BazaStudenata.getInstance().getStudenti().get(vrstaPredmetaKojaSeBrise).getSpisakPredmeta().get(i))) {
 									predmetKojiSeBrise = i;
 									break;
 								}
