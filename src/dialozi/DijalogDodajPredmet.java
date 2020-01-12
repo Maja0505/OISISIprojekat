@@ -23,7 +23,6 @@ import controlleri.PredmetiController;
 import gui.MainFrame;
 import listeners.FocusListener;
 import modeli.BazaPredmeta;
-import modeli.BazaProfesora;
 import modeli.Predmet;
 import tabele.PredmetiJTable;
 
@@ -49,7 +48,7 @@ public class DijalogDodajPredmet {
 		JLabel nazivPredmeta = new JLabel("Naziv predmeta*");
 		JLabel semestar = new JLabel("Semestar izvodjenja*");
 		JLabel godinaIzvodjenja = new JLabel("Godina studija izvodjenja*");
-		JLabel profesor = new JLabel("Predmetni profesor*");
+		
 
 		JTextField Sifra = new JTextField();
 		Sifra.setName("Sifra predmeta*");
@@ -60,17 +59,6 @@ public class DijalogDodajPredmet {
 		NazivPredmeta.setName("Naziv predmeta*");
 		NazivPredmeta.setPreferredSize(new Dimension(100, 30));
 		NazivPredmeta.addFocusListener(new FocusListener());
-
-	/*	String[] izborProfesora = new String[1];
-		
-		izborProfesora[0] = "NEMA PROFESORA";
-		
-		final JComboBox<String> Profesor;
-	
-			Profesor = new JComboBox<String>(izborProfesora);
-
-			Profesor.setPreferredSize(new Dimension(100, 30));
-		*/
 
 		String[] izbor = { "1 (prvi)", "2 (drugi) ", "3 (treci)", "4 (cetvrti)", "5 (peti)", "6 (sesti) ", "7 (sedmi)",
 				"8 (osmi)", };
@@ -170,11 +158,7 @@ public class DijalogDodajPredmet {
 		gbc.gridy = 3;
 		panel.add(godinaIzvodjenja, gbc);
 
-	/*	
-		gbc.gridx = 0;
-		gbc.gridy = 4;
-		panel.add(profesor, gbc);
-		*/
+	
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.weightx = 100;
@@ -195,11 +179,6 @@ public class DijalogDodajPredmet {
 		gbc.gridy = 3;
 		panel.add(godinaIzvodjenjaCB, gbc);
 
-	/*	
-		gbc.gridx = 1;
-		gbc.gridy = 4;
-		panel.add(Profesor, gbc);
-		*/
 		gbc.gridx = 1;
 		gbc.gridy = 10;
 		gbc.insets = new Insets(50, 300, 0, 40);

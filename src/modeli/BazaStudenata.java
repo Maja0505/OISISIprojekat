@@ -36,7 +36,7 @@ public class BazaStudenata {
 	private BazaStudenata() {
 		
 		this.studenti = new ArrayList<Student>();
-	    this.file = new File("studenti.txt");
+	    this.file = new File("testprimeri/studenti.txt");
 	    if(file.length() != 0)
 	    	initStudente(); 
 
@@ -73,7 +73,7 @@ public class BazaStudenata {
 	}
 	
 	public void saveStudente() {
-		 file = new File("studenti.txt");
+		 file = new File("testprimeri/studenti.txt");
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
 			oos.writeObject(studenti);

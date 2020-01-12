@@ -30,7 +30,7 @@ public class BazaProfesora {
 
 	private BazaProfesora() {
 		this.profesori = new ArrayList<Profesor>();
-		this.file = new File("profesori.txt");
+		this.file = new File("testprimeri/profesori.txt");
 		if (file.length() != 0)
 			initProfesori();
 
@@ -62,7 +62,7 @@ public class BazaProfesora {
 	}
 
 	public void saveProfesore() {
-		file = new File("profesori.txt");
+		file = new File("testprimeri/profesori.txt");
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
 			oos.writeObject(profesori);

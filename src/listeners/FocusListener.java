@@ -103,7 +103,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 			} 
 		 
 		 if (txt.getName().equals("Email*")) {
-				Pattern regExp = Pattern.compile("^[a-zA-Z0-9]{1,10}[._]?[a-zA-Z0-9]{1,10}@[a-zA-Z0-9]{1,10}[.][a-z]{1,5}$");
+				Pattern regExp = Pattern.compile("^[a-zA-Z0-9]{1,10}[._]?[a-zA-Z0-9]{1,20}@[a-zA-Z0-9]{1,10}[.][a-z]{1,5}$");
 				Matcher m = regExp.matcher(txt.getText());
 				if(!txt.getText().trim().equals("")) {
 					if( txt.getText().trim().equals("Nepravilan unos email-a") || !m.matches()) {
@@ -224,7 +224,7 @@ public class FocusListener implements java.awt.event.FocusListener {
 		} 
 	
 	 if (txt.getName().equals("EmailProf*")) {
-			Pattern regExp = Pattern.compile("^[a-zA-Z0-9]{1,10}[._]?[a-zA-Z0-9]{1,10}@[a-zA-Z0-9]{1,10}[.][a-z]{1,5}$");
+			Pattern regExp = Pattern.compile("^[a-zA-Z0-9]{1,10}[._]?[a-zA-Z0-9]{1,20}@[a-zA-Z0-9]{1,10}[.][a-z]{1,5}$");
 			Matcher m = regExp.matcher(txt.getText());
 			if(!txt.getText().trim().equals("")) {
 				if( txt.getText().trim().equals("Nepravilan unos email-a") || !m.matches()) {

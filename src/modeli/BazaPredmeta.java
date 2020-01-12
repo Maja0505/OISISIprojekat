@@ -31,7 +31,7 @@ public class BazaPredmeta {
 	
 	private BazaPredmeta() {
 		this.predmeti = new ArrayList<Predmet>();
-	    this.file = new File("predmeti.txt");
+	    this.file = new File("testprimeri/predmeti.txt");
 	    if(file.length() != 0)
 	    	initPredmeti(); 
 	
@@ -69,7 +69,7 @@ public class BazaPredmeta {
 	
 }
 	public void savePredmete() {
-		 file = new File("predmeti.txt");
+		 file = new File("testprimeri/predmeti.txt");
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
 			oos.writeObject(predmeti);
