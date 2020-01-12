@@ -156,19 +156,58 @@ public class BazaStudenata {
 //metoda da dodavanje studenta u Bazu	
 	public void dodajStudenta(Student s) {
 		this.studenti.add(s);
-		this.popunjavanjeListePredmeta();
-		BazaPredmeta.getInstance().popunjavanjeListeStudenata();
+		List<String> listaPredmeta = new ArrayList<String>();
+		
+		//this.popunjavanjeListePredmeta();
+		//kod dodavanja novog studenta potrebno je SAMO tom studentu dodati sve predmete gde su njegova trenutna godina studija i godina izvodjenja predmeta jednake 
+		int broj = -1;
+		for(int j = 0;j<BazaStudenata.getInstance().getStudenti().size();j++) {	
+			if(s.getBrIndeksa().equals(BazaStudenata.getInstance().getStudenti().get(j).getBrIndeksa())) {	
+				for(int i = 0;i<BazaPredmeta.getInstance().getPredmeti().size();i++) {
+					if(Integer.parseInt(BazaStudenata.getInstance().getValueAt(j, 4))==BazaPredmeta.getInstance().getPredmeti().get(i).getGodinaIzvodjenjaPredmeta()){
+							listaPredmeta.add(BazaPredmeta.getInstance().getValueAt(i, 0).toString());
+						}
+				}
+				broj = j;
+				break;
+			}
+		}
+		BazaStudenata.getInstance().getStudenti().get(broj).setSpisakPredmeta(listaPredmeta);
+		
+		//BazaPredmeta.getInstance().popunjavanjeListeStudenata();
+		
+		//U predmetima kod spiska studenta potrebno je dodati studenta kog unosimo , na sve predmete cija je godina izvodjenja jednaka sa njegovom trenutnom godinom studija
+		for(int j = 0;j<BazaPredmeta.getInstance().getPredmeti().size();j++) {	
+				if(Integer.parseInt(BazaStudenata.getInstance().getValueAt(broj, 4))==BazaPredmeta.getInstance().getPredmeti().get(j).getGodinaIzvodjenjaPredmeta()){
+						BazaPredmeta.getInstance().getPredmeti().get(j).getSpisakStudenata().add(BazaStudenata.getInstance().getValueAt(broj, 0).toString() + "," + BazaStudenata.getInstance().getStudenti().get(broj).getIme() + " " + BazaStudenata.getInstance().getStudenti().get(broj).getPrezime());
+				}
+		}
+			
+			
 	}
 
 //metoda za brisanje iz baze	
-	public void izbrisiStudenta(String brIndeksa) {				
+	public void izbrisiStudenta(String brIndeksa) {	
+		String brisanje =  null;
 		for (Student s : studenti) {
 			if (s.getBrIndeksa().equals(brIndeksa)) {
+				brisanje = s.getBrIndeksa() + "," + s.getIme() + " " + s.getPrezime();
 				studenti.remove(s);
 				break;
 			}
 		}
-		BazaPredmeta.getInstance().popunjavanjeListeStudenata();
+		
+		//BazaPredmeta.getInstance().popunjavanjeListeStudenata();
+		//Kada obrisemo studenta potrebno je da ga obrisemo sa svih predmeta koje je on slusao
+		for(int j = 0;j<BazaPredmeta.getInstance().getPredmeti().size();j++) {	
+			for(int i = 0; i < BazaPredmeta.getInstance().getPredmeti().get(j).getSpisakStudenata().size();i++) {
+					if(brisanje.equals(BazaPredmeta.getInstance().getPredmeti().get(j).getSpisakStudenata().get(i))){
+							BazaPredmeta.getInstance().getPredmeti().get(j).getSpisakStudenata().remove(i);
+							break;
+						}
+			}
+	}
+		
 	}	
 	
 //motoda za izmenu studenta u bazi
@@ -178,7 +217,14 @@ public class BazaStudenata {
 		
 		int selektovanaVrsta = MainFrame.getInstance().getTabelaStudenata().getRowSorter().convertRowIndexToModel(StudentiJTable.selektovanaVrsta);
 		Student s = BazaStudenata.getInstance().getRow(selektovanaVrsta);
-
+		
+		String stariIndeks = s.getBrIndeksa();
+		String staroIme = s.getIme();
+		String staroPrezime = s.getPrezime();
+		int staraGodina = s.getTrenutnaGodinaStudija();
+		
+		String stariStudnent = stariIndeks + "," + staroIme + " " + staroPrezime;
+		
 		s.setIme(ime);
 		s.setPrezime(prezime);
 		s.setAdresa(adresa);
@@ -192,8 +238,64 @@ public class BazaStudenata {
 		s.setProsecnaOcena(prosecnaOcena);
 		s.setSpisakPredmeta(spisakPredmeta);
 		
-		this.popunjavanjeListePredmeta();
-		BazaPredmeta.getInstance().popunjavanjeListeStudenata();
+		//this.popunjavanjeListePredmeta();
+		
+		//Ukoliko se godina studija promeni potrebno je zameniti stari spisak predmeta sa novim spiskom predmeta koji se izvode na godini koju smo izmenili
+		if(staraGodina != s.getTrenutnaGodinaStudija()) {
+			List<String> listaPredmeta = new ArrayList<String>();
+			for(int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size();i++) {
+				if(s.getTrenutnaGodinaStudija() == BazaPredmeta.getInstance().getPredmeti().get(i).getGodinaIzvodjenjaPredmeta()) {
+					listaPredmeta.add( BazaPredmeta.getInstance().getPredmeti().get(i).getSifraPredmeta());
+				}
+			}
+			
+			//Brisemo studenta iz svih predmeta sa stare godine studija
+			for(int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size();i++) {
+				for(int j = 0; j < s.getSpisakPredmeta().size();j++) {
+					if(s.getSpisakPredmeta().get(j).equals(BazaPredmeta.getInstance().getPredmeti().get(i).getSifraPredmeta())) {
+						BazaPredmeta.getInstance().getPredmeti().get(i).getSpisakStudenata().remove(stariStudnent);
+					}
+				}		
+			}
+			
+			//postavljamo novu listu predmeta
+			s.setSpisakPredmeta(listaPredmeta);
+			
+			//Dodajemo studenta na predmete koji se izvode na promenjenoj godini studija
+			for(int i = 0;i < s.getSpisakPredmeta().size();i++) {
+				for(int j = 0; j < BazaPredmeta.getInstance().getPredmeti().size();j++) {
+					if(s.getSpisakPredmeta().get(i).equals(BazaPredmeta.getInstance().getPredmeti().get(j).getSifraPredmeta())) {
+						String noviStudent = s.getBrIndeksa() + "," + s.getIme() + " " + s.getPrezime();
+						BazaPredmeta.getInstance().getPredmeti().get(j).getSpisakStudenata().add(noviStudent);
+					}
+				}
+			}
+		
+		
+		}
+		
+		else {
+		
+		
+		
+		//BazaPredmeta.getInstance().popunjavanjeListeStudenata();
+		
+		//Ukoliko godina ne promeni a promeni se  ime ili prezime ili indeks tada se menjaju stari podaci  koji se nalaze u spisku studenata u Predmetima sa novim  
+		if(!stariIndeks.equals(s.getBrIndeksa()) || !staroIme.equals(s.getIme()) || !staroPrezime.equals(s.getPrezime())) {
+			for(int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size();i++) {
+				if(s.getTrenutnaGodinaStudija() == BazaPredmeta.getInstance().getPredmeti().get(i).getGodinaIzvodjenjaPredmeta()) {
+					for(int j = 0; j < BazaPredmeta.getInstance().getPredmeti().get(i).getSpisakStudenata().size();j++) {
+						if(stariStudnent.equals(BazaPredmeta.getInstance().getPredmeti().get(i).getSpisakStudenata().get(j))) {
+							String noviStudent = s.getBrIndeksa() + "," + s.getIme() + " " + s.getPrezime();
+							BazaPredmeta.getInstance().getPredmeti().get(i).getSpisakStudenata().set(j, noviStudent);
+							break;
+							}
+						}
+					}
+				}
+			}
+		}
+		
 }
 	
 	public void dodajPredmetStudentu(String sifra,int rowSelectedIndex) {

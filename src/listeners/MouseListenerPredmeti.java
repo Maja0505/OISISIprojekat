@@ -130,7 +130,7 @@ public class MouseListenerPredmeti extends MouseAdapter {
 							String[] niz = string.split(",");
 							String indeks = niz[0];
 							String imePrezime = niz[1];
-							int studentKojiSeBrise = 0;
+							int studentKojiSeBrise = -1;
 						
 							for(int i = 0;i < BazaPredmeta.getInstance().getPredmeti().get(row).getSpisakStudenata().size();i++) {
 								if((indeks + "," + imePrezime).equals(BazaPredmeta.getInstance().getPredmeti().get(row).getSpisakStudenata().get(i))) {
@@ -138,7 +138,7 @@ public class MouseListenerPredmeti extends MouseAdapter {
 									break;
 								}
 							}
-							int vrstaPredmetaKojaSeBrise = 0;
+							int vrstaPredmetaKojaSeBrise = -1;
 							
 							for(int i = 0;i < BazaStudenata.getInstance().getStudenti().size();i++) {
 								if(indeks.equals(BazaStudenata.getInstance().getStudenti().get(i).getBrIndeksa())) {
@@ -146,7 +146,7 @@ public class MouseListenerPredmeti extends MouseAdapter {
 									break;
 								}
 							}
-							int predmetKojiSeBrise = 0;
+							int predmetKojiSeBrise = -1;
 							
 							for(int i = 0; i < BazaStudenata.getInstance().getStudenti().get(vrstaPredmetaKojaSeBrise).getSpisakPredmeta().size();i++) {
 								if(BazaPredmeta.getInstance().getPredmeti().get(row).getSifraPredmeta().equals(BazaStudenata.getInstance().getStudenti().get(vrstaPredmetaKojaSeBrise).getSpisakPredmeta().get(i))) {
