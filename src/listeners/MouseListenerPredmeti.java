@@ -82,6 +82,7 @@ public class MouseListenerPredmeti extends MouseAdapter {
 		       gbc.gridy=1;
 		       gbc.insets = new Insets(10,70,10, 0);
 		       panel.add(nazadButton,gbc);
+		       nazadButton.setBackground(Color.LIGHT_GRAY);
 		
 		  nazadButton.addActionListener(new ActionListener() {
 			
@@ -96,7 +97,7 @@ public class MouseListenerPredmeti extends MouseAdapter {
 			   gbc.gridy=1;
 			   gbc.anchor = GridBagConstraints.EAST;
 			   gbc.insets = new Insets(10,0,10, 100);
-
+			   obrisiButton.setBackground(Color.LIGHT_GRAY);
 			   panel.add(obrisiButton,gbc);  
 			        
 	   

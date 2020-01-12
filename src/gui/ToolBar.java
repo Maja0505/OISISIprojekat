@@ -14,9 +14,6 @@ import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
 import dialozi.DijalogBrisanjePredmeta;
 import dialozi.DijalogBrisanjeProfesora;
 import dialozi.DijalogBrisanjeStudenta;
@@ -137,7 +134,7 @@ public class ToolBar extends JToolBar {
 
 		JButton studentButton = new JButton();
 		studentButton.setToolTipText("Dodavanje studenta na predmet");
-		studentButton.setIcon(new ImageIcon("images/add.jpg"));
+		studentButton.setIcon(new ImageIcon("images/dodajStudenta.jpg"));
 
 		studentButton.addActionListener(new ActionListener() {
 
@@ -186,7 +183,6 @@ public class ToolBar extends JToolBar {
 		}
 
 		JTextField textField = new JTextField();
-		textField.setDocument(new JTextFieldLimit(100));
 		Font font = new Font("Serif", Font.BOLD, 15); // font za unos
 		textField.setFont(font);
 		add(textField);
@@ -252,14 +248,12 @@ public class ToolBar extends JToolBar {
 										status = tekst;
 										filters.add(RowFilter.regexFilter("(?i)" + status, 7));
 									} else {
-										JOptionPane.showMessageDialog(null,
-												"Ne postoji kolona " + nazivKolone + " u tabeli predmeta", "Greska", 0);
+										JOptionPane.showMessageDialog(null,"Ne postoji kolona " + nazivKolone + " u tabeli predmeta", "Greska", 0);
 										return;
 									}
 
 								} else {
-									JOptionPane.showMessageDialog(null,
-											"Neispravan format pretrage pravilno [Ime:******;Prezime:*****;...]");
+									JOptionPane.showMessageDialog(null,"Neispravan format pretrage pravilno [Ime:******;Prezime:*****;...]");
 									return;
 								}
 
@@ -325,33 +319,31 @@ public class ToolBar extends JToolBar {
 										filters.add(RowFilter.regexFilter("(?i)" + datumRodjenja, 2));
 
 									} else {
-										JOptionPane.showMessageDialog(null,
-												"Ne postoji kolona " + nazivKolone + " u tabeli predmeta", "Greska", 0);
-										break;
+										JOptionPane.showMessageDialog(null,"Ne postoji kolona " + nazivKolone + " u tabeli predmeta", "Greska", 0);
+										return;
 									}
 
-									sorter = new TableRowSorter<TableModel>(
-											MainFrame.getInstance().getTabelaProfesora().getModel());
-									sorter.setRowFilter(RowFilter.andFilter(filters));
-
-									MainFrame.getInstance().getTabelaProfesora().setRowSorter(sorter);
-									textField.setText("");
-
 								} else {
-									JOptionPane.showMessageDialog(null,
-											"Neispravan format pretrage! PRAVILNO [Ime:***;Prezime:***;...]");
+									JOptionPane.showMessageDialog(null,	"Neispravan format pretrage! PRAVILNO [Ime:***;Prezime:***;...]");
+									return;
 								}
 							}
+							
+								sorter = new TableRowSorter<TableModel>(
+										MainFrame.getInstance().getTabelaProfesora().getModel());
+								sorter.setRowFilter(RowFilter.andFilter(filters));
+	
+								MainFrame.getInstance().getTabelaProfesora().setRowSorter(sorter);
+								textField.setText("");
+							
 						} else {
-							JOptionPane.showMessageDialog(null,
-									"Neispravan format pretrage! PRAVILNO [Ime:***;Prezime:***;...]");
+							JOptionPane.showMessageDialog(null,"Neispravan format pretrage! PRAVILNO [Ime:***;Prezime:***;...]");
 						}
 
 					} else {
 
 						@SuppressWarnings("unchecked")
-						TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) MainFrame.getInstance()
-								.getTabelaProfesora().getRowSorter();
+						TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) MainFrame.getInstance().getTabelaProfesora().getRowSorter();
 						sorter.setRowFilter(null);
 					}
 				}
@@ -404,26 +396,26 @@ public class ToolBar extends JToolBar {
 										filters.add(RowFilter.regexFilter("(?i)" + predmetniProfesor, 4));
 
 									} else {
-										JOptionPane.showMessageDialog(null,
-												"Ne postoji kolona " + nazivKolone + " u tabeli predmeta", "Greska", 0);
-										break;
+										JOptionPane.showMessageDialog(null,"Ne postoji kolona " + nazivKolone + " u tabeli predmeta", "Greska", 0);
+										return;
 									}
 
-									sorter = new TableRowSorter<TableModel>(
-											MainFrame.getInstance().getTabelaPredmeta().getModel());
-									sorter.setRowFilter(RowFilter.andFilter(filters));
-
-									MainFrame.getInstance().getTabelaPredmeta().setRowSorter(sorter);
-									textField.setText("");
-
 								} else {
-									JOptionPane.showMessageDialog(null,
-											"Neispravan format pretrage! PRAVILNO [Sifra:***;Naziv:***;...]");
+									JOptionPane.showMessageDialog(null,"Neispravan format pretrage! PRAVILNO [Sifra:***;Naziv:***;...]");
+									return;
 								}
 							}
+							
+								sorter = new TableRowSorter<TableModel>(
+										MainFrame.getInstance().getTabelaPredmeta().getModel());
+								sorter.setRowFilter(RowFilter.andFilter(filters));
+	
+								MainFrame.getInstance().getTabelaPredmeta().setRowSorter(sorter);
+								textField.setText("");
+
+							
 						} else {
-							JOptionPane.showMessageDialog(null,
-									"Neispravan format pretrage! PRAVILNO [Sifra:***;Naziv:***;...]");
+							JOptionPane.showMessageDialog(null,"Neispravan format pretrage! PRAVILNO [Sifra:***;Naziv:***;...]");
 						}
 
 					} else {
@@ -441,31 +433,4 @@ public class ToolBar extends JToolBar {
 
 	}
 
-}
-
-class JTextFieldLimit extends PlainDocument {
-	/**
-	* 
-	*/
-	private static final long serialVersionUID = 1L;
-	private int limit;
-
-	JTextFieldLimit(int limit) {
-		super();
-		this.limit = limit;
-	}
-
-	JTextFieldLimit(int limit, boolean upper) {
-		super();
-		this.limit = limit;
-	}
-
-	public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-		if (str == null)
-			return;
-
-		if ((getLength() + str.length()) <= limit) {
-			super.insertString(offset, str, attr);
-		}
-	}
 }

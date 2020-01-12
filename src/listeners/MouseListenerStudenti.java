@@ -11,15 +11,12 @@ import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import dialozi.ModalniDijalog;
 import gui.MainFrame;
 import modeli.BazaStudenata;
@@ -43,7 +40,7 @@ public class MouseListenerStudenti extends MouseAdapter {
 	        if(column == 8) {
 	        	
 	         
-			JDialog predmeti = new ModalniDijalog(new JFrame(), "Lista predmeta", true);
+			JDialog predmeti = new ModalniDijalog(MainFrame.getInstance(), "Lista predmeta", true);
 	   	  
 			JLabel statusBar = new JLabel();
 			predmeti.add(statusBar,BorderLayout.SOUTH);
@@ -92,7 +89,7 @@ public class MouseListenerStudenti extends MouseAdapter {
 	        }
 	        
 	        if(column == 9) {
-	        	JDialog predmeti = new ModalniDijalog(new JFrame(), "Informacije o studentima", true);
+	        	JDialog predmeti = new ModalniDijalog(MainFrame.getInstance(), "Informacije o studentima", true);
 	  	   	  
 				JLabel statusBar = new JLabel();
 				predmeti.add(statusBar,BorderLayout.SOUTH);

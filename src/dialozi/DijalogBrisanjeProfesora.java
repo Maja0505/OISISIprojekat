@@ -42,6 +42,8 @@ public class DijalogBrisanjeProfesora {
 		
 	    JButton odustanak = new JButton("Odustanak");
 	    JButton potvrda = new JButton("Potvrda");
+	    odustanak.setBackground(Color.LIGHT_GRAY);
+		potvrda.setBackground(Color.CYAN);
 	    
 	    	odustanak.addActionListener(new ActionListener() {
 			

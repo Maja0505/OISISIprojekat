@@ -23,6 +23,7 @@ import listeners.FocusListener;
 import modeli.BazaPredmeta;
 import modeli.BazaProfesora;
 import modeli.Predmet;
+import tabele.PredmetiJTable;
 
 public class DijalogDodajPredmet {
 
@@ -140,6 +141,7 @@ public class DijalogDodajPredmet {
 					if (mogucUnos) {
 						PredmetiController.getInstance().dodajPredmet(predmet);
 						onemoguciTxtField = 0;
+						PredmetiJTable.selektovanaVrsta = -1;
 						dodajPredmet.dispose();
 					} else {
 						JOptionPane.showMessageDialog(null, "Vec postoji takav predmet");

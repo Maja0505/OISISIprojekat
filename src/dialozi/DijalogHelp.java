@@ -48,7 +48,7 @@ public class DijalogHelp {
 		JLabel lupaOpis = new JLabel("Pretraga primer - ime:*****;prezime:*****;....");
 		JLabel colse = new JLabel(new ImageIcon("images/xIcon.jpg"));
 		JLabel info = new JLabel(new ImageIcon("images/aboutIcon.jpg"));
-		JLabel dsnp = new JLabel(new ImageIcon("images/add.jpg"));
+		JLabel dsnp = new JLabel(new ImageIcon("images/dodajStudenta.jpg"));
 		JLabel dpnp = new JLabel(new ImageIcon("images/profesor.jpg"));
 		JLabel lupa = new JLabel(new ImageIcon("images/pretraga.jpg"));
 		JLabel ctrlN = new JLabel("CTRL+N");
