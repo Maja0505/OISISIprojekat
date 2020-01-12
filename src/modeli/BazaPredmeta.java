@@ -149,7 +149,15 @@ public class BazaPredmeta {
 				break;
 			}
 		}
-		BazaStudenata.getInstance().popunjavanjeListePredmeta();
+		
+		for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size();i++) {
+			for(int j = 0; j < BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().size();j++) {
+				if(id.equals(BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().get(j))) {
+					BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().remove(j);
+				}
+			}
+		}
+		
 		BazaProfesora.getInstance().popunjavanjeListePredmeta();
 	}
 	
