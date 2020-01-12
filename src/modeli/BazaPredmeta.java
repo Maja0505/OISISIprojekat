@@ -162,8 +162,12 @@ public class BazaPredmeta {
 		
 	}
 	
-	public void izmeniPredmet(String sifra, String nazivPredmet, int semestar, int godinaIzvodjenjaPredmeta, String predmetniProfesor,List<String> listaStudenata) {		//menja u bazi
-				Predmet p=BazaPredmeta.getInstance().getRow(PredmetiJTable.selektovanaVrsta);
+	
+	public void izmeniPredmet(String sifra, String nazivPredmet, int semestar, int godinaIzvodjenjaPredmeta, String predmetniProfesor,List<String> listaStudenata) {			//menja u bazi
+			
+				int selektovanaVrsta=MainFrame.getInstance().getTabelaPredmeta().getRowSorter().convertRowIndexToModel(PredmetiJTable.selektovanaVrsta);
+																							
+				Predmet p=BazaPredmeta.getInstance().getRow(selektovanaVrsta);
 	
 				p.setSifraPredmeta(sifra);
 				p.setNazivPredmet(nazivPredmet);
