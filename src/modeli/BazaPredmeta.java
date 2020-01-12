@@ -158,16 +158,56 @@ public class BazaPredmeta {
 			}
 		}
 		
-		BazaProfesora.getInstance().popunjavanjeListePredmeta();
+		
+		
+		for(int i = 0; i < BazaProfesora.getInstance().getProfesori().size();i++) {
+			for(int j = 0; j <BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().size();j++) {
+				if(id.equals(BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().get(j))) {
+					BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().remove(j);
+				}
+			}
+		}
+		
 	}
 	
 	public void dodajPredmet(Predmet p) {				//dodaje u bazu
 		this.predmeti.add(p);
-		this.popunjavanjeListeStudenata();
-		BazaProfesora.getInstance().popunjavanjeListePredmeta();
-		BazaStudenata.getInstance().popunjavanjeListePredmeta();
+		//this.popunjavanjeListeStudenata();
+		//BazaProfesora.getInstance().popunjavanjeListePredmeta();
+		//BazaStudenata.getInstance().popunjavanjeListePredmeta();
+	/*	
+		
+	  //popunjavanje liste studenata SAMO u dodatom predmetu
+		for(int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size(); i++) {
+			if(p.getSifraPredmeta().equals(BazaPredmeta.getInstance().getPredmeti().get(i).getSifraPredmeta())) {
+				for(int j = 0; j <  BazaStudenata.getInstance().getStudenti().size(); j++) {
+					if(p.getGodinaIzvodjenjaPredmeta() == BazaStudenata.getInstance().getStudenti().get(j).getTrenutnaGodinaStudija()) {
+						String student=  BazaStudenata.getInstance().getStudenti().get(j).getBrIndeksa() + "," + BazaStudenata.getInstance().getStudenti().get(j).getIme() + " " +  BazaStudenata.getInstance().getStudenti().get(j).getPrezime();
+						BazaPredmeta.getInstance().getPredmeti().get(i).getSpisakStudenata().add(student);
+						
+					}
+				}
+				break;
+			}
+		}
 		
 		
+		
+		//Kada dodamo predmet potrebno je da prodjeno kroz listu studenata i samo studentima koji su na godini studija na kojoj se predmet izvodi,njima dodati predmet
+		for(int i = 0;i < BazaStudenata.getInstance().getStudenti().size(); i++) {
+			if(p.getGodinaIzvodjenjaPredmeta()==BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija()) {
+				BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().add(p.getSifraPredmeta());
+			}
+		}
+		
+		for(int i = 0; i < BazaProfesora.getInstance().getProfesori().size(); i++) {
+			String[] niz = p.getPredmetniProfesor().split(",");
+			String licnaPredmetnogProfesora = niz[0];
+			if(licnaPredmetnogProfesora.equals(BazaProfesora.getInstance().getProfesori().get(i).getBrojLicneKarte())) {
+				BazaProfesora.getInstance().getProfesori().get(i).getSpisakPredmeta().add(p.getSifraPredmeta());
+			}
+		}
+		*/
 	}
 	
 	
@@ -176,18 +216,66 @@ public class BazaPredmeta {
 				int selektovanaVrsta=MainFrame.getInstance().getTabelaPredmeta().getRowSorter().convertRowIndexToModel(PredmetiJTable.selektovanaVrsta);
 																							
 				Predmet p=BazaPredmeta.getInstance().getRow(selektovanaVrsta);
-	
+				int staraGodina = p.getGodinaIzvodjenjaPredmeta();
+				String staraSifra= p.getSifraPredmeta();
+				
 				p.setSifraPredmeta(sifra);
 				p.setNazivPredmet(nazivPredmet);
 				p.setSemestar(semestar);
 				p.setGodinaIzvodjenjaPredmeta(godinaIzvodjenjaPredmeta);
 				p.setPredmetniProfesor(predmetniProfesor);
-				p.setSpisakStudenata(listaStudenata);
+				
 			
-				this.popunjavanjeListeStudenata();
-				BazaStudenata.getInstance().popunjavanjeListePredmeta();
-				BazaProfesora.getInstance().popunjavanjeListePredmeta();
-		
+				if(staraGodina != p.getGodinaIzvodjenjaPredmeta()) {						//ukoliko se promeni godina brisemo sve studente iz liste
+					p.setSpisakStudenata(new ArrayList<String>()); 
+					for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size(); i++) {
+						if(staraGodina == BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija()) {
+							for(int j = 0; j < BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().size(); j++) {
+								if(staraSifra.equals(BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().get(j))) {
+									BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().remove(j);
+								}
+							}
+						}
+					}
+					
+																	
+				}else {
+					p.setSpisakStudenata(listaStudenata);
+				}
+				
+				
+				//this.popunjavanjeListeStudenata();
+				//BazaStudenata.getInstance().popunjavanjeListePredmeta();
+				//BazaProfesora.getInstance().popunjavanjeListePredmeta();
+		/*		
+			// Ako se izmeni godina studija moramo da zamenimo spisak studenata koji ga slusaju
+			if(staraGodina != p.getGodinaIzvodjenjaPredmeta()) {	
+				List<String> novaListaStudenata = new ArrayList<String>();
+				for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size(); i++) {
+					if(p.getGodinaIzvodjenjaPredmeta() == BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija()) {
+						String student = BazaStudenata.getInstance().getStudenti().get(i).getBrIndeksa() + "," + BazaStudenata.getInstance().getStudenti().get(i).getIme() + " " +  BazaStudenata.getInstance().getStudenti().get(i).getPrezime();
+						novaListaStudenata.add(student);
+					}
+				}
+				p.setSpisakStudenata(novaListaStudenata);
+				
+				//Ako smo promenili godinu izvodjenja moramo da obrisemo taj predmet iz svih studenata cija je trenutna godina studija jednaka staroj godini izvodjinja predmeta
+				for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size(); i++) {
+					if(staraGodina == BazaStudenata.getInstance().getStudenti().get(i).getTrenutnaGodinaStudija()) {
+						for(int j = 0; j < BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().size(); j++) {
+							if(staraSifra.equals(BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().get(j))) {
+								BazaStudenata.getInstance().getStudenti().get(i).getSpisakPredmeta().remove(j);
+							}
+						}
+					}
+				}
+				
+				for(int i = 0; i < BazaStudenata.getInstance().getStudenti().size(); i++) {
+					if(p.getGodinaIzvodjenjaPredmeta() == )
+				}
+			}	
+			
+	*/		
 	}
 	
 	public void dodajStudentaNapredmet(String indeks,int rowSelectedIndex) {

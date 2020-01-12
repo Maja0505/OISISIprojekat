@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -128,7 +130,8 @@ public class DijalogDodajPredmet {
 						return;
 					}
 					String profesor = Profesor.getSelectedItem().toString();
-					Predmet predmet = new Predmet(sifra, naziv, semestar, godinaIzvodjenja, profesor, null);
+					List<String> listaStudenata = new ArrayList<String>();
+					Predmet predmet = new Predmet(sifra, naziv, semestar, godinaIzvodjenja, profesor, listaStudenata);
 
 					boolean mogucUnos = true;
 					for (int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size(); i++) {

@@ -136,6 +136,12 @@ public class BazaProfesora {
 	public void izbrisiProfesora(String id) { // brise iz baze
 		for (Profesor p : profesori) {
 			if (p.getBrojLicneKarte().equals(id)) {
+				String profesor = p.getBrojLicneKarte() + "," + p.getIme() + " " + p.getPrezime();
+				for(int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size(); i++) {
+					if(profesor.equals(BazaPredmeta.getInstance().getPredmeti().get(i).getPredmetniProfesor())) {
+						BazaPredmeta.getInstance().getPredmeti().get(i).setPredmetniProfesor("NEMA PROFESORA");
+					}
+				}
 				profesori.remove(p);
 
 				break;
