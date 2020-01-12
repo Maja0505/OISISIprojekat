@@ -116,22 +116,6 @@ public class BazaProfesora {
 		}
 	}
 
-	public void popunjavanjeListePredmeta() {
-		for (int j = 0; j < BazaProfesora.getInstance().getProfesori().size(); j++) {
-			List<String> listaPredmeta = new ArrayList<String>();
-			for (int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size(); i++) {
-				if ((BazaProfesora.getInstance().getProfesori().get(j).getBrojLicneKarte() + ","
-						+ BazaProfesora.getInstance().getValueAt(j, 0).concat(" ")
-								.concat(BazaProfesora.getInstance().getValueAt(j, 1))).equals(
-										BazaPredmeta.getInstance().getPredmeti().get(i).getPredmetniProfesor())) {
-					listaPredmeta.add(BazaPredmeta.getInstance().getValueAt(i, 0).toString());
-
-				}
-			}
-
-			BazaProfesora.getInstance().getProfesori().get(j).setSpisakPredmeta(listaPredmeta);
-		}
-	}
 
 	public void izbrisiProfesora(String id) { // brise iz baze
 		for (Profesor p : profesori) {

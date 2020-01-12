@@ -200,11 +200,9 @@ public class BazaStudenata {
 			s.setSpisakPredmeta(new ArrayList<String>()); //dodajemo praznu listu
 //Potrebno je izbrisati studenta sa svih predmeta koje je on slusao ako je promenio godinu			
 			for(int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size();i++) {
-				if(staraGodina == BazaPredmeta.getInstance().getPredmeti().get(i).getGodinaIzvodjenjaPredmeta()) {
 					for(int j = 0; j < BazaPredmeta.getInstance().getPredmeti().get(i).getSpisakStudenata().size();j++) {
 						if(stariStudnent.equals(BazaPredmeta.getInstance().getPredmeti().get(i).getSpisakStudenata().get(j))) {
 							BazaPredmeta.getInstance().getPredmeti().get(i).getSpisakStudenata().remove(j);
-						}
 					}
 				}
 				
@@ -213,14 +211,12 @@ public class BazaStudenata {
 //Ukoliko se promeni ime ili prezime ili indeks potrebno je te podatke promeniti i u Predmetima u spisku studenata			
 			if(!stariIndeks.equals(s.getBrIndeksa()) || !staroIme.equals(s.getIme()) || !staroPrezime.equals(s.getPrezime())) {
 				for(int i = 0; i < BazaPredmeta.getInstance().getPredmeti().size();i++) {
-					if(s.getTrenutnaGodinaStudija() == BazaPredmeta.getInstance().getPredmeti().get(i).getGodinaIzvodjenjaPredmeta()) {
 						for(int j = 0; j < BazaPredmeta.getInstance().getPredmeti().get(i).getSpisakStudenata().size();j++) {
 							if(stariStudnent.equals(BazaPredmeta.getInstance().getPredmeti().get(i).getSpisakStudenata().get(j))) {
 								String noviStudent = s.getBrIndeksa() + "," + s.getIme() + " " + s.getPrezime();
 								BazaPredmeta.getInstance().getPredmeti().get(i).getSpisakStudenata().set(j, noviStudent);
 								break;
 								}
-							}
 						}
 					}
 				}
